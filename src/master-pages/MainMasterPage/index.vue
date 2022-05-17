@@ -1,41 +1,36 @@
 <template>
-  <div>
-    <div>
-      <slot name="header" :pOwner="owner">
-        Моя піцерія
-
-        <h3>{{ owner.name }}</h3>
+  <div class="wrapper">
+    <div class="header-container">
+      <slot name="header">
+        <header-of-page />
       </slot>
     </div>
-    <div>
+    <div class="content-container">
       <slot> Немає контенту </slot>
     </div>
-    <div>
+    <div class="footer-container">
       <slot name="footer">
-        <h1>Контакти</h1>
-        <ul>
-          <li>Тел.:0501111111</li>
-          <li>Адреса: м.Ужгород, вул.Харчова 12</li>
-        </ul>
+        <footer-of-page />
       </slot>
     </div>
   </div>
 </template>
 
 <script>
+import HeaderOfPage from "@/components/HeaderOfPage";
+import FooterOfPage from "@/components/FooterOfPage";
+
 export default {
   name: "MainMasterPage",
-
-  data() {
-    return {
-      owner: {
-        name: "Ivan",
-        secondName: "Grigor",
-        age: 34,
-      },
-    };
+  components: {
+    HeaderOfPage,
+    FooterOfPage,
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.content-container {
+  min-height: 400px;
+}
+</style>

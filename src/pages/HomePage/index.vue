@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MainMasterPage />
+    <main-master-page />
   </div>
 </template>
 
