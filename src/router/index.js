@@ -6,6 +6,11 @@ import HomePage from "@/pages/HomePage";
 const routes = [
   { path: "/", component: HomePage, name: "home" },
   // { path: "/edit/:id?", component: EditPage, name: "edit" },
+  {
+    path: "/products-list",
+    name: "productsList",
+    component: () => import("../pages/ProductList"),
+  },
 ];
 
 const router = createRouter({
