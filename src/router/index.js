@@ -1,15 +1,20 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import HomePage from "@/pages/HomePage";
-// import EditPage from "@/pages/EditPage";
+import ProductPage from "@/pages/ProductPage";
+import CartPage from "@/pages/CartPage";
 
 const routes = [
-  { path: "/", component: HomePage, name: "home" },
-  // { path: "/edit/:id?", component: EditPage, name: "edit" },
+  { path: "/", component: HomePage, name: "homePage" },
   {
-    path: "/products-list",
-    name: "productsList",
-    component: () => import("../pages/ProductList"),
+    path: "/all-product/:category?",
+    component: ProductPage,
+    name: "allProductPage",
+  },
+  {
+    path: "/cart",
+    component: CartPage,
+    name: "cart",
   },
 ];
 

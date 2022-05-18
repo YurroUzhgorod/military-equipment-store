@@ -1,21 +1,22 @@
 <template>
-  <header-of-page />
-  <router-view></router-view>
-  <footer-of-page />
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
+//
 <script>
-import HeaderOfPage from "@/components/HeaderOfPage";
-import FooterOfPage from "@/components/FooterOfPage";
-
 export default {
   name: "App",
-  components: { HeaderOfPage, FooterOfPage },
 };
 </script>
 
 <style>
 #app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
 </style>
-s

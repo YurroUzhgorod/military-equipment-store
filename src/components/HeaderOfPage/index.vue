@@ -12,18 +12,21 @@
         <input type="text" placeholder="search" />
       </div>
 
-      <div class="cart-images-container">
+      <div class="cart-images-container" @click="goToRoute('cart')">
         <img src="@/assets/images/basket.jpeg" alt="" />
       </div>
     </div>
     <div class="store-navigation">
-      <div class="clothing-menu" @click="goToRoute('productsList')">
+      <div class="clothing-menu" @click="goToRoute('allProductPage')">
+        <h3>Всі товари</h3>
+      </div>
+      <div class="clothing-menu" @click="goToRoute('trousers')">
         <h3>Одяг</h3>
       </div>
-      <div class="foot-wear-menu" @click="goToRoute('foot-wear')">
+      <div class="foot-wear-menu" @click="onGoToProductList('foot-wear')">
         <h3>Взуття</h3>
       </div>
-      <div class="combat-gear-menu" @click="goToRoute('combat-gear')">
+      <div class="combat-gear-menu" @click="onGoToProductList('combat-gear')">
         <h3>Спорядження</h3>
       </div>
       <div class="rucksacks-bags-menu" @click="rucksacks - bags('')">
@@ -39,10 +42,11 @@
 <script>
 export default {
   name: "HeaderOfPage",
+
   methods: {
-    goToRoute(routeName) {
+    goToRoute(routName) {
       this.$router.push({
-        name: routeName,
+        name: routName,
       });
     },
   },
@@ -58,6 +62,11 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  .cart-images-container {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
   img {
     width: 100px;
@@ -67,7 +76,7 @@ export default {
   background-color: antiquewhite;
   text-align: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   div {
     padding: 3px;
 
