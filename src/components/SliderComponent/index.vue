@@ -1,21 +1,11 @@
 <template>
-  <v-carousel v-model="model">
+  <v-carousel hide-delimiters>
     <v-carousel-item
-      v-for="(color, i) in colors"
-      :key="color"
-    >
-      <v-sheet
-        :color="color"
-        height="100%"
-        tile
-      >
-        <div class="d-flex fill-height justify-center align-center">
-          <div class="text-h2">
-            Slide {{ i + 1 }}
-          </div>
-        </div>
-      </v-sheet>
-    </v-carousel-item>
+      v-for="(item,i) in items"
+      :key="i"
+      :src="item.src"
+      cover
+    ></v-carousel-item>
   </v-carousel>
 </template>
 
@@ -23,14 +13,22 @@
   export default {
     name:"SliderCompomemt",
     data: () => ({
-      model: 0,
-      colors: [
-        'primary',
-        'secondary',
-        'yellow darken-2',
-        'red',
-        'orange',
-      ],
+      
+     
+        items: [
+          {
+            src: 'https://wallpaperaccess.com/full/751676.jpg',
+          },
+          {
+            src: 'https://ufpro.com/storage/app/media/Blog/Camouflage%20Patterns/blog-post-camouflage.jpg',
+          },
+          {
+            src: 'https://i.shgcdn.com/465d1a41-83d5-4706-9590-e1b67c2d07f7/-/format/auto/-/preview/3000x3000/-/quality/lighter/',
+          },
+          {
+            src: 'https://www.ghost-hood.com/myfactory/CustomUpload/374O357O340O370O356O369O350O338O352O369O366O326O364O353O327O/KATALOG_ausruestung.png',
+          },
+        ],
     }),
   }
 </script>
