@@ -19,13 +19,13 @@
       <h3>Social</h3>
       <div class="flex-container">
         <div class="logo-images-container">
-          <img src="@/assets/images/social-logo/fb-logo.png" alt="" />
+          <img :src="require('@/assets/images/social-logo/fb-logo.png')" alt="No photo" />
         </div>
         <div class="logo-images-container">
-          <img src="@/assets/images/social-logo/instagram-logo.jpeg" alt="" />
+          <img :src="require('@/assets/images/social-logo/instagram-logo.jpeg')" alt="No photo" />
         </div>
         <div class="logo-images-container">
-          <img src="@/assets/images/social-logo/telegram-logo.png" alt="" />
+          <img :src="require('@/assets/images/social-logo/telegram-logo.png')" alt="No photo" />
         </div>
       </div>
     </div>

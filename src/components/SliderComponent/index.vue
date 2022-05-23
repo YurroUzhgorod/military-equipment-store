@@ -28,6 +28,9 @@
           {
             src: 'https://www.ghost-hood.com/myfactory/CustomUpload/374O357O340O370O356O369O350O338O352O369O366O326O364O353O327O/KATALOG_ausruestung.png',
           },
+          {
+            src: 'https://i.cbc.ca/1.4702940.1528840553!/fileImage/httpImage/canadian-soldiers-participate-in-exercise-the-5th-canadian-division-support-base.JPG',
+          },
         ],
     }),
   }

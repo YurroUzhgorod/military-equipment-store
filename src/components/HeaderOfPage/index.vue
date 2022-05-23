@@ -5,7 +5,7 @@
     </div>
     <div class="flex-container">
       <div class="logo-images-container">
-        <img src="@/assets/images/store-logo.jpeg" alt="" />
+        <img :src="require('@/assets/images/store-logo.jpeg')" alt="No photo" />
       </div>
 
       <div class="search-product-container">
@@ -13,7 +13,7 @@
       </div>
 
       <div class="cart-images-container" @click="goToRoute('cart')">
-        <img src="@/assets/images/basket.jpeg" alt="" />
+        <img :src="require('@/assets/images/basket.jpeg')" alt="No photo" />
       </div>
     </div>
     <div class="store-navigation">
@@ -55,7 +55,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background-color: beige;
+   background-color: rgb(208, 208, 187);
   padding: 0px 10px;
 }
 .flex-container {
