@@ -1,5 +1,5 @@
 <template>
-  <div>i am cartItem</div>
+  <div></div>
 </template>
 
 <script>

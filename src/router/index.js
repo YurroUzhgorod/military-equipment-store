@@ -7,7 +7,7 @@ import CartPage from "@/pages/CartPage";
 const routes = [
   { path: "/", component: HomePage, name: "homePage" },
   {
-    path: "/all-product/:category?",
+    path: "/all-product/:category?,",
     component: ProductPage,
     name: "allProductPage",
   },
