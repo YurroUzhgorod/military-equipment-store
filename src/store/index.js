@@ -10,5 +10,6 @@ export default createStore({
   modules: {
     productList,
     cartList,
+    
   },
 });
