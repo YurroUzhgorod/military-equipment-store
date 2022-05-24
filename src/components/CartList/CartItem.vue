@@ -5,6 +5,12 @@
 <script>
 export default {
   name: "CartItem",
+  props: {
+    product: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
 };
 </script>
 

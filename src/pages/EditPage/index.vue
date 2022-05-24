@@ -2,31 +2,22 @@
   <div>
     <main-master-page>
       <template #content>
-        <slider-component />
+        <edit-product-form />
       </template>
     </main-master-page>
   </div>
 </template>
 
 <script>
+import EditProductForm from "@/components/EditProductForm";
 import MainMasterPage from "@/masterPages/MainMasterPage.vue";
-import SliderComponent from "@/components/SliderComponent";
-
 export default {
-  name: "HomePage",
+  name: "EditPage",
   components: {
     MainMasterPage,
-    SliderComponent,
+    EditProductForm,
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.slider-line {
-  text-align: center;
-  img {
-    width: 400px;
-    height: 250px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

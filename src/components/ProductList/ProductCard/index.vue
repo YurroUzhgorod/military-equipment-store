@@ -8,7 +8,11 @@
     </div>
     <div>
       {{ product.price }} грн
-      <button @click="onAdd">+</button>
+      <hr />
+      <br />
+
+      <!-- <button @click="onAdd">add</button> -->
+      <button @click="$emit('on-edit')">edit</button>
     </div>
   </div>
 </template>
@@ -22,6 +26,13 @@ export default {
     product: {
       type: Object,
       default: () => ({}),
+    },
+
+    methods: {
+      // ...mapActions(["addProduct"]),
+      // onAdd() {
+      //   this.addProduct(this.product.id);
+      // },
     },
   },
 
@@ -43,6 +54,11 @@ export default {
   margin: 10px;
   img {
     width: 130px;
+  }
+  button {
+    border: 1px green solid;
+    width: 40px;
+    margin: 5px;
   }
 }
 </style>

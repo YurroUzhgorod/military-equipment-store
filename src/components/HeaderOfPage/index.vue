@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <div class="authorization">
+    <div class="authorization-block">
       <p>Зайдіть або створіть аккаунт</p>
     </div>
     <div class="flex-container">
-      <div class="logo-images-container">
-        <img :src="require('@/assets/images/store-logo.jpeg')" alt="No photo" />
+      <div class="logo-images-container" @click="goToRoute('homePage')">
+        <img :src="require('@/assets/images/store-logo.webp')" alt="No photo" />
       </div>
 
       <div class="search-product-container">
-        <input type="text" placeholder="search" />
+        <input type="text" placeholder="Пошук " class="block-search-input" />
       </div>
 
       <div class="cart-images-container" @click="goToRoute('cart')">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="store-navigation">
-      <div class="clothing-menu" @click="goToRoute('allProductPage')">
+      <div class="clothing-menu" @click="goToRoute('allProducts')">
         <h3>Всі товари</h3>
       </div>
       <div class="clothing-menu" @click="goToRoute('trousers')">
@@ -55,32 +55,45 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-   background-color: rgb(208, 208, 187);
-  padding: 0px 10px;
+  background-color: rgb(208, 208, 187);
+}
+.authorization-block {
+  background-color: rgb(142, 108, 67);
 }
 .flex-container {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px 20px;
+
+  .logo-images-container {
+    &:hover {
+      cursor: pointer;
+    }
+    img {
+      width: 200px;
+    }
+  }
   .cart-images-container {
+    img {
+      width: 50px;
+    }
     &:hover {
       cursor: pointer;
     }
   }
-
-  img {
-    width: 100px;
-  }
 }
 .store-navigation {
-  background-color: antiquewhite;
+  background-color: rgb(98, 99, 37);
+
   text-align: center;
   display: flex;
-  justify-content: space-between;
+  text-align: center;
   div {
-    padding: 3px;
+    padding: 10px 30px;
+    &:hover {
+      cursor: pointer;
+    }
 
-    border-radius: 8px;
     &:hover {
       background-color: rgb(135, 121, 102);
     }
@@ -88,5 +101,14 @@ export default {
 }
 p {
   text-align: right;
+}
+
+input {
+  border: 1px solid rgb(143, 105, 55);
+  font-size: 20px;
+  height: 50px;
+  width: 380px;
+  border-radius: 10px;
+  margin: 0px 0px 100px 0px auto;
 }
 </style>

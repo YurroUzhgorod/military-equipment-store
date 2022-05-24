@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 
-import productList from "./ProductList";
+import productsList from "./productsList";
 import cartList from "./cartList";
 
 export default createStore({
@@ -8,8 +8,7 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {
-    productList,
+    productsList,
     cartList,
-    
   },
 });

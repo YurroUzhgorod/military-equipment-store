@@ -1,5 +1,5 @@
 export default {
-  namespaced:true,
+  namespaced: true,
 
   state: () => ({
     catrList: [],
@@ -32,16 +32,16 @@ export default {
     deleteCartItemCount(state, cartItemId) {
       state.cartList = state.cartList.filter((item) => item.id !== cartItemId);
     },
-    addPizza(state, pizzaId) {
-      const pizza = state.cartList.find((item) => item.pizzaId === pizzaId);
-      if (pizza) pizza.count++;
-      else
-        state.cartList.push({
-          id: new Date().getTime(),
-          pizzaId,
-          count: 1,
-        });
-    },
+    // addProduct(state, productId) {
+    //   const product = state.cartList.find((item) => item.pizzaId === productId);
+    //   if (pizza) pizza.count++;
+    //   else
+    //     state.cartList.push({
+    //       id: new Date().getTime(),
+    //       productId,
+    //       count: 1,
+    // //     });
+    // },
   },
   //Розділ, де описуємо функції, які викликаємо у копонентах, якщо хочемо змінити стейт
   actions: {
@@ -60,6 +60,16 @@ export default {
     },
     addPizza({ commit }, pizzaId) {
       commit("addPizza", pizzaId);
+    },
+    addPizzza(state, pizzaId) {
+      const pizza = state.cartList.find((item) => item.pizzaId === pizzaId);
+      if (pizza) pizza.count++;
+      else
+        state.cartList.push({
+          id: new Date().getTime(),
+          pizzaId,
+          count: 1,
+        });
     },
     // updateValue({ commit }, payload) {
     //   commit("increment", payload);

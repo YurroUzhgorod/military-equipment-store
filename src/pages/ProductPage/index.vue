@@ -2,7 +2,7 @@
   <div>
     <main-master-page>
       <template #content>
-        <div><router-link to="/"> Home</router-link></div>
+        <div class="home-link"><router-link to="/"> go Home</router-link></div>
         <product-list />
       </template>
     </main-master-page>
@@ -22,7 +22,19 @@ export default {
   computed: {
     ...mapGetters(["getProductList"]),
   },
+  methods: {
+    onAddNewProduct() {
+      this.$router.push({
+        name: "edit",
+      });
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.home-link {
+  width: 70px;
+  margin: auto;
+}
+</style>

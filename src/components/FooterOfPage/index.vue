@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="about">
-      <h3>About</h3>
+      <h3>About:</h3>
       <p>About Us</p>
       <p>Contact Us</p>
       <p>Privacy Policy</p>
