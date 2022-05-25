@@ -12,7 +12,7 @@
 
       <span>{{ cartItem.count }} шт</span>
       <button @click="onIncrement">+</button>
-      <button @click="onDelete">x</button>
+      <button @click="onDelete">delete</button>
     </div>
   </div>
 </template>
@@ -65,11 +65,11 @@ export default {
 <style lang="scss" scoped>
 .product-row-container {
   display: flex;
-  width: 500px;
+  width: 600px;
   margin: 5px auto;
   border: 2px black solid;
   button {
-    width: 40px;
+    width: 60px;
     background-color: antiquewhite;
     margin: 10px;
     border: 2px black solid;

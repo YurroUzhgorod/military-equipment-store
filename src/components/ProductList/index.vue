@@ -14,6 +14,13 @@
         <div>Add new product</div>
       </div>
     </div>
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="15"
+        :total-visible="7"
+      ></v-pagination>
+    </div>
   </div>
 </template>
 
@@ -27,6 +34,7 @@ export default {
   },
   data() {
     return {
+      page: 1,
       ProdList: [],
       searchText: null,
     };
