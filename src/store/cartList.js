@@ -16,12 +16,12 @@ export default {
   //Функції, які здійснюють зчитування значень з стейта і які ми можемо використати у компонентах
   getters: {
     getCartList: (state) => state.cartList,
-    getTotalPrice: (state) =>
+    getTotalPrice: (state, getters, rootState, rootGetters) =>
       state.cartList.reduce((prevSum, cartItem) => {
-        const pizza = state.pizzaList.find(
-          (item) => item.id === cartItem.pizzaId
+        const product = rootGetters["productsList/getProductList"].find(
+          (item) => item.id === cartItem.prodId
         );
-        return prevSum + pizza.price * cartItem.count;
+        return prevSum + product.price * cartItem.count;
       }, 0),
   },
   //Розділ, де описуємо функції, які мають право робити зміни у стейті

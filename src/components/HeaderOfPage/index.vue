@@ -21,7 +21,7 @@
         <div @click="goToRoute('cart')">
           <img :src="require('@/assets/images/basket.jpeg')" alt="No photo" />
         </div>
-        <!-- <div>{{ getTotalPrice }}</div> -->
+        <div v-if="getTotalPrice">{{ getTotalPrice }} грн</div>
       </div>
     </div>
     <div class="store-navigation">
