@@ -4,6 +4,7 @@ export default {
   namespaced: true,
   state() {
     return {
+      searchText: null,
       productList: [
         {
           id: "1",
@@ -12,6 +13,7 @@ export default {
           price: 100,
           imgSrc:
             "https://images.prom.ua/316893867_w640_h640_shtany-bryuki-dpm.jpg",
+          color: "dpm",
         },
         {
           id: "2",
@@ -20,6 +22,7 @@ export default {
           price: 120,
           imgSrc:
             "https://images.prom.ua/1083892768_w700_h500_bryuki-ddpm-.jpg",
+          color: "dpm",
         },
         {
           id: "3",
@@ -28,6 +31,8 @@ export default {
           price: 100,
           imgSrc:
             "https://patriotshop.com.ua/media/catalog/product/cache/1/image/650x/040ec09b1e35df139433887a97daa66f/_/m/_mtp_mali_1.jpg",
+
+          color: "mtp",
         },
         {
           id: "4",
@@ -36,6 +41,7 @@ export default {
           price: 50,
           imgSrc:
             "https://images.prom.ua/434187681_w640_h640_kitel-dpm-dpm.jpg",
+          color: "dpm",
         },
         {
           id: "5",
@@ -43,6 +49,7 @@ export default {
           type: "shirt",
           price: 55,
           imgSrc: "https://images.prom.ua/1086541939_w640_h640_kitel-ddpm-.jpg",
+          color: "ddpm",
         },
         {
           id: "6",
@@ -50,6 +57,7 @@ export default {
           type: "trouser",
           price: 60,
           imgSrc: "https://images.prom.ua/3432607550_kitel-mtp-original.jpg",
+          color: "mtp",
         },
         {
           id: "7",
@@ -57,6 +65,7 @@ export default {
           type: "trouser",
           price: 65,
           imgSrc: "https://images.prom.ua/3432440977_kitel-kaz-03.jpg",
+          color: "olive",
         },
         {
           id: "8",
@@ -65,6 +74,7 @@ export default {
           price: 160,
           imgSrc:
             "https://content.rozetka.com.ua/goods/images/big/47007929.jpg",
+          color: "green",
         },
         {
           id: "9",
@@ -73,6 +83,7 @@ export default {
           price: 65,
           imgSrc:
             "https://content.rozetka.com.ua/goods/images/big/220469120.jpg",
+          color: "brown",
         },
       ],
     };
@@ -83,6 +94,7 @@ export default {
     // getFilteredProductListt: (state)=>(filterdCaterory)=>
     getProductById: (state) => (productId) =>
       state.productList.find((item) => item.id === productId),
+    getSearchText: (state) => state.searchText,
   },
   //Розділ, де описуємо функції, які мають право робити зміни у стейті
   mutations: {
@@ -108,6 +120,9 @@ export default {
           ...product,
         };
     },
+    setSearchText(state, text) {
+      state.searchText = text;
+    },
   },
 
   // розділ, де описуємо функції, які викликаємо у компонентах, якшо хочемо змінити стейт
@@ -120,6 +135,9 @@ export default {
     },
     updateProduct({ commit }, product) {
       commit("setUpdateProduct", product);
+    },
+    updateSearchText({ commit }, text) {
+      commit("setSearchText", text);
     },
   },
 };

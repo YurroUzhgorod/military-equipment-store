@@ -1,15 +1,19 @@
 <template>
   <div>
-    <cart-item />
+    <product-row v-for="item in getCartList" :key="item.id" :cart-item="item" />
   </div>
 </template>
 
 <script>
-import CartItem from "./CartItem.vue";
+import { mapGetters } from "vuex";
+import ProductRow from "./ProductRow.vue";
 export default {
   name: "CartList",
   components: {
-    CartItem,
+    ProductRow,
+  },
+  computed: {
+    ...mapGetters("cartList", ["getCartList"]),
   },
 };
 </script>

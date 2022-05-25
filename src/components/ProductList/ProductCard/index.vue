@@ -6,42 +6,36 @@
     <div>
       {{ product.title }}
     </div>
+    <div>{{ product.price }} грн</div>
     <div>
-      {{ product.price }} грн
       <hr />
-      <br />
 
-      <!-- <button @click="onAdd">add</button> -->
+      <button @click="onAdd">add</button>
       <button @click="$emit('on-edit')">edit</button>
     </div>
   </div>
 </template>
 
 <script>
-// import { mapActions } from "vuex";
+import { mapActions } from "vuex";
+
 export default {
   name: "ProductCart",
-
+  components: {},
   props: {
     product: {
       type: Object,
       default: () => ({}),
     },
-
-    methods: {
-      // ...mapActions(["addProduct"]),
-      // onAdd() {
-      //   this.addProduct(this.product.id);
-      // },
-    },
   },
 
-  //   methods: {
-  //     ...mapActions(["addProduct"]),
-  //     onAdd() {
-  //       this.addPizza(this.pizza.id);
-  //     },
-  //   },
+  methods: {
+    ...mapActions("cartList", ["addProductItem"]),
+
+    onAdd() {
+      this.addProductItem(this.product.id);
+    },
+  },
 };
 </script>
 

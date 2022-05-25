@@ -9,11 +9,19 @@
       </div>
 
       <div class="search-product-container">
-        <input type="text" placeholder="Пошук " class="block-search-input" />
+        <input
+          type="text"
+          placeholder="search"
+          class="block-search-input"
+          v-model="searchText"
+        />
+        <button @click="onSearchProduct">Найти</button>
       </div>
-
-      <div class="cart-images-container" @click="goToRoute('cart')">
-        <img :src="require('@/assets/images/basket.jpeg')" alt="No photo" />
+      <div class="cart-images-container">
+        <div @click="goToRoute('cart')">
+          <img :src="require('@/assets/images/basket.jpeg')" alt="No photo" />
+        </div>
+        <!-- <div>{{ getTotalPrice }}</div> -->
       </div>
     </div>
     <div class="store-navigation">
@@ -40,9 +48,23 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "HeaderOfPage",
+  data() {
+    return {
+      searchText: null,
+    };
+  },
 
+  computed: {
+    ...mapGetters("productsList", ["updateSearchText"]),
+    ...mapGetters("cartList", ["getTotalPrice"]),
+
+    changeSearchInputValue() {
+      return this.updateSearchText(this.searchText);
+    },
+  },
   methods: {
     goToRoute(routName) {
       this.$router.push({
@@ -50,6 +72,9 @@ export default {
       });
     },
   },
+  // watch: {
+  //   searchText(newValue) {},
+  // },
 };
 </script>
 
@@ -108,6 +133,15 @@ input {
   font-size: 20px;
   height: 50px;
   width: 380px;
+  border-radius: 10px;
+  margin: 0px 0px 100px 0px auto;
+}
+button {
+  border: 1px solid rgb(143, 105, 55);
+  background-color: rgb(143, 105, 55);
+  font-size: 20px;
+  height: 50px;
+  width: 70px;
   border-radius: 10px;
   margin: 0px 0px 100px 0px auto;
 }

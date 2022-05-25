@@ -61,8 +61,9 @@ export default {
     mounted() {
       this.ProdList = this.getProductList.map((product) => ({
         ...this.getProductList,
-        searchTextRow: `${product.title} ${product.color} ${product.type}`,
+        searchTextRow: `${product.title}${product.color}${product.type}`,
       }));
+      console.log(this.searchTextRow);
     },
   },
 };

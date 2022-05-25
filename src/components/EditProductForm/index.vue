@@ -30,6 +30,12 @@
       </label>
     </div>
     <div>
+      <label>
+        Product color
+        <input type="text" v-model="product.color" />
+      </label>
+    </div>
+    <div>
       <button @click="onSave">{{ saveBtnTitle }}</button>
       <button @click="onDelete">{{ delBtnTitle }}</button>
     </div>
