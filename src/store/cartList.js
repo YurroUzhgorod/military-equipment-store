@@ -4,13 +4,7 @@ export default {
   namespaced: true,
 
   state: () => ({
-    cartList: [
-      {
-        id: "aas2dfsd",
-        prodId: "2",
-        count: 3,
-      },
-    ],
+    cartList: [],
   }),
 
   //Функції, які здійснюють зчитування значень з стейта і які ми можемо використати у компонентах
