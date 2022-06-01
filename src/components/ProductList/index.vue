@@ -42,6 +42,7 @@ export default {
 
   computed: {
     ...mapGetters("productsList", ["getProductList"]),
+    
     filteredProductList() {
       if (this.searchText)
         return this.ProdList.filter((product) =>

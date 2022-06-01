@@ -4,6 +4,7 @@ import HomePage from "@/pages/HomePage";
 import ProductPage from "@/pages/ProductPage";
 import CartPage from "@/pages/CartPage";
 import EditPage from "@/pages/EditPage";
+import InfoPage from "@/pages/InfoPage";
 
 const routes = [
   { path: "/", component: HomePage, name: "homePage" },
@@ -19,6 +20,7 @@ const routes = [
     name: "cart",
   },
   { path: "/edit/:id?", component: EditPage, name: "edit" },
+  { path: "/info/:source?", component: InfoPage, name: "info" },
 ];
 
 const router = createRouter({

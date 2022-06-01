@@ -2,9 +2,9 @@
   <div class="container">
     <div class="about">
       <h3>About:</h3>
-      <p>About Us</p>
-      <p>Contact Us</p>
-      <p>Privacy Policy</p>
+      <p @click="onGoToRoute('about')">About Us</p>
+      <p @click="onGoToRoute('contacts')">Contact Us</p>
+      <p @click="onGoToRoute('privacy-policy')">Privacy Policy</p>
       <p>Terms & Conditions</p>
     </div>
     <div class="help">
@@ -52,6 +52,17 @@
 <script>
 export default {
   name: "FooterOfPage",
+
+  methods: {
+    onGoToRoute(routeParams) {
+      this.$router.push({
+        name: "info",
+        params: {
+          source: routeParams,
+        },
+      });
+    },
+  },
 };
 </script>
 
@@ -60,21 +71,43 @@ export default {
   background-color: rgb(208, 208, 187);
   display: flex;
   justify-content: space-between;
-}
-.about {
-  padding: 10px;
-}
-.flex-container {
-  display: flex;
+  p:hover {
+  }
+  /* unvisited link */
+  p:link {
+    color: green;
+  }
 
-  img {
-    width: 50px;
-    height: 50px;
-    margin: 10px;
+  /* visited link */
+  p:visited {
+    color: green;
+  }
+
+  /* mouse over link */
+  p:hover {
+    color: red;
+    cursor: pointer;
+  }
+
+  /* selected link */
+  p:active {
+    color: yellow;
   }
   .about {
-    h3 {
-      text-align: center;
+    padding: 10px;
+  }
+  .flex-container {
+    display: flex;
+
+    img {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+    }
+    .about {
+      h3 {
+        text-align: center;
+      }
     }
   }
 }
