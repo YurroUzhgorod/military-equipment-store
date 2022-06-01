@@ -14,6 +14,8 @@ import MainMasterPage from "@/masterPages/MainMasterPage";
 import AboutContent from "@/components/infoPageComponents/AboutContent";
 import ContactUsContent from "@/components/infoPageComponents/ContactUsContent";
 import PrivatePolicyContent from "@/components/infoPageComponents/PrivatePolicyContent";
+import TermsAndConditionsContent from "@/components/infoPageComponents/TermsAndConditionsContent";
+
 export default {
   name: "InfoPage",
   components: {
@@ -21,6 +23,7 @@ export default {
     AboutContent,
     ContactUsContent,
     PrivatePolicyContent,
+    TermsAndConditionsContent,
   },
   // data() {
   //   return {
@@ -37,6 +40,8 @@ export default {
           return ContactUsContent;
         case "privacy-policy":
           return PrivatePolicyContent;
+        case "terms&condition":
+          return TermsAndConditionsContent;
         default:
           return AboutContent;
       }

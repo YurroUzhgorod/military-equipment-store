@@ -5,13 +5,16 @@
     </div>
     <div class="flex-container">
       <div class="logo-images-container" @click="goToRoute('homePage')">
-        <img :src="require('@/assets/images/store-logo.webp')" alt="No photo" />
+        <img
+          :src="require('@/assets/images/general-icons/store-logo.jpg')"
+          alt="No photo"
+        />
       </div>
 
       <div class="search-product-container">
         <input
           type="text"
-          placeholder="search"
+          placeholder="  пошук"
           class="block-search-input"
           v-model="searchText"
         />
@@ -19,14 +22,17 @@
       </div>
       <div class="cart-images-container">
         <div @click="goToRoute('cart')">
-          <img :src="require('@/assets/images/basket.jpeg')" alt="No photo" />
+          <img
+            :src="require('@/assets/images/general-icons/cart-icon.png')"
+            alt="No photo"
+          />
         </div>
         <div v-if="getTotalPrice">{{ getTotalPrice }} грн</div>
       </div>
     </div>
     <div class="store-navigation">
       <div class="clothing-menu" @click="goToRoute('allProducts')">
-        <h3>Всі товари</h3>
+        <h3>Новинки</h3>
       </div>
       <div class="clothing-menu" @click="goToRoute('trousers')">
         <h3>Одяг</h3>
@@ -38,11 +44,14 @@
         <h3>Спорядження</h3>
       </div>
       <div class="rucksacks-bags-menu" @click="rucksacks - bags('')">
-        <h3>Рюкзаки&Сумки</h3>
+        <h3>Рюкзаки & Cумки & Баули</h3>
       </div>
-      <div class="eye-menu" @click="goToRoute"><h3>Окуляри</h3></div>
-      <div class="brands-menu" @click="goToRoute"><h3>Бренди</h3></div>
-      <div class="color-menu"><h3>Камуфляж</h3></div>
+      <div class="rucksacks-bags-menu" @click="rucksacks - bags('')">
+        <h3>Тактичні & балістичні окуляри</h3>
+      </div>
+      <div class="rucksacks-bags-menu" @click="rucksacks - bags('')">
+        <h3>Розпродаж</h3>
+      </div>
     </div>
   </div>
 </template>
@@ -95,12 +104,12 @@ export default {
       cursor: pointer;
     }
     img {
-      width: 200px;
+      width: 400px;
     }
   }
   .cart-images-container {
     img {
-      width: 50px;
+      width: 60px;
     }
     &:hover {
       cursor: pointer;
@@ -129,7 +138,7 @@ p {
 }
 
 input {
-  border: 1px solid rgb(143, 105, 55);
+  border: 2px solid rgb(143, 105, 55);
   font-size: 20px;
   height: 50px;
   width: 380px;

@@ -9,7 +9,10 @@
       />
       <div class="add-new-product-container" @click="onAddNewProduct">
         <div>
-          <img :src="require('@/assets/images/addImg.png')" alt="no photo" />
+          <img
+            :src="require('@/assets/images/general-icons/addImg.png')"
+            alt="no photo"
+          />
         </div>
         <div>Add new product</div>
       </div>
@@ -42,7 +45,7 @@ export default {
 
   computed: {
     ...mapGetters("productsList", ["getProductList"]),
-    
+
     filteredProductList() {
       if (this.searchText)
         return this.ProdList.filter((product) =>

@@ -1,38 +1,42 @@
 <template>
   <div class="container">
     <div class="about">
-      <h3>About:</h3>
+      <h3>Інформація:</h3>
       <p @click="onGoToRoute('about')">About Us</p>
       <p @click="onGoToRoute('contacts')">Contact Us</p>
       <p @click="onGoToRoute('privacy-policy')">Privacy Policy</p>
-      <p>Terms & Conditions</p>
+      <p @click="onGoToRoute('terms&condition')">Terms & Conditions</p>
     </div>
     <div class="help">
-      <h3>Help:</h3>
+      <h3>Покупцям:</h3>
       <p>Delivery & Returns</p>
       <p>Cookie Policy</p>
       <p>Site Map</p>
       <p>FAQs</p>
     </div>
 
-    <div class="social">
-      <h3>Social</h3>
+    <div class="social-network-container">
+      <h3>Слідкуйте за нами в соціальних мережах</h3>
       <div class="flex-container">
         <div class="logo-images-container">
           <img
-            :src="require('@/assets/images/social-logo/fb-logo.png')"
+            :src="require('@/assets/images/social-networks- icon/fb-logo.png')"
             alt="No photo"
           />
         </div>
         <div class="logo-images-container">
           <img
-            :src="require('@/assets/images/social-logo/instagram-logo.jpeg')"
+            :src="
+              require('@/assets/images/social-networks- icon/instagram-logo.png')
+            "
             alt="No photo"
           />
         </div>
         <div class="logo-images-container">
           <img
-            :src="require('@/assets/images/social-logo/telegram-logo.png')"
+            :src="
+              require('@/assets/images/social-networks- icon/telegram-logo.png')
+            "
             alt="No photo"
           />
         </div>
@@ -85,7 +89,7 @@ export default {
 
   /* mouse over link */
   p:hover {
-    color: red;
+    text-decoration: underline;
     cursor: pointer;
   }
 
