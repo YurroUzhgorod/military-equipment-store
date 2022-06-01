@@ -72,6 +72,11 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
   background-color: rgb(208, 208, 187);
   display: flex;
   justify-content: space-between;

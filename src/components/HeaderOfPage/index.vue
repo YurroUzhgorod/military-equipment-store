@@ -60,11 +60,6 @@
 import { mapGetters } from "vuex";
 export default {
   name: "HeaderOfPage",
-  data() {
-    return {
-      searchText: null,
-    };
-  },
 
   computed: {
     ...mapGetters("productsList", ["updateSearchText"]),
