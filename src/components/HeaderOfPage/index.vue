@@ -12,22 +12,28 @@
       </div>
 
       <div class="search-product-container">
-        <input
-          type="text"
-          placeholder="  пошук"
-          class="block-search-input"
-          v-model="searchText"
-        />
+        <input type="text" placeholder="  пошук" class="block-search-input" />
         <button @click="onSearchProduct">Найти</button>
       </div>
-      <div class="cart-images-container">
-        <div @click="goToRoute('cart')">
+
+      <div class="cart-container">
+        <div class="pop-up-cart-empty" v-if="getTotalPrice === 0">
+          <img
+            :src="require('@/assets/images/general-icons/cart-icon.png')"
+            alt="No photo"
+            @click="showEmptyCartPopUp"
+          />
+          <div class="pop-up-container" v-if="isShowPopUp">
+            <empty-cart-pop-up @changeVisible="changeVisible" />
+          </div>
+        </div>
+        <div v-else @click="goToRoute('cart')">
           <img
             :src="require('@/assets/images/general-icons/cart-icon.png')"
             alt="No photo"
           />
+          <div v-if="getTotalPrice">{{ getTotalPrice }} грн</div>
         </div>
-        <div v-if="getTotalPrice">{{ getTotalPrice }} грн</div>
       </div>
     </div>
     <div class="store-navigation">
@@ -57,28 +63,42 @@
 </template>
 
 <script>
+import EmptyCartPopUp from "@/components/EmptyCartPopUp";
+
 import { mapGetters } from "vuex";
 export default {
   name: "HeaderOfPage",
 
+  components: {
+    EmptyCartPopUp,
+  },
+
+  data() {
+    return {
+      isShowPopUp: false,
+    };
+  },
+
   computed: {
     ...mapGetters("productsList", ["updateSearchText"]),
     ...mapGetters("cartList", ["getTotalPrice"]),
-
-    changeSearchInputValue() {
-      return this.updateSearchText(this.searchText);
-    },
   },
   methods: {
+    showEmptyCartPopUp() {
+      this.isShowPopUp = true;
+    },
+    changeVisible() {
+      console.log(this.isShowPopUp);
+      this.isShowPopUp = false;
+      console.log(this.isShowPopUp);
+    },
+
     goToRoute(routName) {
       this.$router.push({
         name: routName,
       });
     },
   },
-  // watch: {
-  //   searchText(newValue) {},
-  // },
 };
 </script>
 
@@ -103,7 +123,8 @@ export default {
       width: 400px;
     }
   }
-  .cart-images-container {
+  .cart-container {
+    // position: relative;
     img {
       width: 60px;
     }
@@ -142,12 +163,27 @@ input {
   margin: 0px 0px 100px 0px auto;
 }
 button {
-  border: 1px solid rgb(143, 105, 55);
   background-color: rgb(143, 105, 55);
   font-size: 20px;
   height: 50px;
   width: 70px;
   border-radius: 10px;
   margin: 0px 0px 100px 0px auto;
+}
+.pop-up-container {
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px black;
+  position: absolute;
+  z-index: 1;
+  // left: 50%;
+  // top: 50%;
+  // transform: translate(-50%, -50%);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
 }
 </style>

@@ -1,7 +1,11 @@
 <template>
-  <div>
+  <div class="container">
+    <p><strong> Корзина пуста </strong></p>
+
     <div>
-      <p>Корзина пуста</p>
+      <button @click="$emit('changeVisible')">
+        <strong> X </strong>
+      </button>
     </div>
   </div>
 </template>
@@ -12,4 +16,20 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  text-align: center;
+
+  p {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+  }
+}
+</style>
