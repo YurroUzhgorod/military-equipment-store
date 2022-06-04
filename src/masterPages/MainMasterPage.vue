@@ -30,6 +30,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
 .slider {
   width: 700px;
   height: 400px;

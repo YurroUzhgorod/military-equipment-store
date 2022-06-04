@@ -2,9 +2,7 @@
   <div>
     <main-master-page>
       <template #content>
-        <div>
-          <cart-list />
-        </div>
+        <cart-list />
       </template>
     </main-master-page>
   </div>

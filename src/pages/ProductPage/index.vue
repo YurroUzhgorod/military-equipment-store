@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <main-master-page>
-      <template #content>
-        <div class="home-link"><router-link to="/"> go Home</router-link></div>
-        <product-list />
-      </template>
-    </main-master-page>
-  </div>
+  <main-master-page>
+    <template #content>
+      <product-list />
+    </template>
+  </main-master-page>
 </template>
 
 <script>

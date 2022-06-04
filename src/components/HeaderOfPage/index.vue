@@ -84,6 +84,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  width: 100%;
   background-color: rgb(208, 208, 187);
 }
 .authorization-block {
