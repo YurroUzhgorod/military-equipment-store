@@ -19,35 +19,45 @@
       <h3>Слідкуйте за нами в соціальних мережах</h3>
       <div class="flex-container">
         <div class="logo-images-container">
-          <img
-            :src="require('@/assets/images/social-networks- icon/fb-logo.png')"
-            alt="No photo"
-          />
+          <a href="https://www.facebook.com/">
+            <img
+              :src="
+                require('@/assets/images/social-networks- icon/fb-logo.png')
+              "
+              alt="No photo"
+            />
+          </a>
         </div>
         <div class="logo-images-container">
-          <img
-            :src="
-              require('@/assets/images/social-networks- icon/instagram-logo.png')
-            "
-            alt="No photo"
-          />
+          <a href="https://www.instagram.com/">
+            <img
+              :src="
+                require('@/assets/images/social-networks- icon/instagram-logo.png')
+              "
+              alt="No photo"
+            />
+          </a>
         </div>
         <div class="logo-images-container">
-          <img
-            :src="
-              require('@/assets/images/social-networks- icon/telegram-logo.png')
-            "
-            alt="No photo"
-          />
+          <a href="https://web.telegram.org/k/">
+            <img
+              :src="
+                require('@/assets/images/social-networks- icon/telegram-logo.png')
+              "
+              alt="No photo"
+            />
+          </a>
         </div>
       </div>
     </div>
 
     <div class="about">
-      Sign up to our newsletter
-      <br />
+      <h3>Підпишіться на нашу розсилку</h3>
+      <span>
+        Будьте першими, хто дізнається про новинки та ексклюзивні пропозиції
+      </span>
       <label>
-        <input type="text" placeholder="Enter your email adress" />
+        <input type="text" placeholder="  Вкажіть адрес електронної пошти" />
       </label>
     </div>
   </div>
@@ -75,20 +85,13 @@ export default {
   background-color: rgb(208, 208, 187);
   display: flex;
   justify-content: space-between;
-
-  p:hover {
-  }
-  /* unvisited link */
-  p:link {
-    color: green;
-  }
-
-  /* visited link */
-  p:visited {
-    color: green;
+  input {
+    width: 100%;
+    border: 2px solid rgb(143, 105, 55);
+    height: 40px;
+    border-radius: 5px;
   }
 
-  /* mouse over link */
   p:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -96,17 +99,18 @@ export default {
 
   /* selected link */
   p:active {
-    color: yellow;
+    color: rgb(98, 99, 37);
   }
   .about {
-    padding: 10px;
+    margin: 10px;
+    width: 300px;
   }
   .flex-container {
     display: flex;
 
     img {
-      width: 50px;
-      height: 50px;
+      width: 35px;
+      height: 35px;
       margin: 10px;
     }
     .about {

@@ -176,6 +176,7 @@ button {
   background-color: white;
   box-shadow: 0px 0px 10px 1px black;
   position: absolute;
+  position: fixed;
   z-index: 1;
   // left: 50%;
   // top: 50%;
