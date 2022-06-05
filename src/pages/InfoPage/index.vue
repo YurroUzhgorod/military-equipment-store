@@ -25,11 +25,6 @@ export default {
     PrivatePolicyContent,
     TermsAndConditionsContent,
   },
-  // data() {
-  //   return {
-  //     currentRouteParams: null,
-  //   };
-  // },
 
   computed: {
     activeComponent() {

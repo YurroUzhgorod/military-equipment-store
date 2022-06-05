@@ -15,7 +15,7 @@
       <p>FAQs</p>
     </div>
 
-    <div class="social-network-container">
+    <div class="social-networks-payments-container">
       <h3>Слідкуйте за нами в соціальних мережах</h3>
       <div class="flex-container">
         <div class="logo-images-container">
@@ -48,6 +48,9 @@
             />
           </a>
         </div>
+      </div>
+      <div class="payment-container">
+        <img :src="require('@/assets/images/payment-logos.svg')" alt="" />
       </div>
     </div>
 
@@ -85,6 +88,7 @@ export default {
   background-color: rgb(208, 208, 187);
   display: flex;
   justify-content: space-between;
+
   input {
     width: 100%;
     border: 2px solid rgb(143, 105, 55);
@@ -119,5 +123,8 @@ export default {
       }
     }
   }
+}
+.payment-container {
+  margin: 10px 0 0 0;
 }
 </style>

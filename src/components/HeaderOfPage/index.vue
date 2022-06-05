@@ -36,26 +36,42 @@
         </div>
       </div>
     </div>
-    <div class="store-navigation">
-      <div class="clothing-menu" @click="goToRoute('allProducts')">
+    <div class="store-navigation-container">
+      <div class="store-navigation" @click="goToRoute('allProducts')">
         <h3>Новинки</h3>
       </div>
-      <div class="clothing-menu" @click="goToRoute('trousers')">
+      <div
+        class="store-navigation"
+        @mouseover="testHover('clothing')"
+        @mouseleave="hoverLeave"
+        @click="goToRoute('trousers')"
+      >
         <h3>Одяг</h3>
+        <div class="sub-menu-container" v-if="activeSubMenu === 'clothing'">
+          <component :is="test"></component>
+        </div>
       </div>
-      <div class="foot-wear-menu" @click="onGoToProductList('foot-wear')">
+      <div
+        class="store-navigation"
+        @click="onGoToProductList('foot-wear')"
+        @mouseover="testHover('boots')"
+        @mouseleave="hoverLeave"
+      >
         <h3>Взуття</h3>
+        <div class="sub-menu-container" v-if="activeSubMenu === 'boots'">
+          <component :is="test"></component>
+        </div>
       </div>
-      <div class="combat-gear-menu" @click="onGoToProductList('combat-gear')">
+      <div class="store-navigation" @click="onGoToProductList('combat-gear')">
         <h3>Спорядження</h3>
       </div>
-      <div class="rucksacks-bags-menu" @click="rucksacks - bags('')">
-        <h3>Рюкзаки & Cумки & Баули</h3>
+      <div class="store-navigation">
+        <h3>Рюкзаки & Cумки</h3>
       </div>
-      <div class="rucksacks-bags-menu" @click="rucksacks - bags('')">
-        <h3>Тактичні & балістичні окуляри</h3>
+      <div class="store-navigation">
+        <h3>Окуляри</h3>
       </div>
-      <div class="rucksacks-bags-menu" @click="rucksacks - bags('')">
+      <div class="store-navigation">
         <h3>Розпродаж</h3>
       </div>
     </div>
@@ -63,6 +79,8 @@
 </template>
 
 <script>
+import ClotheSubMenu from "@/components/SubMenuComponents/ClotheSubMenu.vue";
+import BootsSubMenu from "@/components/SubMenuComponents/BootsSubMenu.vue";
 import EmptyCartPopUp from "@/components/EmptyCartPopUp";
 
 import { mapGetters } from "vuex";
@@ -71,32 +89,52 @@ export default {
 
   components: {
     EmptyCartPopUp,
+    BootsSubMenu,
+    ClotheSubMenu,
   },
 
   data() {
     return {
       isShowPopUp: false,
+      activeSubMenu: null,
     };
   },
 
   computed: {
     ...mapGetters("productsList", ["updateSearchText"]),
     ...mapGetters("cartList", ["getTotalPrice"]),
+
+    test() {
+      switch (this.activeSubMenu) {
+        case "clothing":
+          return ClotheSubMenu;
+        case "boots":
+          return BootsSubMenu;
+
+        default:
+          return 0;
+      }
+    },
   },
   methods: {
     showEmptyCartPopUp() {
       this.isShowPopUp = true;
     },
     changeVisible() {
-      console.log(this.isShowPopUp);
       this.isShowPopUp = false;
-      console.log(this.isShowPopUp);
     },
 
     goToRoute(routName) {
       this.$router.push({
         name: routName,
       });
+    },
+    testHover(params) {
+      this.activeSubMenu = params;
+      console.log("work");
+    },
+    hoverLeave() {
+      this.activeSubMenu = null;
     },
   },
 };
@@ -105,6 +143,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   width: 100%;
+  position: relative;
   background-color: rgb(208, 208, 187);
 }
 .authorization-block {
@@ -133,20 +172,26 @@ export default {
     }
   }
 }
-.store-navigation {
-  background-color: rgb(98, 99, 37);
+.store-navigation-container {
+  // position: relative;
 
+  background-color: rgb(98, 99, 37);
   text-align: center;
   display: flex;
   text-align: center;
-  div {
-    padding: 10px 30px;
+  height: 40px;
+
+  .store-navigation {
+    position: relative;
+
+    padding: 0px 30px;
+
     &:hover {
       cursor: pointer;
     }
 
     &:hover {
-      background-color: rgb(135, 121, 102);
+      background-color: rgb(208, 208, 187);
     }
   }
 }
@@ -173,11 +218,11 @@ button {
 .pop-up-container {
   width: 400px;
   height: 400px;
-  background-color: white;
+  background-color: rgb(208, 208, 187);
   box-shadow: 0px 0px 10px 1px black;
   position: absolute;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   // left: 50%;
   // top: 50%;
   // transform: translate(-50%, -50%);
@@ -186,5 +231,12 @@ button {
   right: 0;
   left: 0;
   margin: auto;
+}
+.sub-menu-container {
+  position: absolute;
+  bottom: px;
+  top: 40px;
+  z-index: 1;
+  background-color: rgb(208, 208, 187);
 }
 </style>
