@@ -18,6 +18,17 @@ export default {
     MainMasterPage,
     SliderComponent,
   },
+  data() {
+    return {
+      items: [
+        {
+          text: "Головна",
+          disabled: false,
+          href: "/",
+        },
+      ],
+    };
+  },
 };
 </script>
 

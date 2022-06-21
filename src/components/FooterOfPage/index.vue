@@ -1,18 +1,18 @@
 <template>
-  <div class="container">
+  <div class="footer-container">
     <div class="about">
-      <h3>Інформація:</h3>
-      <p @click="onGoToRoute('about')">About Us</p>
-      <p @click="onGoToRoute('contacts')">Contact Us</p>
-      <p @click="onGoToRoute('privacy-policy')">Privacy Policy</p>
-      <p @click="onGoToRoute('terms&condition')">Terms & Conditions</p>
+      <h3>Інформація :</h3>
+      <p @click="onGoToRoute('about')">Про Компанію</p>
+      <p @click="onGoToRoute('contacts')">Контакти</p>
+      <p @click="onGoToRoute('privacy-policy')">Адреси наших магазинів</p>
+      <p @click="onGoToRoute('terms&condition')">Графік роботи магазинів</p>
     </div>
     <div class="help">
       <h3>Покупцям:</h3>
-      <p>Delivery & Returns</p>
-      <p>Cookie Policy</p>
-      <p>Site Map</p>
-      <p>FAQs</p>
+      <p>Оплата і доставка</p>
+      <p>Особистий кабінет</p>
+      <p>Карта сайту</p>
+      <p>Найчастіші питання</p>
     </div>
 
     <div class="social-networks-payments-container">
@@ -83,48 +83,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.container {
-  background-color: rgb(208, 208, 187);
-  display: flex;
-  justify-content: space-between;
-
-  input {
-    width: 100%;
-    border: 2px solid rgb(143, 105, 55);
-    height: 40px;
-    border-radius: 5px;
-  }
-
-  p:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  /* selected link */
-  p:active {
-    color: rgb(98, 99, 37);
-  }
-  .about {
-    margin: 10px;
-    width: 300px;
-  }
-  .flex-container {
-    display: flex;
-
-    img {
-      width: 35px;
-      height: 35px;
-      margin: 10px;
-    }
-    .about {
-      h3 {
-        text-align: center;
-      }
-    }
-  }
-}
-.payment-container {
-  margin: 10px 0 0 0;
-}
-</style>
+<style lang="scss" scoped></style>

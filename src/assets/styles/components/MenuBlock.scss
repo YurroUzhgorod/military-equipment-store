@@ -1,0 +1,39 @@
+.menu-block-container {
+  background-color: rgb(118, 119, 43);
+  position: relative;
+
+  height: 40px;
+  margin: auto;
+
+  .menu-items-container {
+    margin: auto;
+    width: 85%;
+    height: 100%;
+    display: flex;
+
+    .menu-item {
+      padding: 0 30px;
+      height: 100%;
+      display: flex;
+      margin: auto;
+      font-family: Georgia;
+      font-weight: 900;
+
+      &:hover {
+        background-color: rgb(208, 208, 187);
+        cursor: pointer;
+      }
+
+      .menu-item-title {
+        margin: auto;
+      }
+    }
+  }
+  .sub-menu-container {
+    width: 85%;
+    display: inline-block;
+    position: absolute;
+    top: 40px;
+    z-index: 3;
+  }
+}

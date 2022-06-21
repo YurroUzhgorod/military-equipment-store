@@ -4,7 +4,7 @@
 
     <div>
       <button @click="$emit('changeVisible')">
-        <strong> X </strong>
+        <v-icon>mdi-close-circle-outline</v-icon>
       </button>
     </div>
   </div>
@@ -18,6 +18,8 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  font-size: 20px;
+  font-weight: bold;
   display: flex;
   width: 100%;
   height: 100%;

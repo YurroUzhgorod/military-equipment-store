@@ -1,0 +1,35 @@
+.sub-menu-block-container {
+  padding-top: 30px;
+  display: flex;
+  width: 100%;
+  height: 300px;
+  background-color: rgb(208, 208, 187);
+  font-family: Georgia;
+
+  .links-container {
+    // padding: 20px;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+
+    .column-list-container {
+      span {
+        font-size: 16px;
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+      .column-content-clock {
+        width: 50%;
+      }
+    }
+  }
+  .image-container {
+    width: 40%;
+    img {
+      border: 1px solid rgb(94, 129, 75);
+      width: 250px;
+    }
+  }
+}

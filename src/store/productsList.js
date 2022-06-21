@@ -77,8 +77,98 @@ export default {
           color: "green",
         },
         {
-          id: "9",
-          title: "Черевики Lowa ",
+          id: "10",
+          title: "Черевики sdfs ",
+          type: "boots",
+          price: 65,
+          imgSrc:
+            "https://content.rozetka.com.ua/goods/images/big/220469120.jpg",
+          color: "brown",
+        },
+        {
+          id: "11",
+          title: "Черевики kkkk ",
+          type: "boots",
+          price: 65,
+          imgSrc:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1DoYDLIFHXuFCa--1sU5NPmR-oEBgooltemg7cUq2KNzAEC5yDhpObCVdTeLHCu7omNI&usqp=CAU",
+          color: "brown",
+        },
+        {
+          id: "12",
+          title: "Черевики jjjj ",
+          type: "boots",
+          price: 65,
+          imgSrc:
+            "https://content.rozetka.com.ua/goods/images/big/220469120.jpg",
+          color: "brown",
+        },
+        {
+          id: "13",
+          title: "Черевики nnn ",
+          type: "boots",
+          price: 65,
+          imgSrc:
+            "https://content.rozetka.com.ua/goods/images/big/220469120.jpg",
+          color: "brown",
+        },
+        {
+          id: "14",
+          title: "Черевики rrrr ",
+          type: "boots",
+          price: 65,
+          imgSrc:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCX_BUZYRthEfFCbcnw7AJSJ09M5QpqRm0fA&usqp=CAU",
+          color: "brown",
+        },
+        {
+          id: "15",
+          title: "Черевики dddd ",
+          type: "boots",
+          price: 65,
+          imgSrc:
+            "https://content.rozetka.com.ua/goods/images/big/220469120.jpg",
+          color: "brown",
+        },
+        {
+          id: "16",
+          title: "Черевики eeee ",
+          type: "boots",
+          price: 65,
+          imgSrc:
+            "https://content.rozetka.com.ua/goods/images/big/220469120.jpg",
+          color: "brown",
+        },
+        {
+          id: "17",
+          title: "Черевики ccc ",
+          type: "boots",
+          price: 75,
+          imgSrc:
+            "https://content.rozetka.com.ua/goods/images/big/220469120.jpg",
+          color: "brown",
+        },
+        {
+          id: "18",
+          title: "Черевики qqqq ",
+          type: "boots",
+          price: 25,
+          imgSrc:
+            "https://content.rozetka.com.ua/goods/images/big/220469120.jpg",
+          color: "brown",
+        },
+        {
+          id: "19",
+          title: "Черевики iii ",
+          type: "boots",
+          price: 65,
+          imgSrc:
+            "https://content.rozetka.com.ua/goods/images/big/220469120.jpg",
+          color: "brown",
+        },
+        {
+          id: "20",
+          title: "Черевики rrr ",
           type: "boots",
           price: 65,
           imgSrc:
