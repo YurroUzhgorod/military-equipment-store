@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="pop-up-container">
     <p><strong> Корзина пуста </strong></p>
 
     <div>
@@ -17,9 +17,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.pop-up-container {
   font-size: 20px;
-  font-weight: bold;
   display: flex;
   width: 100%;
   height: 100%;

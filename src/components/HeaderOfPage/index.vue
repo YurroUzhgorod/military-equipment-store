@@ -3,7 +3,7 @@
     <div class="authorization-block">
       <p>Зайдіть або створіть аккаунт</p>
     </div>
-    <div class="flex-container">
+    <div class="header-content-container">
       <div class="logo-images-container" @click="goToRoute('homePage')">
         <img
           :src="require('@/assets/images/general-icons/store-logo.jpg')"

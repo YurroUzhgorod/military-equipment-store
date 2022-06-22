@@ -16,7 +16,7 @@
     </div>
 
     <div class="social-networks-payments-container">
-      <h3>Слідкуйте за нами в соціальних мережах</h3>
+      <h3>Слідкуйте за нами в соціальних мережах:</h3>
       <div class="flex-container">
         <div class="logo-images-container">
           <a href="https://www.facebook.com/">
@@ -55,7 +55,7 @@
     </div>
 
     <div class="about">
-      <h3>Підпишіться на нашу розсилку</h3>
+      <h3>Підпиcуйтесь на розсилку:</h3>
       <span>
         Будьте першими, хто дізнається про новинки та ексклюзивні пропозиції
       </span>
