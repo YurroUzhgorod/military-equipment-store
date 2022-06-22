@@ -1,6 +1,6 @@
 <template>
   <div class="pop-up-container">
-    <p><strong> Корзина пуста </strong></p>
+    <p>Корзина пуста</p>
 
     <div>
       <button @click="$emit('changeVisible')">

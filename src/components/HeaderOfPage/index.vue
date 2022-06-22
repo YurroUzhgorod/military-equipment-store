@@ -13,7 +13,12 @@
 
       <div class="search-product-container">
         <input type="text" placeholder="  пошук" class="block-search-input" />
-        <button @click="onSearchProduct">Найти</button>
+        <button @click="onSearchProduct">
+          <img
+            :src="require('@/assets/images/general-icons/search-icon.webp')"
+            alt="no photo"
+          />
+        </button>
       </div>
 
       <div class="contact-us-container">

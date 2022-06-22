@@ -18,9 +18,9 @@ export default {
       {
         src: "https://wallpaperaccess.com/full/751676.jpg",
       },
-      {
-        src: "https://miro.medium.com/max/1200/1*3RSOB4O4Ap95BmSFRPBvNw.jpeg",
-      },
+      // {
+      //   src: "https://miro.medium.com/max/1200/1*3RSOB4O4Ap95BmSFRPBvNw.jpeg",
+      // },
       {
         src: "https://i.shgcdn.com/465d1a41-83d5-4706-9590-e1b67c2d07f7/-/format/auto/-/preview/3000x3000/-/quality/lighter/",
       },
@@ -36,9 +36,9 @@ export default {
       {
         src: require("@/assets/images/slider-img/photo22.png"),
       },
-      {
-        src: require("@/assets/images/slider-img/slider1.jpeg"),
-      },
+      // {
+      //   src: require("@/assets/images/slider-img/slider1.jpeg"),
+      // },
       {
         src: require("@/assets/images/slider-img/slider2.webp"),
       },

@@ -7,7 +7,7 @@
         :key="column.id"
       >
         <div
-          column-content-clock
+          class="column-content-block"
           v-for="columnsListItems in column.listItems"
           :key="columnsListItems.id"
         >
