@@ -3,6 +3,9 @@
     <div class="menu-items-container" @mouseleave="onHoverLeave()">
       <div
         class="menu-item"
+        :class="{
+          'parent-div-for-submenu-is-active': value.submenu === subMenuData,
+        }"
         v-for="(value, menuItemId) in menuItems"
         :key="menuItemId"
         @mouseover="onHover(menuItemId)"
