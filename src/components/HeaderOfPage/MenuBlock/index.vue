@@ -4,7 +4,7 @@
       <div
         class="menu-item"
         :class="{
-          'parent-div-for-submenu-is-active': value.submenu === subMenuData,
+          'parent-div-for-submenu-is-active': value.title === activeMenu,
         }"
         v-for="(value, menuItemId) in menuItems"
         :key="menuItemId"

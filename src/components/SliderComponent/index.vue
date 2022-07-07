@@ -18,6 +18,9 @@ export default {
       {
         src: "https://wallpaperaccess.com/full/751676.jpg",
       },
+      {
+        src: require("@/assets/images/slider-img/64.jpg"),
+      },
       // {
       //   src: "https://miro.medium.com/max/1200/1*3RSOB4O4Ap95BmSFRPBvNw.jpeg",
       // },
