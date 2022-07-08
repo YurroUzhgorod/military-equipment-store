@@ -47,6 +47,7 @@
         <div class="add-new-product"><button>Додати товар</button></div>
       </div>
     </div>
+
     <div class="store-navigation-container">
       <menu-block />
     </div>
@@ -91,13 +92,6 @@ export default {
       this.$router.push({
         name: routName,
       });
-    },
-    testHover(params) {
-      this.activeSubMenu = params;
-      console.log("work");
-    },
-    hoverLeave() {
-      this.activeSubMenu = null;
     },
   },
 };

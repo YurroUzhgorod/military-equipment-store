@@ -5,6 +5,10 @@
   height: 40px;
   margin: auto;
 
+  .sub-menu-container {
+    position: sticky;
+    top: 0;
+  }
   .menu-items-container {
     margin: auto;
     width: 85%;
@@ -28,7 +32,7 @@
         margin: auto;
       }
     }
-    .parent-div-for-submenu-is-active {
+    .parent-menu-is-active {
       background-color: rgb(208, 208, 187);
     }
   }

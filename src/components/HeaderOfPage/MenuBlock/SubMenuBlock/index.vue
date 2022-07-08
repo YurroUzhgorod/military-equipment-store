@@ -11,7 +11,10 @@
           v-for="columnsListItems in column.listItems"
           :key="columnsListItems.id"
         >
-          <div class="" @click="goToroute(columnsListItems.routeId)">
+          <div
+            class=""
+            @click="$emit('subCategory', columnsListItems.routeSubCategory)"
+          >
             <span>
               {{ columnsListItems.title }}
             </span>

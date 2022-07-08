@@ -10,9 +10,9 @@ const routes = [
   { path: "/", component: HomePage, name: "homePage" },
 
   {
-    path: "/all-products",
+    path: "/products/:category/:subCategory?",
     component: ProductPage,
-    name: "allProducts",
+    name: "products",
   },
   {
     path: "/cart",

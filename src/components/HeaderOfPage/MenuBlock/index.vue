@@ -4,12 +4,12 @@
       <div
         class="menu-item"
         :class="{
-          'parent-div-for-submenu-is-active': value.title === activeMenu,
+          'parent-menu-is-active': value.submenu === subMenuData,
         }"
-        v-for="(value, menuItemId) in menuItems"
-        :key="menuItemId"
-        @mouseover="onHover(menuItemId)"
-        @click="onGoToRoute(menuItemId)"
+        v-for="(value, menuItem) in menuItems"
+        :key="menuItem"
+        @mouseover="onHover(menuItem)"
+        @click="onGoToCategory(value.id)"
       >
         <div class="menu-item-title">
           <span>
@@ -19,8 +19,9 @@
       </div>
       <div class="sub-menu-container">
         <sub-menu-block
-          v-if="isSubMenuActive && subMenuData"
+          v-if="isSubMenuActive && subMenuData.columnsMenusSection"
           :menu-data="subMenuData"
+          @subCategory="findSubcategory"
         />
       </div>
     </div>
@@ -40,23 +41,39 @@ export default {
       menuItems,
       isSubMenuActive: false,
       subMenuData: null,
+      productsCategory: null,
+      productsSubCategory: null,
     };
   },
 
   methods: {
-    onHover(menuItemId) {
-      this.subMenuData = this.menuItems[menuItemId].submenu;
+    onHover(menuItem) {
+      this.subMenuData = this.menuItems[menuItem].submenu;
       this.isSubMenuActive = true;
+      this.productsCategory = this.menuItems[menuItem].id;
     },
 
     onHoverLeave() {
       this.isSubMenuActive = false;
       this.subMenuData = null;
     },
-    onGoToRoute() {
+    onGoToCategory(category, subCategory) {
       this.$router.push({
-        name: "allProducts",
+        name: "products",
+        params: { category, subCategory },
       });
+    },
+
+    findSubcategory(subCategoryValue) {
+      this.productsSubCategory = subCategoryValue;
+    },
+  },
+
+  watch: {
+    productsSubCategory(newSubCategory) {
+      let category = this.productsCategory;
+
+      this.onGoToCategory(category, newSubCategory);
     },
   },
 };

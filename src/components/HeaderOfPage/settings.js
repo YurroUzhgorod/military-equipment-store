@@ -2,12 +2,16 @@ export const menuItems = {
   menuItem1: {
     id: "new-in",
     title: "Новинки",
+    submenu: {
+      id: 1,
+    },
   },
 
   menuItem2: {
     id: "clothes",
     title: "Одяг",
     submenu: {
+      id: 2,
       imageSection: {
         imgSrc: require("@/assets/images/sub-menu-img/clothes-img.jpeg"),
       },
@@ -18,27 +22,27 @@ export const menuItems = {
           listItems: [
             {
               title: "Штани",
-              routeId: "Pants-id",
+              routeSubCategory: "Pants",
             },
             {
               title: "Футболки & Жилети",
-              routeId: "T-shirts&West-id",
+              routeSubCategory: "t-shirts&West-id",
             },
             {
               title: "Уніформа",
-              routeId: "http////",
+              routeSubCategory: "uniforn",
             },
             {
               title: "Фліс",
-              routeId: "http////",
+              routeSubCategory: "fleece",
             },
             {
               title: "Рукавиці",
-              routeId: "http////",
+              routeSubCategory: "gloves",
             },
             {
               title: "Сорочки",
-              routeId: "http////",
+              routeSubCategory: "shirts",
             },
           ],
         },
@@ -48,23 +52,23 @@ export const menuItems = {
           listItems: [
             {
               title: "Куртки",
-              routeId: "http////",
+              routeSubCategory: "jackets",
             },
             {
               title: "Ватерпруф",
-              routeId: "http////",
+              routeSubCategory: "water-proof",
             },
             {
               title: "Комбенезони",
-              routeId: "http////",
+              routeSubCategory: "overalls",
             },
             {
               title: "Ремені",
-              routeId: "http////",
+              routeSubCategory: "belts",
             },
             {
               title: "Шарфи",
-              routeId: "http////",
+              routeSubCategory: "scarves",
             },
           ],
         },
@@ -76,6 +80,7 @@ export const menuItems = {
     id: "boots",
     title: "Взуття",
     submenu: {
+      id: 3,
       imageSection: {
         imgSrc: require("@/assets/images/sub-menu-img/boots-img.jpeg"),
       },
@@ -86,23 +91,23 @@ export const menuItems = {
           listItems: [
             {
               title: "Літні черевики",
-              routeId: "http////",
+              routeSubCategory: "summer-boots",
             },
             {
               title: "Демісезонні черевики",
-              routeId: "http////",
+              routeSubCategory: "demi-season-boots",
             },
             {
               title: "Зимові черевики",
-              routeId: "http////",
+              routeSubCategory: "winter-boots",
             },
             {
               title: "Напів-черевики",
-              routeId: "http////",
+              routeSubCategory: "semi-boots",
             },
             {
               title: "Кеди",
-              routeId: "http////",
+              routeSubCategory: "sneakers",
             },
           ],
         },
@@ -112,23 +117,23 @@ export const menuItems = {
           listItems: [
             {
               title: "Бахіли",
-              routeId: "http////",
+              routeSubCategory: "shoe-covers",
             },
             {
               title: "Гамаші",
-              routeId: "http////",
+              routeSubCategory: "gamashi",
             },
             {
               title: "Гетри",
-              routeId: "http////",
+              routeSubCategory: "gaiters",
             },
             {
               title: "Шкарпетки",
-              routeId: "http////",
+              routeSubCategory: "socks",
             },
             {
               title: "Аксесуари",
-              routeId: "http////",
+              routeSubCategory: "boots-accessories",
             },
           ],
         },
@@ -140,6 +145,8 @@ export const menuItems = {
     id: "equipment",
     title: "Спорядження",
     submenu: {
+      id: 4,
+
       imageSection: {
         imgSrc: require("@/assets/images/sub-menu-img/equipment-img.jpeg"),
       },
@@ -150,23 +157,23 @@ export const menuItems = {
           listItems: [
             {
               title: "Магазинні підсумки",
-              routeId: "http////",
+              routeSubCategory: "magazine-pouches",
             },
             {
               title: "Утилітарні підсумки",
-              routeId: "http////",
+              routeSubCategory: "utility-pouches",
             },
             {
               title: "Підсумки під аптечку",
-              routeId: "http////",
+              routeSubCategory: "medical-pouches",
             },
             {
               title: "Гранатні підсумки",
-              routeId: "http////",
+              routeSubCategory: "grenade-pouches",
             },
             {
               title: "Підсумки під рацію",
-              routeId: "http////",
+              routeSubCategory: "radio-pouches",
             },
           ],
         },
@@ -176,23 +183,23 @@ export const menuItems = {
           listItems: [
             {
               title: "Бронежилети",
-              routeId: "http////",
+              routeSubCategory: "body-armors",
             },
             {
               title: "Чест-ріги ",
-              routeId: "http////",
+              routeSubCategory: "chest-rigs",
             },
             {
               title: "Ремінно-плечеві системи",
-              routeId: "http////",
+              routeSubCategory: "Belt-and-shoulder-systems",
             },
             {
               title: "Жилети",
-              routeId: "http////",
+              routeSubCategory: "wests",
             },
             {
               title: "Гідратори",
-              routeId: "http////",
+              routeSubCategory: "hydrators",
             },
           ],
         },
@@ -204,6 +211,8 @@ export const menuItems = {
     id: "bags-backpacks",
     title: "Рюкзаки & Cумки",
     submenu: {
+      id: 5,
+
       imageSection: {
         imgSrc: require("@/assets/images/sub-menu-img/bags-img.jpeg"),
       },
@@ -214,23 +223,23 @@ export const menuItems = {
           listItems: [
             {
               title: "Рейдові та патрульні рюкзаки",
-              linkSrc: "http////",
+              routeSubCategory: "raid-back-pacs",
             },
             {
               title: "Сумки через плече",
-              routeId: "http////",
+              routeSubCategory: "bags",
             },
             {
               title: "Баули, транспортні сумки",
-              routeId: "http////",
+              routeSubCategory: "transports-bag",
             },
             {
               title: " Чохли водонепроникні",
-              routeId: "http////",
+              routeSubCategory: "waterproof-covers",
             },
             {
               title: "Чохли для рюкзаків",
-              routeId: "http////",
+              routeSubCategory: "bag-pack-covers",
             },
           ],
         },
@@ -242,6 +251,8 @@ export const menuItems = {
     id: "glasses",
     title: "Окуляри",
     submenu: {
+      id: 6,
+
       imageSection: {
         imgSrc: require("@/assets/images/sub-menu-img/eye-glasses-img.jpeg"),
       },
@@ -252,23 +263,23 @@ export const menuItems = {
           listItems: [
             {
               title: "Захисні окуляри",
-              routeId: "http////",
+              routeSubCategory: "protect-eye-glasses",
             },
             {
               title: "Оруляри маски",
-              routeId: "http////",
+              routeSubCategory: "eye-masks",
             },
             {
               title: "Аксесуари",
-              routeId: "http////",
+              routeSubCategory: "glasses-accessories",
             },
             {
               title: "Діоптричні вставки",
-              routeId: "http////",
+              routeSubCategory: "dioptric-insert",
             },
             {
               title: "Чохли для окулярів",
-              routeId: "http////",
+              routeSubCategory: "glasses-covers",
             },
           ],
         },
@@ -278,11 +289,8 @@ export const menuItems = {
   menuItem7: {
     id: "sale",
     title: "Розпродажа",
+    submenu: {
+      id: 7,
+    },
   },
-
-  // menuItem8: {
-  //   id: "add",
-  //   title: "Додати товар",
-  //   routerName: "edit",
-  // },
 };
