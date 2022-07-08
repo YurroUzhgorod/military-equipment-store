@@ -2,7 +2,7 @@
   <div class="container">
     <div class="list-container">
       <product-card
-        v-for="productItem in filteredProductList"
+        v-for="productItem in productList"
         :key="productItem.id"
         :product="productItem"
         @on-edit="onEdit(productItem.id)"
@@ -25,6 +25,21 @@
       ></v-pagination>
     </div>
   </div>
+
+  //------------------------
+
+  <div v-if="isEmpty">The library is empty</div>
+  <div v-else>
+    <div v-for="book in books" :key="book._id" class="container">
+      <div>{{ book.title }}</div>
+      <div>{{ book.price }}</div>
+      <img :src="getImgSrc(book.photo)" alt="" />
+      <button @click="onDelete(book._id)">Delete</button>
+      <button @click="onEdit(book._id)">Edit</button>
+    </div>
+  </div>
+
+  //-------------------------
 </template>
 
 <script>
@@ -44,7 +59,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("productsList", ["getProductList"]),
+    ...mapGetters("products", ["getProductList"]),
 
     filteredProductList() {
       if (this.searchText)

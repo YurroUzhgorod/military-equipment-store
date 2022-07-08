@@ -279,4 +279,10 @@ export const menuItems = {
     id: "sale",
     title: "Розпродажа",
   },
+
+  // menuItem8: {
+  //   id: "add",
+  //   title: "Додати товар",
+  //   routerName: "edit",
+  // },
 };

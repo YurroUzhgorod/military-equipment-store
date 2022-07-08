@@ -20,32 +20,31 @@
           />
         </button>
       </div>
+      <div class="test">
+        <div class="contact-us-container">
+          <call-back-pop-up />
+        </div>
 
-      <div class="contact-us-container">
-        <call-back-pop-up />
-      </div>
-      <div class="language-container">
-        <site-languages />
-      </div>
-
-      <div class="cart-container">
-        <div class="pop-up-cart-empty" v-if="getTotalPrice === 0">
-          <img
-            :src="require('@/assets/images/general-icons/cart-icon.png')"
-            alt="No photo"
-            @click="showEmptyCartPopUp"
-          />
-          <div class="cart-pop-up-container" v-if="isShowPopUp">
-            <empty-cart-pop-up @changeVisible="changeVisible" />
+        <div class="cart-container">
+          <div class="pop-up-cart-empty" v-if="getTotalPrice === 0">
+            <img
+              :src="require('@/assets/images/general-icons/cart-icon.png')"
+              alt="No photo"
+              @click="showEmptyCartPopUp"
+            />
+            <div class="cart-pop-up-container" v-if="isShowPopUp">
+              <empty-cart-pop-up @changeVisible="changeVisible" />
+            </div>
+          </div>
+          <div v-else @click="goToRoute('cart')">
+            <img
+              :src="require('@/assets/images/general-icons/cart-icon.png')"
+              alt="No photo"
+            />
+            <div v-if="getTotalPrice">{{ getTotalPrice }} грн</div>
           </div>
         </div>
-        <div v-else @click="goToRoute('cart')">
-          <img
-            :src="require('@/assets/images/general-icons/cart-icon.png')"
-            alt="No photo"
-          />
-          <div v-if="getTotalPrice">{{ getTotalPrice }} грн</div>
-        </div>
+        <div class="add-new-product"><button>Додати товар</button></div>
       </div>
     </div>
     <div class="store-navigation-container">
@@ -58,7 +57,6 @@
 import EmptyCartPopUp from "@/components/EmptyCartPopUp";
 import CallBackPopUp from "@/components/CallBackPopUp";
 import MenuBlock from "./MenuBlock";
-import siteLanguages from "./siteLanguages.vue";
 
 import { mapGetters } from "vuex";
 export default {
@@ -68,7 +66,6 @@ export default {
     EmptyCartPopUp,
     MenuBlock,
     CallBackPopUp,
-    siteLanguages,
   },
 
   data() {

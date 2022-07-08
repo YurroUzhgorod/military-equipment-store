@@ -90,11 +90,9 @@ export default {
 .callback-pop-up-container {
   font-family: Georgia;
 
-  border-radius: 20px;
-
   display: flex;
   .phone-image {
-    width: 30px;
+    width: 40px;
     margin: auto;
   }
   img {
