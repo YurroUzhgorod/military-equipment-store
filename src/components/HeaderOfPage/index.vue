@@ -44,7 +44,9 @@
             <div v-if="getTotalPrice">{{ getTotalPrice }} грн</div>
           </div>
         </div>
-        <div class="add-new-product"><button>Додати товар</button></div>
+        <div class="add-new-product" @click="onGoToAddProductRoute">
+          <button>Додати товар</button>
+        </div>
       </div>
     </div>
 
@@ -91,6 +93,11 @@ export default {
     goToRoute(routName) {
       this.$router.push({
         name: routName,
+      });
+    },
+    onGoToAddProductRoute() {
+      this.$router.push({
+        name: "edit",
       });
     },
   },

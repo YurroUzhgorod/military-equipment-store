@@ -1,22 +1,21 @@
 <template>
   <div class="product-container">
     <div>
-      <img :src="product.imgSrc" alt="no photo" />
-    </div>
-    <div>
       {{ product.title }}
     </div>
     <div>{{ product.price }} грн</div>
-    <div>
-      <hr />
 
-      <button @click="onAdd">add</button>
-      <button @click="$emit('on-edit')">edit</button>
+    <img :src="product.photo" alt="" />
+    <hr />
+    <div>
+      <button @click="onDelete(product._id)">Видалити</button>
+      <button @click="onEdit(product._id)">Редагувати</button>
     </div>
   </div>
 </template>
 
 <script>
+// import { mapActions } from "vuex";
 import { mapActions } from "vuex";
 
 export default {
@@ -30,10 +29,15 @@ export default {
   },
 
   methods: {
-    ...mapActions("cartList", ["addProductItem"]),
+    // ...mapActions("cartList", ["addProductItem"]),
 
-    onAdd() {
-      this.addProductItem(this.product.id);
+    ...mapActions("products", ["deleteProduct"]),
+
+    onDelete(id) {
+      this.deleteProduct(id);
+    },
+    onEdit(id) {
+      this.$router.push({ name: "edit", params: { id } });
     },
   },
 };

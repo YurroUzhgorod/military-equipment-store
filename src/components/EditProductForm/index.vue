@@ -1,97 +1,147 @@
 <template>
   <div class="wrapper">
-    <div class="edit-form-container"></div>
     <div>
       <label>
-        Product src
-        <input type="text" v-model="product.imgSrc" />
-      </label>
-    </div>
-
-    <!-- <div>
-      <img :src="photoSrc" alt="no photo" />
-    </div> -->
-    <div>
-      <label>
-        Product title
+        Назва товару
         <input type="text" v-model="product.title" />
       </label>
     </div>
+
     <div>
       <label>
-        Product type
-        <input type="text" v-model="product.type" />
+        Опис товару
+        <input type="textarea" v-model="product.description" />
       </label>
     </div>
     <div>
-      <label>
-        Product price
-        <input type="text" v-model="product.price" />
-      </label>
+      Виробник
+      <select v-model="product.manufacturer">
+        <option
+          v-for="(manufacturer, index) in manufacturerList"
+          :key="index"
+          :value="manufacturer"
+        >
+          {{ manufacturer }}
+        </option>
+      </select>
     </div>
+
+    <div>
+      Виберіть категорію
+      <select v-model="product.category">
+        <option
+          v-for="(categoryItem, index) in allCategoryOfProducts"
+          :key="index"
+          :value="categoryItem"
+        >
+          {{ categoryItem }}
+        </option>
+      </select>
+    </div>
+
     <div>
       <label>
-        Product color
-        <input type="text" v-model="product.color" />
+        Ціна
+        <input type="number" v-model="product.price" />
       </label>
     </div>
+
     <div>
-      <button @click="onSave">{{ saveBtnTitle }}</button>
-      <button @click="onDelete">{{ delBtnTitle }}</button>
+      Статус товару
+      <select v-model="product.in_sale">
+        <option :value="true">В продажі</option>
+        <option :value="false">Не в продажі</option>
+      </select>
     </div>
+
+    <div>
+      <label>
+        Фото-картка
+        <input type="file" @input="createLogoImage" />
+      </label>
+      <img id="img" :src="photoSrc" alt="" />
+    </div>
+
+    <button @click="onSave">{{ btnLabel }}</button>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { allCategoryOfProducts, manufacturerList } from "./settings";
+import { mapActions } from "vuex";
 export default {
   name: "EditUserForm",
 
   data() {
     return {
+      allCategoryOfProducts,
+      manufacturerList,
       product: {},
+      rawPhotoData: null,
     };
   },
-
   computed: {
-    ...mapGetters("productsList", ["getProductById"]),
-
     photoSrc() {
-      return this.product.imgSrc ?? require("@/assets/logo.svg");
+      return this.rawPhotoData || this.product.photo;
     },
-    currentProductId() {
+    receivedProductId() {
+      console.log(this.$route.params.id);
       return this.$route.params.id;
     },
-    saveBtnTitle() {
-      return this.currentProductId ? "Save" : "Add";
-    },
-    delBtnTitle() {
-      return this.currentProductId ? "Delete" : "Cancel";
+    btnLabel() {
+      return this.receivedProductId ? "Оновити" : "Додати";
     },
   },
 
   methods: {
-    ...mapActions("productsList", [
-      "addNewProduct",
-      "delProduct",
+    ...mapActions("products", [
+      "getProductById",
+      "addProduct",
       "updateProduct",
     ]),
 
-    onSave() {
-      if (this.currentProductId) this.updateProduct(this.product);
-      else this.addNewProduct(this.product);
-
-      this.$router.push({ name: "allProducts" });
+    createLogoImage(event) {
+      const file = event.target.files[0];
+      let reader = new FileReader();
+      const self = this;
+      reader.onload = (e) => {
+        self.rawPhotoData = e.target.result;
+        self.product.photo = e.target.result;
+        console.log("self.product.photo");
+        console.log(self.product.photo);
+      };
+      reader.readAsDataURL(file);
     },
-    onDelete() {
-      if (this.currentProductId) this.delProduct(this.currentProductId);
-      this.$router.push({ name: "allProducts" });
+
+    async onSave() {
+      try {
+        console.log("функція онсейв в едіт продукт форм працює");
+        console.log(this.product);
+
+        if (!this.receivedProductId) await this.addProduct(this.product);
+        else await this.updateProduct(this.product);
+        this.$router.push({
+          name: "products",
+          params: {
+            category: "clothing",
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 
-  mounted() {
-    if (this.currentProductId)
-      this.product = this.getProductById(this.currentProductId);
+  async mounted() {
+    if (this.receivedProductId) {
+      try {
+        this.product = await this.getProductById(this.receivedProductId);
+        // console.log("this.product");
+        // console.log(this.product);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   },
 };
 </script>
@@ -122,5 +172,9 @@ button {
   &:hover {
     color: red;
   }
+}
+
+select {
+  background-color: rgb(140, 136, 136);
 }
 </style>

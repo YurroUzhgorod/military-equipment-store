@@ -22,15 +22,15 @@ export const menuItems = {
           listItems: [
             {
               title: "Штани",
-              routeSubCategory: "Pants",
+              routeSubCategory: "pants",
             },
             {
               title: "Футболки & Жилети",
-              routeSubCategory: "t-shirts&West-id",
+              routeSubCategory: "t-shirts&West",
             },
             {
               title: "Уніформа",
-              routeSubCategory: "uniforn",
+              routeSubCategory: "uniform",
             },
             {
               title: "Фліс",
@@ -279,7 +279,7 @@ export const menuItems = {
             },
             {
               title: "Чохли для окулярів",
-              routeSubCategory: "glasses-covers",
+              routeSubCategory: "glasses-cover",
             },
           ],
         },

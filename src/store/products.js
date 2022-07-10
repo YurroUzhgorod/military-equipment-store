@@ -12,7 +12,7 @@ export default {
   },
   // функції, які здійснюють зчитування значень з стейта і які ми можемо використовувати у компонентах
   getters: {
-    productList: (state) => state.productList,
+    getProductList: (state) => state.productList,
     isLoading: (state) => state.loading,
     isError: (state) => state.error,
   },
@@ -21,11 +21,11 @@ export default {
     setProductList(state, products) {
       state.productList = products;
     },
-    addProductToList(state, product) {
-      state.books.push(product);
-    },
+    // addProductToList(state, product) {
+    //   state.books.push(product);
+    // },
     deleteProductFromList(state, productId) {
-      state.productList = state.books.filter(
+      state.productList = state.productList.filter(
         (product) => product._id !== productId
       );
     },
@@ -108,6 +108,7 @@ export default {
           })
           .catch((err) => {
             //Якщо погано
+            console.log("бек відправив помилку");
             commit("setError", err);
             reject(err);
           })
@@ -123,7 +124,7 @@ export default {
       commit("setError", null);
       return new Promise((resolve, reject) => {
         axios
-          .get(apiEndpoints.products.getBookById(id))
+          .get(apiEndpoints.products.getProductById(id))
           .then(
             //Якщо добре
             (res) => res.data
