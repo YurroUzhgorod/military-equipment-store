@@ -11,14 +11,15 @@ const routes = [
   { path: "/", component: HomePage, name: "homePage" },
 
   {
-    path: "/:id",
-    component: ProductItemInfo,
-    name: "prodItemInfo",
-  },
-  {
     path: "/products/:category?/:subCategory?",
     component: ProductPage,
     name: "products",
+  },
+
+  {
+    path: "/:id",
+    component: ProductItemInfo,
+    name: "prodItemInfo",
   },
 
   {
@@ -26,7 +27,9 @@ const routes = [
     component: CartPage,
     name: "cart",
   },
+
   { path: "/edit/:id?", component: EditPage, name: "edit" },
+
   { path: "/info/:source?", component: InfoPage, name: "info" },
 ];
 

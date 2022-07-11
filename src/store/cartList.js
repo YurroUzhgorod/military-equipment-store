@@ -12,8 +12,8 @@ export default {
     getCartList: (state) => state.cartList,
     getTotalPrice: (state, getters, rootState, rootGetters) =>
       state.cartList.reduce((prevSum, cartItem) => {
-        const product = rootGetters["productsList/getProductList"].find(
-          (item) => item.id === cartItem.prodId
+        const product = rootGetters["products/getProductList"].find(
+          (item) => item._id === cartItem.prodId
         );
         return prevSum + product.price * cartItem.count;
       }, 0),

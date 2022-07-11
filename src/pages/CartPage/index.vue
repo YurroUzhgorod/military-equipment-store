@@ -2,6 +2,10 @@
   <div>
     <main-master-page>
       <template #content>
+        <delivery-info-block />
+        <div class="breadcrumbs-container">
+          <v-breadcrumbs :items="items" divider="."></v-breadcrumbs>
+        </div>
         <cart-list />
       </template>
     </main-master-page>
@@ -9,6 +13,8 @@
 </template>
 
 <script>
+import DeliveryInfoBlock from "@/components/DeliveryInfoBlock";
+
 import MainMasterPage from "@/masterPages/MainMasterPage.vue";
 import CartList from "@/components/CartList";
 export default {
@@ -17,6 +23,7 @@ export default {
   components: {
     MainMasterPage,
     CartList,
+    DeliveryInfoBlock,
   },
 };
 </script>

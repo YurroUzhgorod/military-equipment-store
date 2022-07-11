@@ -1,5 +1,5 @@
 <template>
-  <div class="product-container">
+  <div @click="goToProductItem(product._id)" class="product-container">
     <div>
       {{ product.title }}
     </div>
@@ -38,6 +38,9 @@ export default {
     },
     onEdit(id) {
       this.$router.push({ name: "edit", params: { id } });
+    },
+    goToProductItem(itemId) {
+      this.$router.push({ name: "prodItemInfo", params: { id: itemId } });
     },
   },
 };

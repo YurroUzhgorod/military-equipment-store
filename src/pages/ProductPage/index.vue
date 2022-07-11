@@ -1,12 +1,11 @@
 <template>
   <main-master-page>
     <template #content>
-      <div class="general-delivery-info">
-        <div>Відправка усіма кур'єрами</div>
-        <div>Безкоштовка доставка</div>
-        <div>Повернення до 14 днів</div>
-      </div>
+      <delivery-info-block />
 
+      <div class="breadcrumbs-container">
+        <v-breadcrumbs :items="items" divider="/"></v-breadcrumbs>
+      </div>
       <div class="content-container">
         <div class="filter-block-container">Це блок для фільтрацій</div>
         <div class="product-list-container">
@@ -18,6 +17,7 @@
 </template>
 
 <script>
+import DeliveryInfoBlock from "@/components/DeliveryInfoBlock";
 import ProductList from "@/components/ProductList";
 import MainMasterPage from "@/masterPages/MainMasterPage.vue";
 import { mapGetters } from "vuex";
@@ -26,15 +26,50 @@ export default {
   components: {
     MainMasterPage,
     ProductList,
+    DeliveryInfoBlock,
+  },
+  data() {
+    return {
+      items: [
+        {
+          text: "home",
+          disabled: false,
+        },
+        {
+          text: this.$route.params.category,
+          disabled: false,
+        },
+        {
+          text: this.$route.params.subCategory,
+          disabled: true,
+        },
+      ],
+    };
   },
   computed: {
     ...mapGetters(["getProductList"]),
+
+    checkRouteCategory() {
+      return this.$route.params.category;
+    },
+
+    checkRouteSubCategory() {
+      return this.$route.params.subCategory;
+    },
   },
   methods: {
     onAddNewProduct() {
       this.$router.push({
         name: "edit",
       });
+    },
+  },
+  watch: {
+    checkRouteCategory(newValue) {
+      this.items[1].text = newValue;
+    },
+    checkRouteSubCategory(newValue) {
+      this.items[2].text = newValue;
     },
   },
 };
@@ -51,19 +86,15 @@ export default {
     background-color: rgb(183, 171, 171);
   }
 }
-.general-delivery-info {
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  padding: 10px 15px 10px 15px;
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  font-family: Georgia;
-  border-bottom: 1px black solid;
-}
 
 // .home-link {
 //   width: 70px;
 //   margin: auto;
 // }
+.breadcrumbs-container {
+  font-family: Georgia;
+}
+.filter-block-container {
+  margin: 15px 10px 10px 10px;
+}
 </style>

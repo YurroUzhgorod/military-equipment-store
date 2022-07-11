@@ -13,6 +13,9 @@ export default {
   // функції, які здійснюють зчитування значень з стейта і які ми можемо використовувати у компонентах
   getters: {
     getProductList: (state) => state.productList,
+    getProductById: (state) => (prodId) =>
+      state.productList.find((item) => item._id === prodId),
+
     isLoading: (state) => state.loading,
     isError: (state) => state.error,
   },

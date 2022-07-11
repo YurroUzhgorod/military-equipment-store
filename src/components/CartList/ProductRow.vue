@@ -1,7 +1,7 @@
 <template>
   <div class="product-row-container">
     <div>
-      <img :src="product.imgSrc" alt="" />
+      <img :src="product.photo" alt="" />
     </div>
     <div class="product-info">
       {{ product.title }}
@@ -30,9 +30,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters("productsList", ["getProductById"]),
+    ...mapGetters("products", ["getProductById"]),
 
     product() {
+      console.log("продукт в якого фото адрефайн");
+      console.log(this.getProductById(this.cartItem.prodId));
       return this.getProductById(this.cartItem.prodId);
     },
   },
