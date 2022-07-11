@@ -115,9 +115,6 @@ export default {
 
     async onSave() {
       try {
-        console.log("функція онсейв в едіт продукт форм працює");
-        console.log(this.product);
-
         if (!this.receivedProductId) await this.addProduct(this.product);
         else await this.updateProduct(this.product);
         this.$router.push({
