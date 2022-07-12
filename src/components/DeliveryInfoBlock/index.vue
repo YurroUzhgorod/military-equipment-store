@@ -2,8 +2,8 @@
   <div class="delivery-info-block">
     <div class="general-delivery-info">
       <div>Відправка усіма кур'єрами</div>
-      <div>Безкоштовка доставка</div>
-      <div>Повернення до 14 днів</div>
+      <div>Безкоштовна доставка</div>
+      <div>Повернення товару до 14 днів</div>
     </div>
   </div>
 </template>

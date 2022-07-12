@@ -4,7 +4,7 @@
       <template #content>
         <delivery-info-block />
         <div class="breadcrumbs-container">
-          <v-breadcrumbs :items="items" divider="."></v-breadcrumbs>
+          <v-breadcrumbs :items="items" divider="/"></v-breadcrumbs>
         </div>
         <cart-list />
       </template>
@@ -24,6 +24,20 @@ export default {
     MainMasterPage,
     CartList,
     DeliveryInfoBlock,
+  },
+  data() {
+    return {
+      items: [
+        {
+          text: "home",
+          disabled: false,
+        },
+        {
+          text: "cart",
+          disabled: false,
+        },
+      ],
+    };
   },
 };
 </script>

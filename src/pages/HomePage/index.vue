@@ -3,6 +3,7 @@
     <main-master-page>
       <template #content>
         <slider-component />
+        <welcome-info />
       </template>
     </main-master-page>
   </div>
@@ -11,12 +12,14 @@
 <script>
 import MainMasterPage from "@/masterPages/MainMasterPage.vue";
 import SliderComponent from "@/components/SliderComponent";
+import WelcomeInfo from "@/components/WelcomeInfo";
 
 export default {
   name: "HomePage",
   components: {
     MainMasterPage,
     SliderComponent,
+    WelcomeInfo,
   },
   data() {
     return {
