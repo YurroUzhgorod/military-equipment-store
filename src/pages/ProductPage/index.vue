@@ -80,17 +80,12 @@ export default {
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-auto-rows: minmax(30 auto);
-  // background-color: rgb(208, 208, 187);
   font-family: Georgia;
   .filter-block-container {
     background-color: rgb(183, 171, 171);
   }
 }
 
-// .home-link {
-//   width: 70px;
-//   margin: auto;
-// }
 .breadcrumbs-container {
   font-family: Georgia;
 }

@@ -16,6 +16,7 @@
           type="text"
           placeholder="  Я шукаю..."
           class="block-search-input"
+          v-model="searchProd"
         />
         <button @click="onSearchProduct">
           <img
@@ -79,6 +80,7 @@ export default {
     return {
       isShowPopUp: false,
       activeSubMenu: null,
+      searchProd: "",
     };
   },
 
@@ -104,6 +106,7 @@ export default {
         name: "edit",
       });
     },
+    onSearchProduct() {},
   },
 };
 </script>

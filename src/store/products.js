@@ -5,6 +5,7 @@ export default {
   namespaced: true,
   state() {
     return {
+      searchText: "",
       productList: [],
       loading: false,
       error: false,
@@ -39,6 +40,9 @@ export default {
     setError(state, data) {
       state.error = data;
     },
+    updateSearchText(state, newText) {
+      state.searchText = newText;
+    },
   },
 
   // розділ, де описуємо функції, які викликаємо у компонентах, якшо хочемо змінити стейт
@@ -48,7 +52,7 @@ export default {
       commit("setError", null);
       //Запит на сервер
       axios
-        .get(apiEndpoints.products.readList) //Асинхронна дія
+        .get(apiEndpoints.products.readList) //Асинхронна дія //Асинхронна дія
         .then(
           //Якщо добре
           (res) => res.data
@@ -174,6 +178,10 @@ export default {
             () => commit("setLoading", false)
           );
       });
+    },
+
+    setSearchText({ commit }, inputText) {
+      commit("updateSearchText", inputText);
     },
   },
 };
