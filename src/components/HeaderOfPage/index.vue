@@ -1,7 +1,13 @@
 <template>
   <div class="header-container">
     <div class="authorization-block">
-      <p>Зайдіть або створіть аккаунт</p>
+      <router-link v-if="!isAuthenticated()" to="/signup">
+        <strong>Sign up</strong>
+      </router-link>
+      <router-link v-if="!isAuthenticated()" to="/login">
+        <strong>Log in</strong>
+      </router-link>
+      <button v-if="isAuthenticated()" @click="onLogout">Log out</button>
     </div>
     <div class="header-content-container">
       <div class="logo-images-container" @click="goToRoute('homePage')">
@@ -65,8 +71,8 @@
 import EmptyCartPopUp from "@/components/EmptyCartPopUp";
 import CallBackPopUp from "@/components/CallBackPopUp";
 import MenuBlock from "./MenuBlock";
+import { mapGetters, mapActions } from "vuex";
 
-import { mapGetters } from "vuex";
 export default {
   name: "HeaderOfPage",
 
@@ -87,8 +93,15 @@ export default {
   computed: {
     ...mapGetters("productsList", ["updateSearchText"]),
     ...mapGetters("cartList", ["getTotalPrice"]),
+    ...mapGetters("auth", ["isAuthenticated"]),
   },
   methods: {
+    ...mapActions("auth", ["logout"]),
+    onLogout() {
+      this.logout();
+      this.$router.push({ path: "/login" });
+    },
+
     showEmptyCartPopUp() {
       this.isShowPopUp = true;
     },

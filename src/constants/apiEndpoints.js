@@ -6,4 +6,9 @@ export default {
     getProductById: (id) => `${process.env.VUE_APP_API_URL}/products/${id}`,
     delete: `${process.env.VUE_APP_API_URL}/products`,
   },
+  user: {
+    usersList: `${process.env.VUE_APP_API_URL}/users`,
+    signup: `${process.env.VUE_APP_API_URL}/users/signup`,
+    login: `${process.env.VUE_APP_API_URL}/users/login`,
+  },
 };

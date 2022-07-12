@@ -7,8 +7,14 @@ import CartPage from "@/pages/CartPage";
 import EditPage from "@/pages/EditPage";
 import InfoPage from "@/pages/InfoPage";
 
+import LoginPage from "@/pages/LoginPage";
+import SignupPage from "@/pages/SignupPage";
+
 const routes = [
   { path: "/", component: HomePage, name: "homePage" },
+
+  { path: "/login", component: LoginPage, name: "login" },
+  { path: "/signup", component: SignupPage, name: "signup" },
 
   {
     path: "/products/:category?/:subCategory?",

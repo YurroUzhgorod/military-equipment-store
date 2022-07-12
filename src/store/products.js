@@ -47,12 +47,14 @@ export default {
 
   // розділ, де описуємо функції, які викликаємо у компонентах, якшо хочемо змінити стейт
   actions: {
-    loadProducts({ commit }) {
+    loadProducts({ commit }, { category: category, type: type }) {
       commit("setLoading", true);
       commit("setError", null);
       //Запит на сервер
       axios
-        .get(apiEndpoints.products.readList) //Асинхронна дія //Асинхронна дія
+        .get(apiEndpoints.products.readList, {
+          params: { category: category, type: type },
+        }) //Асинхронна дія) //Асинхронна дія //Асинхронна дія
         .then(
           //Якщо добре
           (res) => res.data
