@@ -12,7 +12,11 @@
       </div>
 
       <div class="search-product-container">
-        <input type="text" placeholder="  пошук" class="block-search-input" />
+        <input
+          type="text"
+          placeholder="  Я шукаю..."
+          class="block-search-input"
+        />
         <button @click="onSearchProduct">
           <img
             :src="require('@/assets/images/general-icons/search-icon.webp')"
