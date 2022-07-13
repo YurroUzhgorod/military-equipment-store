@@ -92,7 +92,7 @@ export default {
 
   display: flex;
   .phone-image {
-    width: 40px;
+    width: 31px;
     margin: auto;
   }
   img {

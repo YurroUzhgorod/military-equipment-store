@@ -2,10 +2,10 @@
   <div class="welcome-info-container">
     <div class="welcome-info-text">
       <p>
-        ЛАСКАВО ПРОСИМО В MILITARY1ST Готуйтеся до дії! Незалежно від того, чи
-        шукаєте ви якісний бойовий одяг, надійне туристичне спорядження чи
-        професійне спорядження для страйкболу за помірними цінами, наш Military
-        Shop ідеально задовольнить ваші потреби.
+        ЛАСКАВО ПРОСИМО на наш сайт! Незалежно від того, чи шукаєте ви якісний
+        бойовий одяг, надійне туристичне спорядження чи професійне спорядження
+        для страйкболу за помірними цінами, наш Military Shop ідеально
+        задовольнить ваші потреби.
       </p>
 
       <p>
@@ -44,6 +44,8 @@ export default {
 
 <style lang="scss" scoped>
 .welcome-info-container {
+  font-family: georgia;
+  margin: 10px;
   padding: 30px 0 0 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -52,6 +54,9 @@ export default {
   }
   .welcome-info-text {
     margin: 0 10px;
+    p {
+      text-indent: 25px;
+    }
   }
 }
 </style>

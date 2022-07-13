@@ -1,15 +1,30 @@
 <template>
-  <div @click="goToProductItem(product._id)" class="product-container">
-    <div>
-      {{ product.title }}
+  <div class="product-container">
+    <div class="product-image-container" @click="goToProductItem(product._id)">
+      <img :src="product.photo" alt="" />
     </div>
-    <div>{{ product.price }} грн</div>
-
-    <img :src="product.photo" alt="" />
+    <div class="title">
+      <strong> {{ product.title }} </strong>
+    </div>
+    <div class="product-price">
+      <span> {{ product.price }} грн</span>
+    </div>
     <hr />
-    <div>
-      <button @click="onDelete(product._id)">Видалити</button>
-      <button @click="onEdit(product._id)">Редагувати</button>
+    <div class="click-add-show-info-container">
+      <div class="add-item-to-cart" @click="onAddToCart(product._id)">
+        <img
+          :src="require('@/assets/images/general-icons/add-to-cart-icon.png')"
+          alt="no photo"
+        />
+      </div>
+
+      <div class="edit-item">
+        <button @click="onEdit(product._id)">змінити</button>
+      </div>
+
+      <div class="delete-item">
+        <button @click="onDelete(product._id)">видалити</button>
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +44,11 @@ export default {
   },
 
   methods: {
-    // ...mapActions("cartList", ["addProductItem"]),
+    ...mapActions("cartList", ["addProductItem"]),
+
+    onAddToCart(id) {
+      this.addProductItem(id);
+    },
 
     ...mapActions("products", ["deleteProduct"]),
 
@@ -48,18 +67,61 @@ export default {
 
 <style lang="scss" scoped>
 .product-container {
-  width: 150px;
-  border: 2px solid green;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px;
+  display: inline-block;
+
+  // background-color: rgb(201, 199, 190);
+
+  // border-radius: 5px;
+  // padding: 10px;
+  margin: 0 15px 15px 15px;
+}
+.product-price {
+  margin: 3px 0 3px 0;
+  text-align: center;
+}
+.product-image-container {
+  text-align: center;
   img {
-    width: 130px;
-  }
-  button {
-    border: 1px green solid;
-    width: 40px;
-    margin: 5px;
+    width: 200px;
+    height: 200px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
+button {
+  border: 1px solid black;
+  padding: 2px;
+  margin: 1px;
+  border-radius: 5px;
+}
+.title {
+  text-align: center;
+}
+
+.click-add-show-info-container {
+  display: flex;
+  justify-content: space-around;
+
+  padding: 5px 0 0 0;
+
+  justify-content: space-around;
+  margin: auto;
+  img {
+    width: 30px;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+  }
+}
+
+//     .add-item-to-cart {
+//       margin: 3px;
+//     }
+//   }
+//   .delete-item {
+//     margin: 3px 0 0 0;
+//   }
+// }
 </style>

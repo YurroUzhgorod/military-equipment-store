@@ -8,8 +8,8 @@
         }"
         v-for="(value, menuItem) in menuItems"
         :key="menuItem"
-        @mouseover="onHover(menuItem)"
-        @click="onGoToCategory(value.id)"
+        @mouseover="onHover(menuItem, value.id)"
+        @click="onGoToProductCategory(value.id)"
       >
         <div class="menu-item-title">
           <span>
@@ -21,7 +21,7 @@
         <sub-menu-block
           v-if="isSubMenuActive && subMenuData.columnsMenusSection"
           :menu-data="subMenuData"
-          @subCategory="findSubcategory"
+          @subCategory="onGoToProductSubCategory"
         />
       </div>
     </div>
@@ -31,6 +31,7 @@
 <script>
 import SubMenuBlock from "./SubMenuBlock";
 import { menuItems } from "../settings.js";
+import { mapActions } from "vuex";
 export default {
   name: "MenuBlock",
   components: {
@@ -41,13 +42,16 @@ export default {
       menuItems,
       isSubMenuActive: false,
       subMenuData: null,
-      productsCategory: null,
-      productsSubCategory: null,
+      lastOnHoverCategory: null,
     };
   },
 
   methods: {
-    onHover(menuItem) {
+    ...mapActions("products", ["loadProducts"]),
+
+    onHover(menuItem, onHoverCategoryName) {
+      this.lastOnHoverCategory = onHoverCategoryName;
+
       this.subMenuData = this.menuItems[menuItem].submenu;
       this.isSubMenuActive = true;
       this.productsCategory = this.menuItems[menuItem].id;
@@ -57,23 +61,23 @@ export default {
       this.isSubMenuActive = false;
       this.subMenuData = null;
     },
-    onGoToCategory(category, subCategory) {
+
+    async onGoToProductSubCategory(subCategory) {
+      console.log(subCategory);
+      const category = this.lastOnHoverCategory;
       this.$router.push({
         name: "products",
-        params: { category, subCategory },
+        params: { category, subCategory: subCategory },
       });
+      await this.loadProducts({ subCategory });
     },
 
-    findSubcategory(subCategoryValue) {
-      this.productsSubCategory = subCategoryValue;
-    },
-  },
-
-  watch: {
-    productsSubCategory(newSubCategory) {
-      let category = this.productsCategory;
-
-      this.onGoToCategory(category, newSubCategory);
+    async onGoToProductCategory(category) {
+      this.$router.push({
+        name: "products",
+        params: { category },
+      });
+      await this.loadProducts({ category });
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-container">
+  <div class="footer-content-container">
     <div class="about">
       <h3>Інформація :</h3>
       <p @click="onGoToRoute('about')">Про Компанію</p>
@@ -17,7 +17,7 @@
 
     <div class="social-networks-payments-container">
       <h3>Слідкуйте за нами в соціальних мережах:</h3>
-      <div class="flex-container">
+      <div class="logo-img-wrapper">
         <div class="logo-images-container">
           <a href="https://www.facebook.com/">
             <img
@@ -54,14 +54,22 @@
       </div>
     </div>
 
-    <div class="about">
+    <div class="news-letter-sing-in">
       <h3>Підпиcуйтесь на розсилку:</h3>
       <span>
         Будьте першими, хто дізнається про новинки та ексклюзивні пропозиції
       </span>
-      <label>
-        <input type="text" placeholder="  Вкажіть адрес електронної пошти" />
-      </label>
+
+      <div class="news-letter-input-wrapper">
+        <input type="email" placeholder="  Вкажіть адрес електронної пошти" />
+
+        <div class="news-letter-confirm-button">
+          <img
+            :src="require('@/assets/images/general-icons/confirm-icon.png')"
+            alt="No photo"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>

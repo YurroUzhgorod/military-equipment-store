@@ -5,14 +5,10 @@ import apiEndpoints from "@/constants/apiEndpoints";
 const store = {
   namespaced: true,
   state: {
-    usersList: [],
     authData: JSON.parse(localStorage.getItem("authData")) || null,
     expiresAt: localStorage.getItem("expiresAt") || null,
   },
   mutations: {
-    setUsersList(state, usersList) {
-      state.usersList = usersList;
-    },
     setAuthData(state, { authData, expiresAt }) {
       state.authData = { ...authData };
       state.expiresAt =
@@ -30,22 +26,6 @@ const store = {
     },
   },
   actions: {
-    loadUsers({ commit }) {
-      new Promise((resolve, reject) => {
-        axios
-          .get(apiEndpoints.user.usersList)
-          .then((res) => res.data)
-          .then((resData) => {
-            commit("setUsersList", resData.data);
-            resolve(true);
-          })
-          .catch((err) => {
-            commit("clearAuthData");
-            reject(err);
-          });
-      });
-    },
-
     setAuthData({ commit }, { authData, expiresAt }) {
       commit("setAuthData", { authData, expiresAt });
     },
@@ -86,7 +66,6 @@ const store = {
     },
   },
   getters: {
-    usersList: (state) => state.usersList,
     isAuthenticated: (state) => () => {
       return state.authData && new Date().getTime() < state.expiresAt;
     },

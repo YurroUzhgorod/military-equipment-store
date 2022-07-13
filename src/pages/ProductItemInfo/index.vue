@@ -3,13 +3,23 @@
     <main-master-page>
       <template #content>
         <delivery-info-block />
-        <div>{{ product.title }}</div>
-        <div>{{ product.price }}</div>
-        <div>{{ product.title }}</div>
-        <div><img :src="product.photo" alt="" /></div>
-        <div>{{ product.description }}</div>
-        <div>{{ product.manufacturer }}</div>
-        <button @click="onAddToCart">Додати в корзину</button>
+
+        <addition-info />
+        <div class="product-item-info">
+          <div class="product-code">
+            <span>Kод продукту:</span> {{ product.code }}
+          </div>
+          <div>{{ product.title }}</div>
+          <div>{{ product.manufacturer }}</div>
+          <div>{{ product.category }}</div>
+          <div>{{ product.sub_category }}</div>
+          <div>{{ product.price }}</div>
+          <div>{{ product.title }}</div>
+          <div><img :src="product.photo" alt="" /></div>
+          <div>{{ product.description }}</div>
+          <div>{{ product.manufacturer }}</div>
+          <button>в корзину</button>
+        </div>
       </template>
     </main-master-page>
   </div>
@@ -17,6 +27,7 @@
 
 <script>
 import DeliveryInfoBlock from "@/components/DeliveryInfoBlock";
+import AdditionInfo from "@/components/AdditionInfo";
 import MainMasterPage from "@/masterPages/MainMasterPage";
 import { mapActions } from "vuex";
 export default {
@@ -24,6 +35,7 @@ export default {
   components: {
     MainMasterPage,
     DeliveryInfoBlock,
+    AdditionInfo,
   },
   data() {
     return {
@@ -38,11 +50,6 @@ export default {
 
   methods: {
     ...mapActions("products", ["getProductById"]),
-    ...mapActions("cartList", ["addProductItem"]),
-
-    onAddToCart() {
-      this.addProductItem(this.product._id);
-    },
   },
 
   async mounted() {
@@ -58,4 +65,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.product-code {
+  margin: 0 10px 0 0;
+  text-align: right;
+  span {
+    text-decoration: underline;
+  }
+}
+</style>

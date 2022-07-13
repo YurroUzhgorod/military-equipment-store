@@ -1,13 +1,15 @@
 <template>
   <div class="header-container">
     <div class="authorization-block">
-      <router-link v-if="!isAuthenticated()" to="/signup">
-        <strong>Sign up</strong>
-      </router-link>
       <router-link v-if="!isAuthenticated()" to="/login">
-        <strong>Log in</strong>
+        увійдіть
       </router-link>
-      <button v-if="isAuthenticated()" @click="onLogout">Log out</button>
+      <span v-if="!isAuthenticated()"> або </span>
+
+      <router-link v-if="!isAuthenticated()" to="/signup">
+        зареєструйтесь
+      </router-link>
+      <button v-if="isAuthenticated()" @click="onLogout">Вийти...</button>
     </div>
     <div class="header-content-container">
       <div class="logo-images-container" @click="goToRoute('homePage')">
@@ -22,9 +24,9 @@
           type="text"
           placeholder="  Я шукаю..."
           class="block-search-input"
-          v-model="searchProd"
+          v-model="searchProdTitle"
         />
-        <button @click="onSearchProduct">
+        <button @click="onSearchProduct(searchProdTitle)">
           <img
             :src="require('@/assets/images/general-icons/search-icon.webp')"
             alt="no photo"
@@ -86,17 +88,17 @@ export default {
     return {
       isShowPopUp: false,
       activeSubMenu: null,
-      searchProd: "",
+      searchProdTitle: "",
     };
   },
 
   computed: {
-    ...mapGetters("productsList", ["updateSearchText"]),
     ...mapGetters("cartList", ["getTotalPrice"]),
     ...mapGetters("auth", ["isAuthenticated"]),
   },
   methods: {
     ...mapActions("auth", ["logout"]),
+    ...mapActions("products", ["loadProducts"]),
     onLogout() {
       this.logout();
       this.$router.push({ path: "/login" });
@@ -119,7 +121,16 @@ export default {
         name: "edit",
       });
     },
-    onSearchProduct() {},
+    async onSearchProduct(searchText) {
+      this.$router.push({
+        name: "products",
+        params: {
+          category: searchText,
+        },
+      });
+      await this.loadProducts({ title: searchText });
+      this.searchProdTitle = "";
+    },
   },
 };
 </script>

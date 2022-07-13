@@ -30,11 +30,26 @@
       Виберіть категорію
       <select v-model="product.category">
         <option
-          v-for="(categoryItem, index) in allCategoryOfProducts"
+          v-for="(value, key, index) in allCategoryAndSubcategory"
           :key="index"
-          :value="categoryItem"
+          :value="key"
         >
-          {{ categoryItem }}
+          {{ key }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      Виберіть суб-категорію
+      <select v-model="product.sub_category">
+        <option
+          v-for="(subcategory, index) in allCategoryAndSubcategory[
+            this.product.category
+          ]"
+          :key="index"
+          :value="subcategory"
+        >
+          {{ subcategory }}
         </option>
       </select>
     </div>
@@ -48,7 +63,7 @@
 
     <div>
       Статус товару
-      <select v-model="product.in_sale">
+      <select v-model="product.is_available">
         <option :value="true">В продажі</option>
         <option :value="false">Не в продажі</option>
       </select>
@@ -67,14 +82,15 @@
 </template>
 
 <script>
-import { allCategoryOfProducts, manufacturerList } from "./settings";
+import { manufacturerList, allCategoryAndSubcategory } from "./settings";
 import { mapActions } from "vuex";
 export default {
   name: "EditUserForm",
 
   data() {
     return {
-      allCategoryOfProducts,
+      allCategoryAndSubcategory,
+
       manufacturerList,
       product: {},
       rawPhotoData: null,
@@ -85,7 +101,6 @@ export default {
       return this.rawPhotoData || this.product.photo;
     },
     receivedProductId() {
-      console.log(this.$route.params.id);
       return this.$route.params.id;
     },
     btnLabel() {
@@ -114,14 +129,13 @@ export default {
     },
 
     async onSave() {
+      if (!this.product.code) this.product.code = new Date().getTime();
+
       try {
         if (!this.receivedProductId) await this.addProduct(this.product);
         else await this.updateProduct(this.product);
         this.$router.push({
-          name: "products",
-          params: {
-            category: "clothing",
-          },
+          name: "homePage",
         });
       } catch (err) {
         console.log(err);
@@ -133,8 +147,6 @@ export default {
     if (this.receivedProductId) {
       try {
         this.product = await this.getProductById(this.receivedProductId);
-        // console.log("this.product");
-        // console.log(this.product);
       } catch (err) {
         console.log(err);
       }

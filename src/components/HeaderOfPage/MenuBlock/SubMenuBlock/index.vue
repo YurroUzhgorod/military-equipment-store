@@ -8,15 +8,15 @@
       >
         <div
           class="column-content-block"
-          v-for="columnsListItems in column.listItems"
-          :key="columnsListItems.id"
+          v-for="columnsListItem in column.listItems"
+          :key="columnsListItem.id"
         >
           <div
             class=""
-            @click="$emit('subCategory', columnsListItems.routeSubCategory)"
+            @click="$emit('subCategory', columnsListItem.routeSubCategory)"
           >
             <span>
-              {{ columnsListItems.title }}
+              {{ columnsListItem.title }}
             </span>
           </div>
         </div>

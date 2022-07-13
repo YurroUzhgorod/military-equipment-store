@@ -5,7 +5,6 @@ export default {
   namespaced: true,
   state() {
     return {
-      searchText: "",
       productList: [],
       loading: false,
       error: false,
@@ -40,20 +39,23 @@ export default {
     setError(state, data) {
       state.error = data;
     },
-    updateSearchText(state, newText) {
-      state.searchText = newText;
-    },
   },
 
   // розділ, де описуємо функції, які викликаємо у компонентах, якшо хочемо змінити стейт
   actions: {
-    loadProducts({ commit }, { category: category, type: type }) {
+    loadProducts({ commit }, searchProductParams) {
       commit("setLoading", true);
       commit("setError", null);
       //Запит на сервер
       axios
         .get(apiEndpoints.products.readList, {
-          params: { category: category, type: type },
+          params: {
+            title: searchProductParams.title,
+            category: searchProductParams.category,
+            sub_category: searchProductParams.subCategory,
+            minPrice: searchProductParams.minPrice,
+            maxPrice: searchProductParams.minPrice,
+          },
         }) //Асинхронна дія) //Асинхронна дія //Асинхронна дія
         .then(
           //Якщо добре
@@ -87,6 +89,7 @@ export default {
           .then((resData) => {
             if (resData.success) resolve(true);
             else throw new Error("Fatch failed!");
+            console.log(resData.data);
           })
           .catch((err) => {
             //Якщо погано
@@ -180,10 +183,6 @@ export default {
             () => commit("setLoading", false)
           );
       });
-    },
-
-    setSearchText({ commit }, inputText) {
-      commit("updateSearchText", inputText);
     },
   },
 };

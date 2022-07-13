@@ -24,9 +24,10 @@ export default {
 
 <style lang="scss" scoped>
 .empty-cart-container {
-  display: flex;
+  text-align: center;
   h1 {
-    margin: auto;
+    display: inline-block;
+    margin: 50px 0 150px 0;
   }
 }
 </style>

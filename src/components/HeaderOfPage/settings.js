@@ -208,7 +208,7 @@ export const menuItems = {
   },
 
   menuItem5: {
-    id: "bags-backpacks",
+    id: "bags_and_backpacks",
     title: "Рюкзаки & Cумки",
     submenu: {
       id: 5,
