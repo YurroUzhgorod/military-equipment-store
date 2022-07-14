@@ -9,6 +9,17 @@ const store = {
     authData: JSON.parse(localStorage.getItem("authData")) || null,
     expiresAt: localStorage.getItem("expiresAt") || null,
   },
+  getters: {
+    usersList: (state) => state.usersList,
+    isAuthenticated: (state) => () => {
+      return state.authData && new Date().getTime() < state.expiresAt;
+    },
+    getAccessToken: (state) => () => {
+      return state.authData && state.authData.access_token;
+    },
+    authorized: (state) =>
+      state.authData && new Date().getTime() < state.expiresAt,
+  },
   mutations: {
     setUsersList(state, usersList) {
       state.usersList = usersList;
@@ -83,17 +94,6 @@ const store = {
     logout({ commit }) {
       commit("clearAuthData");
     },
-  },
-  getters: {
-    usersList: (state) => state.usersList,
-    isAuthenticated: (state) => () => {
-      return state.authData && new Date().getTime() < state.expiresAt;
-    },
-    getAccessToken: (state) => () => {
-      return state.authData && state.authData.access_token;
-    },
-    authorized: (state) =>
-      state.authData && new Date().getTime() < state.expiresAt,
   },
 };
 
