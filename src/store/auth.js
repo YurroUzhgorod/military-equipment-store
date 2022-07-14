@@ -8,9 +8,11 @@ const store = {
     usersList: [],
     authData: JSON.parse(localStorage.getItem("authData")) || null,
     expiresAt: localStorage.getItem("expiresAt") || null,
+    userStatusIsAdmin: null,
   },
   getters: {
-    usersList: (state) => state.usersList,
+    getUserStatus: (state) => state.userStatusIsAdmin,
+
     isAuthenticated: (state) => () => {
       return state.authData && new Date().getTime() < state.expiresAt;
     },
@@ -21,50 +23,38 @@ const store = {
       state.authData && new Date().getTime() < state.expiresAt,
   },
   mutations: {
-    setUsersList(state, usersList) {
-      state.usersList = usersList;
-    },
-    setAuthData(state, { authData, expiresAt }) {
+    setAuthData(state, { authData, expiresAt, isUserAdmin }) {
       state.authData = { ...authData };
+      state.userStatusIsAdmin = isUserAdmin;
       state.expiresAt =
         expiresAt || state.authData.expires_in * 1000 + new Date().getTime();
 
       localStorage.setItem("authData", JSON.stringify(state.authData));
       localStorage.setItem("expiresAt", JSON.stringify(state.expiresAt));
+      localStorage.setItem(
+        "userStatusIsAdmin",
+        JSON.stringify(state.userStatusIsAdmin)
+      );
     },
     clearAuthData(state) {
       state.authData = null;
       state.expiresAt = null;
+      state.userStatusIsAdmin = null;
 
       localStorage.removeItem("authData");
       localStorage.removeItem("expiresAt");
+      localStorage.removeItem("userStatusIsAdmin");
     },
   },
   actions: {
-    loadUsers({ commit }) {
-      new Promise((resolve, reject) => {
-        axios
-          .get(apiEndpoints.user.usersList)
-          .then((res) => res.data)
-          .then((resData) => {
-            commit("setUsersList", resData.data);
-            resolve(true);
-          })
-          .catch((err) => {
-            commit("clearAuthData");
-            reject(err);
-          });
-      });
+    setAuthData({ commit }, { authData, expiresAt, isUserAdmin }) {
+      commit("setAuthData", { authData, expiresAt, isUserAdmin });
     },
 
-    setAuthData({ commit }, { authData, expiresAt }) {
-      commit("setAuthData", { authData, expiresAt });
-    },
-
-    signup({ commit }, { name, email, password }) {
+    signup({ commit }, { name, email, password, secretKey }) {
       return new Promise((resolve, reject) => {
         axios
-          .post(apiEndpoints.user.signup, { name, email, password })
+          .post(apiEndpoints.user.signup, { name, email, password, secretKey })
           .then(function () {
             resolve(true);
           })

@@ -20,13 +20,20 @@
         />
       </div>
       <div class="user-status">
-        <!-- <div>
-          Ваш статус
-          <select v-model="isAdmin">
+        <div>
+          Ваш статус:
+          <select v-model="userStatus">
+            виберіть значення
             <option :value="true">Адмін</option>
             <option :value="false">Юзер</option>
           </select>
-        </div> -->
+        </div>
+        <div v-if="userStatus">
+          <label>
+            Введіть секретний код для отримання статусу адміна
+            <input type="text" v-model="secretKey" />
+          </label>
+        </div>
       </div>
       <div v-if="message">{{ message }}</div>
       <div>
@@ -45,7 +52,9 @@ export default {
       userName: "",
       email: "",
       password: "",
+      secretKey: null,
       message: "",
+      userStatus: false,
     };
   },
 
@@ -57,6 +66,7 @@ export default {
         const user = {
           name: this.userName,
           email: this.email,
+          secretKey: this.secretKey,
           password: this.password,
         };
         const result = await this.signup(user);

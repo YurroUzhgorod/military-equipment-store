@@ -57,7 +57,11 @@
             <div v-if="getTotalPrice">{{ getTotalPrice }} грн</div>
           </div>
         </div>
-        <div class="add-new-product" @click="onGoToAddProductRoute">
+        <div
+          class="add-new-product"
+          v-if="getUserStatus"
+          @click="onGoToAddProductRoute"
+        >
           <button>Додати товар</button>
         </div>
       </div>
@@ -94,7 +98,7 @@ export default {
 
   computed: {
     ...mapGetters("cartList", ["getTotalPrice"]),
-    ...mapGetters("auth", ["isAuthenticated"]),
+    ...mapGetters("auth", ["isAuthenticated", "getUserStatus"]),
   },
   methods: {
     ...mapActions("auth", ["logout"]),

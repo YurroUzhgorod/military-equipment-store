@@ -30,7 +30,7 @@
         />
       </div>
 
-      <div class="edit-item">
+      <div class="edit-item" v-if="getUserStatus">
         <img
           @click="onEdit(product._id)"
           :src="require('@/assets/images/general-icons/edit-icon.png')"
@@ -38,7 +38,7 @@
         />
       </div>
 
-      <div class="delete-item">
+      <div class="delete-item" v-if="getUserStatus">
         <img
           @click="onDelete(product._id)"
           :src="require('@/assets/images/general-icons/delete-icon.png')"
@@ -63,7 +63,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("auth", ["isAdminData"]),
+    ...mapGetters("auth", ["getUserStatus"]),
   },
 
   methods: {
