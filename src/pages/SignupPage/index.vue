@@ -19,6 +19,15 @@
           placeholder="Password"
         />
       </div>
+      <div class="user-status">
+        <!-- <div>
+          Ваш статус
+          <select v-model="isAdmin">
+            <option :value="true">Адмін</option>
+            <option :value="false">Юзер</option>
+          </select>
+        </div> -->
+      </div>
       <div v-if="message">{{ message }}</div>
       <div>
         <button type="submit">Sign up</button>

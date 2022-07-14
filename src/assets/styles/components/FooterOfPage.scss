@@ -40,31 +40,30 @@
     //   }
     // }
   }
-  .payment-container {
-    margin: 10px 0 0 0;
-  }
+
   .news-letter-sing-in {
     .news-letter-input-wrapper {
-      text-align: center;
-    }
+      padding-top: 3px;
+      display: flex;
 
-    .news-letter-confirm-button {
-      img {
-        background-color: rgb(178, 110, 74);
-        width: 35px;
-        height: 35px;
-        &:hover {
-          cursor: pointer;
+      .news-letter-confirm-button {
+        img {
+          background-color: rgb(178, 110, 74);
+          width: 35px;
+          height: 35px;
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
-      display: inline-block;
-    }
-  }
-  input {
-    border: 1px solid rgb(178, 110, 43);
-    background-color: white;
 
-    height: 35px;
-    width: 85%;
+      input {
+        border: 1px solid rgb(178, 110, 43);
+        background-color: white;
+        font-size: 15px;
+        height: 35px;
+        width: 70%;
+      }
+    }
   }
 }

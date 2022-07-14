@@ -7,11 +7,23 @@
       <strong> {{ product.title }} </strong>
     </div>
     <div class="product-price">
-      <span> {{ product.price }} грн</span>
+      <span class="product-item-price"> {{ product.price }} грн</span>
     </div>
     <hr />
+    <div>
+      <div v-if="this.product.is_available">
+        <span class="product-item-status"> В наявності </span>
+      </div>
+      <div v-else>
+        <span class="product-item-status"> Товар очікується </span>
+      </div>
+    </div>
     <div class="click-add-show-info-container">
-      <div class="add-item-to-cart" @click="onAddToCart(product._id)">
+      <div
+        class="add-item-to-cart"
+        v-if="this.product.is_available"
+        @click="onAddToCart(product._id)"
+      >
         <img
           :src="require('@/assets/images/general-icons/add-to-cart-icon.png')"
           alt="no photo"
@@ -19,19 +31,26 @@
       </div>
 
       <div class="edit-item">
-        <button @click="onEdit(product._id)">змінити</button>
+        <img
+          @click="onEdit(product._id)"
+          :src="require('@/assets/images/general-icons/edit-icon.png')"
+          alt="no photo"
+        />
       </div>
 
       <div class="delete-item">
-        <button @click="onDelete(product._id)">видалити</button>
+        <img
+          @click="onDelete(product._id)"
+          :src="require('@/assets/images/general-icons/delete-icon.png')"
+          alt="no photo"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import { mapActions } from "vuex";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "ProductCart",
@@ -41,6 +60,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+  },
+
+  computed: {
+    ...mapGetters("auth", ["isAdminData"]),
   },
 
   methods: {
@@ -62,6 +85,9 @@ export default {
       this.$router.push({ name: "prodItemInfo", params: { id: itemId } });
     },
   },
+  mounted() {
+    console.log(this.isAdminData);
+  },
 };
 </script>
 
@@ -72,8 +98,13 @@ export default {
   // background-color: rgb(201, 199, 190);
 
   // border-radius: 5px;
-  // padding: 10px;
+  padding-top: 10px;
   margin: 0 15px 15px 15px;
+
+  .product-item-status {
+    background-color: rgb(208, 208, 189);
+    padding: 0 1px 0 1px;
+  }
 }
 .product-price {
   margin: 3px 0 3px 0;

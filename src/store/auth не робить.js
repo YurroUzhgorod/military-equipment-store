@@ -5,14 +5,11 @@ import apiEndpoints from "@/constants/apiEndpoints";
 const store = {
   namespaced: true,
   state: {
-    usersList: [],
     authData: JSON.parse(localStorage.getItem("authData")) || null,
     expiresAt: localStorage.getItem("expiresAt") || null,
+    isAdmin: false,
   },
   mutations: {
-    setUsersList(state, usersList) {
-      state.usersList = usersList;
-    },
     setAuthData(state, { authData, expiresAt }) {
       state.authData = { ...authData };
       state.expiresAt =
@@ -21,6 +18,12 @@ const store = {
       localStorage.setItem("authData", JSON.stringify(state.authData));
       localStorage.setItem("expiresAt", JSON.stringify(state.expiresAt));
     },
+    setUserStatus(state, { status }) {
+      state.isAdmin = status;
+
+      localStorage.setItem("isAdmin", JSON.stringify(state.isAdmin));
+    },
+
     clearAuthData(state) {
       state.authData = null;
       state.expiresAt = null;
@@ -30,22 +33,6 @@ const store = {
     },
   },
   actions: {
-    loadUsers({ commit }) {
-      new Promise((resolve, reject) => {
-        axios
-          .get(apiEndpoints.user.usersList)
-          .then((res) => res.data)
-          .then((resData) => {
-            commit("setUsersList", resData.data);
-            resolve(true);
-          })
-          .catch((err) => {
-            commit("clearAuthData");
-            reject(err);
-          });
-      });
-    },
-
     setAuthData({ commit }, { authData, expiresAt }) {
       commit("setAuthData", { authData, expiresAt });
     },
@@ -55,6 +42,7 @@ const store = {
         axios
           .post(apiEndpoints.user.signup, { name, email, password })
           .then(function () {
+            //   commit('setAuthData', { authData: user.data })
             resolve(true);
           })
           .catch((err) => {
@@ -71,6 +59,9 @@ const store = {
           .then((res) => res.data)
           .then((data) => {
             commit("setAuthData", { ...data.user });
+            commit("setUserStatus", data.status);
+            console.log(data.status);
+
             resolve(true);
           })
           .catch((err) => {
@@ -85,7 +76,6 @@ const store = {
     },
   },
   getters: {
-    usersList: (state) => state.usersList,
     isAuthenticated: (state) => () => {
       return state.authData && new Date().getTime() < state.expiresAt;
     },
