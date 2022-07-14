@@ -14,18 +14,19 @@ export default {
 
 <style lang="scss" scoped>
 .addition-info-container {
-  width: 100%;
+  display: inline-block;
+  margin: auto;
+  width: 95%;
   height: 40px;
+  background-color: rgb(189, 106, 66);
   font-family: Georgia;
   font-size: 20px;
   color: white;
-  margin: auto;
-  text-align: center;
+  display: flex;
   .text-wrapper {
-    background-color: rgb(189, 106, 66);
     display: inline-block;
-    width: 95%;
-    height: 100%;
+
+    margin: auto;
   }
   // span {
   //   margin: 0 auto;

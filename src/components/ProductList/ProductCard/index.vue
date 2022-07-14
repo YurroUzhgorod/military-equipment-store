@@ -30,7 +30,7 @@
         />
       </div>
 
-      <div class="edit-item" v-if="getUserStatus">
+      <div class="edit-item" v-if="getUserStatus()">
         <img
           @click="onEdit(product._id)"
           :src="require('@/assets/images/general-icons/edit-icon.png')"
@@ -38,7 +38,7 @@
         />
       </div>
 
-      <div class="delete-item" v-if="getUserStatus">
+      <div class="delete-item" v-if="getUserStatus()">
         <img
           @click="onDelete(product._id)"
           :src="require('@/assets/images/general-icons/delete-icon.png')"
@@ -99,7 +99,7 @@ export default {
 
   // border-radius: 5px;
   padding-top: 10px;
-  margin: 0 15px 15px 15px;
+  margin: 0 10px 15px 10px;
 
   .product-item-status {
     background-color: rgb(208, 208, 189);

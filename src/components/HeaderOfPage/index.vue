@@ -59,7 +59,7 @@
         </div>
         <div
           class="add-new-product"
-          v-if="getUserStatus"
+          v-if="getUserStatus()"
           @click="onGoToAddProductRoute"
         >
           <button>Додати товар</button>
@@ -105,7 +105,7 @@ export default {
     ...mapActions("products", ["loadProducts"]),
     onLogout() {
       this.logout();
-      this.$router.push({ path: "/login" });
+      this.$router.push({ name: "HomePage" });
     },
 
     showEmptyCartPopUp() {

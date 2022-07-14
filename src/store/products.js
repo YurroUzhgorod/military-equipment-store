@@ -52,9 +52,10 @@ export default {
           params: {
             title: searchProductParams.title,
             category: searchProductParams.category,
+            manufacturer: searchProductParams.manufacturer,
             sub_category: searchProductParams.subCategory,
             minPrice: searchProductParams.minPrice,
-            maxPrice: searchProductParams.minPrice,
+            maxPrice: searchProductParams.maxPrice,
           },
         }) //Асинхронна дія) //Асинхронна дія //Асинхронна дія
         .then(

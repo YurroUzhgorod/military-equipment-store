@@ -6,6 +6,7 @@ import ProductItemInfo from "@/pages/ProductItemInfo";
 import CartPage from "@/pages/CartPage";
 import EditPage from "@/pages/EditPage";
 import InfoPage from "@/pages/InfoPage";
+import ProductsSizePage from "@/pages/ProductsSizePage";
 
 import LoginPage from "@/pages/LoginPage";
 import SignupPage from "@/pages/SignupPage";
@@ -37,6 +38,11 @@ const routes = [
   { path: "/edit/:id?", component: EditPage, name: "edit" },
 
   { path: "/info/:source?", component: InfoPage, name: "info" },
+  {
+    path: "/info/products-sizes",
+    component: ProductsSizePage,
+    name: "productsSize",
+  },
 ];
 
 const router = createRouter({

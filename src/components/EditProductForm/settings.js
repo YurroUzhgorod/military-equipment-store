@@ -11,6 +11,9 @@ export const manufacturerList = [
   "5-11",
   "Crye-precision",
   "Black-hawk",
+  "Propper",
+  "Maxpedition",
+  "Helicon",
 ];
 
 export const allCategoryAndSubcategory = {

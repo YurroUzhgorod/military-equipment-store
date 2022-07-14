@@ -5,13 +5,15 @@ import apiEndpoints from "@/constants/apiEndpoints";
 const store = {
   namespaced: true,
   state: {
-    usersList: [],
     authData: JSON.parse(localStorage.getItem("authData")) || null,
     expiresAt: localStorage.getItem("expiresAt") || null,
-    userStatusIsAdmin: null,
+    userStatusIsAdmin:
+      JSON.parse(localStorage.getItem("userStatusIsAdmin")) || null,
   },
   getters: {
-    getUserStatus: (state) => state.userStatusIsAdmin,
+    getUserStatus: (state) => () => {
+      return state.userStatusIsAdmin;
+    },
 
     isAuthenticated: (state) => () => {
       return state.authData && new Date().getTime() < state.expiresAt;
