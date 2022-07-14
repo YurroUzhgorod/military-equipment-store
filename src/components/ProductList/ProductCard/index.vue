@@ -99,7 +99,7 @@ export default {
 
   // border-radius: 5px;
   padding-top: 10px;
-  margin: 0 10px 15px 10px;
+  margin: 0 10px 15px 15px;
 
   .product-item-status {
     background-color: rgb(208, 208, 189);
