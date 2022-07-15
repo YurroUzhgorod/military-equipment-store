@@ -1,0 +1,129 @@
+const ProductModel = require("../models/product");
+
+const sendJSONResponse = (res, status, content) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.status(status).json(content);
+};
+
+module.exports.getList = function (req, res) {
+  const searchObj = req.query || {};
+  if (searchObj.minPrice || searchObj.maxPrice) {
+    searchObj.price = {
+      $gte: searchObj.minPrice || 0,
+      $lte: searchObj.maxPrice || Infinity,
+    };
+  }
+
+  ProductModel.find(searchObj).exec(function (err, products) {
+    if (err)
+      return sendJSONResponse(res, 500, {
+        success: false,
+        err: { msg: "Fetch faild!" },
+      });
+    sendJSONResponse(res, 200, { success: true, data: products });
+  });
+};
+//-------------------------------------------------------------------------------------------------
+module.exports.getListLike = function (req, res) {
+  console.log("req.qyery.title");
+  console.log(req.query.title);
+  ProductModel.find({
+    title: { $regex: req.query.title, $options: "$i" },
+  }).exec(function (err, products) {
+    if (err)
+      return sendJSONResponse(res, 500, {
+        success: false,
+        err: { msg: "Fetch faild!" },
+      });
+    sendJSONResponse(res, 200, { success: true, data: products });
+  });
+};
+//-------------------------------------------------------------------------------------------------
+
+module.exports.add = function (req, res) {
+  let product = new ProductModel({
+    code: req.body.code,
+    title: req.body.title,
+    description: req.body.description,
+    manufacturer: req.body.manufacturer,
+    category: req.body.category,
+    sub_category: req.body.sub_category,
+    price: parseFloat(req.body.price),
+    photo: req.body.photo,
+    is_available: req.body.is_available,
+  });
+
+  product.save(function (err, savedProduct) {
+    if (err) {
+      sendJSONResponse(res, 500, {
+        success: false,
+        err: { msg: "Saving faild!" },
+      });
+      return;
+    }
+    sendJSONResponse(res, 201, { success: true, data: savedProduct });
+  });
+};
+//-------------------------------------------------------------------------------------------------
+
+module.exports.delete = function (req, res) {
+  ProductModel.findByIdAndDelete(req.body.id, function (err) {
+    if (err) {
+      sendJSONResponse(res, 500, {
+        success: false,
+        err: { msg: "Delete faild!" },
+      });
+      return;
+    }
+    sendJSONResponse(res, 200, { success: true });
+  });
+};
+//-------------------------------------------------------------------------------------------------
+
+module.exports.update = function (req, res, next) {
+  let product = {
+    code: req.body.code,
+    title: req.body.title,
+    description: req.body.description,
+    manufacturer: req.body.manufacturer,
+    category: req.body.category,
+    sub_category: req.body.sub_category,
+    price: parseFloat(req.body.price),
+    is_available: req.body.is_available,
+    updated: Date.now(),
+  };
+  if (req.body.photo) {
+    product.photo = req.body.photo;
+  }
+  ProductModel.findByIdAndUpdate(
+    req.body._id,
+    product,
+    { new: true },
+    function (err) {
+      // mongoose.disconnect()
+      if (err) {
+        sendJSONResponse(res, 500, {
+          success: false,
+          err: { msg: "Update faild!" },
+        });
+        return;
+      }
+
+      sendJSONResponse(res, 200, { success: true });
+    }
+  );
+};
+//-------------------------------------------------------------------------------------------------
+
+module.exports.getById = function (req, res) {
+  ProductModel.findById(req.params.id, function (err, searchProduct) {
+    if (err) {
+      sendJSONResponse(res, 500, {
+        success: false,
+        err: { msg: "Find product faild!" },
+      });
+      return;
+    }
+    sendJSONResponse(res, 200, { success: true, data: searchProduct });
+  });
+};
