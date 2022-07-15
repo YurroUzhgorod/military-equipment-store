@@ -4,7 +4,7 @@
     <form @submit.prevent="submit">
       <div>
         Name :
-        <input type="text" v-model="userMame" name="name" placeholder="Name" />
+        <input type="text" v-model="userName" name="name" placeholder="Name" />
       </div>
       <div>
         email :
@@ -18,6 +18,22 @@
           name="password"
           placeholder="Password"
         />
+      </div>
+      <div class="user-status">
+        <div>
+          Ваш статус:
+          <select v-model="userStatus">
+            виберіть значення
+            <option :value="true">Адмін</option>
+            <option :value="false">Юзер</option>
+          </select>
+        </div>
+        <div v-if="userStatus">
+          <label>
+            Введіть секретний код для отримання статусу адміна
+            <input type="text" v-model="secretKey" />
+          </label>
+        </div>
       </div>
       <div v-if="message">{{ message }}</div>
       <div>
@@ -33,10 +49,12 @@ export default {
   name: "SignupPage",
   data() {
     return {
-      userMame: "",
+      userName: "",
       email: "",
       password: "",
+      secretKey: null,
       message: "",
+      userStatus: false,
     };
   },
 
@@ -46,8 +64,9 @@ export default {
     async submit() {
       try {
         const user = {
-          name: this.userMame,
+          name: this.userName,
           email: this.email,
+          secretKey: this.secretKey,
           password: this.password,
         };
         const result = await this.signup(user);
@@ -55,7 +74,7 @@ export default {
           this.message = "";
           this.$router.push({
             path: "/login",
-            // query: { signedup: "true" },
+            query: { signedup: "true" },
           });
         } else {
           this.message = result; //'SignUp error!';

@@ -102,7 +102,8 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["logout"]),
-    ...mapActions("products", ["loadProducts"]),
+    ...mapActions("products", ["loadProducts", "loadProductsIncludes"]),
+
     onLogout() {
       this.logout();
       this.$router.push({ name: "HomePage" });
@@ -125,14 +126,15 @@ export default {
         name: "edit",
       });
     },
+
     async onSearchProduct(searchText) {
+      await this.loadProductsIncludes(searchText);
       this.$router.push({
         name: "products",
         params: {
           category: searchText,
         },
       });
-      await this.loadProducts({ title: searchText });
       this.searchProdTitle = "";
     },
   },

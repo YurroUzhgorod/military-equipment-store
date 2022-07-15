@@ -18,7 +18,7 @@ const routes = [
   { path: "/signup", component: SignupPage, name: "signup" },
 
   {
-    path: "/products/:category?/:subCategory?",
+    path: "/products/:category/:subCategory?",
     component: ProductPage,
     name: "products",
   },

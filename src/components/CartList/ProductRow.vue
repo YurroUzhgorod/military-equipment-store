@@ -1,12 +1,12 @@
 <template>
   <div class="product-row-container">
     <div>
-      <img :src="product.photo" alt="" />
+      <img :src="cartItem.prodPhoto" alt="" />
     </div>
     <div class="product-info">
-      {{ product.title }}
+      {{ cartItem.prodTitle }}
     </div>
-    <div class="product-info">{{ product.price }} грн</div>
+    <div class="product-info">{{ cartItem.prodPrice }} грн</div>
     <div>
       <button @click="onDecrement">-</button>
 
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "ProductRow",
 
@@ -26,16 +26,6 @@ export default {
     cartItem: {
       type: Object,
       default: () => ({}),
-    },
-  },
-
-  computed: {
-    ...mapGetters("products", ["getProductById"]),
-
-    product() {
-      console.log("продукт в якого фото адрефайн");
-      console.log(this.getProductById(this.cartItem.prodId));
-      return this.getProductById(this.cartItem.prodId);
     },
   },
 

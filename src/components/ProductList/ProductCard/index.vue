@@ -22,7 +22,7 @@
       <div
         class="add-item-to-cart"
         v-if="this.product.is_available"
-        @click="onAddToCart(product._id)"
+        @click="onAddToCart(product)"
       >
         <img
           :src="require('@/assets/images/general-icons/add-to-cart-icon.png')"
@@ -69,8 +69,8 @@ export default {
   methods: {
     ...mapActions("cartList", ["addProductItem"]),
 
-    onAddToCart(id) {
-      this.addProductItem(id);
+    onAddToCart(product) {
+      this.addProductItem(product);
     },
 
     ...mapActions("products", ["deleteProduct"]),
@@ -85,9 +85,6 @@ export default {
       this.$router.push({ name: "prodItemInfo", params: { id: itemId } });
     },
   },
-  mounted() {
-    console.log(this.isAdminData);
-  },
 };
 </script>
 
@@ -95,9 +92,6 @@ export default {
 .product-container {
   display: inline-block;
 
-  // background-color: rgb(201, 199, 190);
-
-  // border-radius: 5px;
   padding-top: 10px;
   margin: 0 10px 15px 15px;
 
@@ -146,13 +140,4 @@ button {
     }
   }
 }
-
-//     .add-item-to-cart {
-//       margin: 3px;
-//     }
-//   }
-//   .delete-item {
-//     margin: 3px 0 0 0;
-//   }
-// }
 </style>

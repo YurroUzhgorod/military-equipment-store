@@ -29,7 +29,7 @@
           </div>
           <div class="error-message" v-if="message">{{ message }}</div>
           <div class="form-group">
-            <button @click="submit" :disabled="!isValid">ВВІЙТИ</button>
+            <button @click="submit">ВВІЙТИ</button>
           </div>
         </div>
       </div>
@@ -66,7 +66,13 @@ export default {
   },
   computed: {
     isValid() {
-      return this.email && this.password;
+      return (
+        this.email &&
+        this.isCorrectEmail &&
+        this.password &&
+        this.email.length > 4 &&
+        this.email.includes("@")
+      );
     },
   },
 
@@ -78,19 +84,24 @@ export default {
     },
 
     async submit() {
-      try {
-        const user = { email: this.email, password: this.password };
-        const result = await this.login(user);
+      if (this.isValid) {
+        try {
+          const user = { email: this.email, password: this.password };
+          const result = await this.login(user);
 
-        if (result === true) {
-          this.message = "";
+          if (result === true) {
+            this.message = "";
 
-          this.$router.push({ path: "/" });
-        } else {
-          this.message = "Login error!";
+            this.$router.push({ path: "/" });
+          } else {
+            this.message = "Login error!";
+          }
+        } catch (err) {
+          this.message = err.response.data.error;
         }
-      } catch (err) {
-        this.message = err.response.data.error;
+      } else {
+        this.message =
+          "Помилка вводу. Перевірте введені дані! Адреса електронної пошти має не менше 4-x  знаків і містити  симовл - @";
       }
     },
   },

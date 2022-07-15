@@ -18,6 +18,8 @@
           <div class="filter-options-container">
             <div class="category-filter-container">
               <div class="category-filter-title">
+                <hr />
+
                 <p>Виберіть категорію</p>
               </div>
               <div class="category-select-container">
@@ -34,8 +36,11 @@
               </div>
             </div>
 
-            <hr />
-            <div class="sub-category-filter-container">
+            <div
+              class="sub-category-filter-container"
+              v-if="this.searchParamsObj.category"
+            >
+              <hr />
               <div class="sub-category-filter-title">
                 <p>Виберіть під-категорію</p>
               </div>
@@ -44,8 +49,7 @@
                   <option value="">не вибрано</option>
                   <option
                     v-for="(subcategory, index) in allCategoryAndSubcategory[
-                      this.searchParamsObj.category ||
-                        this.$route.params.category
+                      this.searchParamsObj.category
                     ]"
                     :key="index"
                     :value="subcategory"
@@ -227,14 +231,28 @@ export default {
   font-family: Georgia;
 
   .filter-block-container {
-    max-height: 500px;
+    max-height: 600px;
     margin: 0 20px 0 25px;
 
     display: inline-block;
+
+    div {
+      padding-bottom: 10px;
+    }
+    button {
+      padding: 7px;
+      background-color: grey;
+      &:hover {
+        cursor: pointer;
+      }
+    }
     .filter-blok-title {
       margin: auto;
       font-size: 20px;
       font-weight: 800;
+    }
+    input {
+      border: 1px #d7d7d7 solid;
     }
 
     .category-filter-container {
