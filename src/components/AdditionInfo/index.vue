@@ -14,6 +14,7 @@ export default {
 
 <style lang="scss" scoped>
 .addition-info-container {
+  padding-bottom: 20px;
   display: inline-block;
   margin: auto;
   width: 95%;

@@ -37,7 +37,7 @@
                 <div
                   class="add-item-to-cart"
                   v-if="product.is_available"
-                  @click="onAddToCart(product._id)"
+                  @click="onAddToCart(product)"
                 >
                   В КОРЗИНУ
                 </div>
@@ -100,8 +100,8 @@ export default {
       this.$router.push({ name: "productsSize" });
     },
 
-    onAddToCart(id) {
-      this.addProductItem(id);
+    onAddToCart(product) {
+      this.addProductItem(product);
     },
   },
 

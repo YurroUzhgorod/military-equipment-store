@@ -31,6 +31,7 @@
 <script>
 import SubMenuBlock from "./SubMenuBlock";
 import { menuItems } from "../settings.js";
+
 import { mapActions } from "vuex";
 export default {
   name: "MenuBlock",

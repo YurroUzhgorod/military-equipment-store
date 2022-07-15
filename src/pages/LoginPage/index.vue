@@ -11,8 +11,8 @@
 
           <div class="email-input">
             <input
-              @click="hideMessage"
-              type="text"
+              @click="hideErrorMessage"
+              type="email"
               v-model="email"
               name="email"
               placeholder="емейл..."
@@ -20,13 +20,14 @@
           </div>
           <div class="password-input">
             <input
-              @click="hideMessage"
+              @click="hideErrorMessage"
               type="password"
               v-model="password"
               name="password"
               placeholder="пароль.."
             />
           </div>
+
           <div class="error-message" v-if="message">{{ message }}</div>
           <div class="form-group">
             <button @click="submit" :disabled="!isValid">ВВІЙТИ</button>
@@ -73,7 +74,7 @@ export default {
   methods: {
     ...mapActions("auth", ["login", "logout"]),
 
-    hideMessage() {
+    hideErrorMessage() {
       this.message = "";
     },
 
@@ -87,7 +88,7 @@ export default {
 
           this.$router.push({ path: "/" });
         } else {
-          this.message = "Login error!";
+          this.message = "Помилка логінізації";
         }
       } catch (err) {
         this.message = err.response.data.error;
@@ -102,6 +103,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.breadcrumbs-container {
+  font-family: georgia;
+}
 .login-page-wrapper {
   padding: 20px 0 70px 0;
   display: flex;
