@@ -13,6 +13,7 @@
       </div>
 
       <div class="content-container">
+        <div class="sorting-items-container">сортування товару</div>
         <div class="filter-block-container">
           <div class="filter-blok-title">ФІЛЬТР ПІДБОРУ</div>
           <div class="filter-options-container">
@@ -226,13 +227,27 @@ export default {
 <style lang="scss" scoped>
 .content-container {
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-auto-rows: minmax(30 auto);
+  grid-template-areas:
+    "sorting-items-container sorting-items-container sorting-items-container sorting-items-container sorting-items-container"
+    "filter-block-container product-list-container product-list-container product-list-container product-list-container";
+
+  // grid-template-columns: 1fr 4fr;
+  // grid-auto-rows: minmax(30 auto);
   font-family: Georgia;
+  .sorting-items-container {
+    grid-area: sorting-items-container;
+    background-color: grey;
+    margin: 15px;
+  }
+  .product-list-container {
+    grid-area: product-list-container;
+  }
 
   .filter-block-container {
+    grid-area: filter-block-container;
     max-height: 600px;
     margin: 0 20px 0 25px;
+    width: 250px;
 
     display: inline-block;
 

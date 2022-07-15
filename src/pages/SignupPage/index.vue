@@ -40,10 +40,10 @@
 
           <div class="user-status">
             <div class="select-input-container">
-              Ваш статус:
+              Виберіть статус:
               <select v-model="userStatus">
                 <option :value="true">Адмін</option>
-                <option :value="false">Юзер</option>
+                <option :value="false">Користувач</option>
               </select>
             </div>
             <div v-if="userStatus">
