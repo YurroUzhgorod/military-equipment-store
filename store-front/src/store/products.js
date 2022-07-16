@@ -53,6 +53,7 @@ export default {
             manufacturer: searchProductParams.manufacturer,
             minPrice: searchProductParams.minPrice,
             maxPrice: searchProductParams.maxPrice,
+            sortRule: searchProductParams.sortRule,
           },
         })
         .then((res) => res.data)
@@ -65,6 +66,7 @@ export default {
         })
         .finally(() => commit("setLoading", false));
     },
+
     //--------------------------------------------------------------------------------------------------------
     loadProductsIncludes({ commit }, searchProductParams) {
       commit("setLoading", true);

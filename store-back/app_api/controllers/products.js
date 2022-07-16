@@ -14,19 +14,28 @@ module.exports.getList = function (req, res) {
     };
   }
 
-  ProductModel.find(searchObj).exec(function (err, products) {
-    if (err)
-      return sendJSONResponse(res, 500, {
-        success: false,
-        err: { msg: "Fetch faild!" },
-      });
-    sendJSONResponse(res, 200, { success: true, data: products });
-  });
+  let sortRule;
+  if (searchObj.sortRule === "priseIncrease") sortRule = { price: 1 };
+  if (searchObj.sortRule === "priseDecrease") sortRule = { price: -1 };
+  if (searchObj.sortRule === "dateNew") sortRule = { created: 1 };
+  if (searchObj.sortRule === "dateLast") sortRule = { created: -1 };
+  if (searchObj.sortRule === "nameA") sortRule = { title: 1 };
+  if (searchObj.sortRule === "nameZ") sortRule = { title: -1 };
+
+  ProductModel.find(searchObj)
+    .sort(sortRule)
+    .exec(function (err, products) {
+      if (err)
+        return sendJSONResponse(res, 500, {
+          success: false,
+          err: { msg: "Fetch faild!" },
+        });
+      sendJSONResponse(res, 200, { success: true, data: products });
+    });
 };
+
 //-------------------------------------------------------------------------------------------------
 module.exports.getListLike = function (req, res) {
-  console.log("req.qyery.title");
-  console.log(req.query.title);
   ProductModel.find({
     title: { $regex: req.query.title, $options: "$i" },
   }).exec(function (err, products) {

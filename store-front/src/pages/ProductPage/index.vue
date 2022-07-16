@@ -13,7 +13,21 @@
       </div>
 
       <div class="content-container">
-        <div class="sorting-items-container">сортування товару</div>
+        <div class="sorting-items-container">
+          <div class="category-title"><span> CОРТУВАННЯ </span></div>
+          <div class="select-input-container">
+            <select v-model="searchParamsObj.sortRule">
+              <option :value="null" selected>Не вибрано</option>
+              <option value="priseIncrease">По ціні(зменшення)</option>
+              <option value="priseDecrease">По ціні(зібльшення)</option>
+              <option value="dateNew">По даті(спочатку новіші)</option>
+              <option value="dateLast">По даті(спочатку старіші)</option>
+              <option value="nameA">Ім'ям(Я-А)</option>
+              <option value="nameZ">Ім'ям(А-Я)</option>
+            </select>
+          </div>
+        </div>
+
         <div class="filter-block-container">
           <div class="filter-blok-title">ФІЛЬТР ПІДБОРУ</div>
           <div class="filter-options-container">
@@ -25,7 +39,7 @@
               </div>
               <div class="category-select-container">
                 <select v-model="searchParamsObj.category">
-                  <option value="">не вибрано</option>
+                  <option :value="null" selected>не вибрано</option>
                   <option
                     v-for="(value, key, index) in allCategoryAndSubcategory"
                     :key="index"
@@ -47,7 +61,7 @@
               </div>
               <div class="sub-category-select-container">
                 <select v-model="searchParamsObj.subCategory">
-                  <option value="">не вибрано</option>
+                  <option :value="null">не вибрано</option>
                   <option
                     v-for="(subcategory, index) in allCategoryAndSubcategory[
                       this.searchParamsObj.category
@@ -108,8 +122,13 @@
             </div>
 
             <div>
-              <button @click="onGoToFilteredProducts(searchParamsObj)">
+              <button @click="onGoToFilteredProducts()">
                 <span> ПОШУК </span>
+              </button>
+            </div>
+            <div>
+              <button @click="onClearSearchParamsObj(searchParamsObj)">
+                <span> Скинути </span>
               </button>
             </div>
           </div>
@@ -158,6 +177,7 @@ export default {
       manufacturerList,
       allCategoryAndSubcategory,
       searchParamsObj: {},
+
       items: [
         {
           text: "home",
@@ -174,6 +194,7 @@ export default {
       ],
     };
   },
+
   computed: {
     activeComponent() {
       switch (this.checkRouteCategory) {
@@ -203,14 +224,46 @@ export default {
   methods: {
     ...mapActions("products", ["loadProducts"]),
 
-    async onGoToFilteredProducts(searchParamsObj) {
-      await this.loadProducts(searchParamsObj);
+    onClearSearchParamsObj() {
       this.searchParamsObj = {};
     },
+
+    onGoToFilteredProducts() {
+      let search = {};
+      if (this.searchParamsObj.category && this.searchParamsObj.category.length)
+        search.category = this.searchParamsObj.category;
+      if (
+        this.searchParamsObj.subCategory &&
+        this.searchParamsObj.subCategory.length
+      )
+        search.subCategory = this.searchParamsObj.subCategory;
+      if (
+        this.searchParamsObj.manufacturer &&
+        this.searchParamsObj.manufacturer.length
+      )
+        search.manufacturer = this.searchParamsObj.manufacturer;
+      if (this.searchParamsObj.title && this.searchParamsObj.title.length)
+        search.title = this.searchParamsObj.title;
+
+      if (
+        this.searchParamsObj.sortRule &&
+        this.searchParamsObj.sortRule.length
+      ) {
+        search.sortRule = this.searchParamsObj.sortRule;
+      }
+
+      this.loadProducts(search);
+    },
+
     onAddNewProduct() {
       this.$router.push({
         name: "edit",
       });
+    },
+
+    checkSortParams() {
+      console.log(this.searchParamsObj);
+      this.loadProducts(this.searchParamsObj);
     },
   },
   watch: {
@@ -220,6 +273,10 @@ export default {
     checkRouteSubCategory(newValue) {
       this.items[2].text = newValue;
     },
+  },
+  mounted() {
+    this.searchParamsObj.category = this.$route.params.category;
+    this.searchParamsObj.subCategory = this.$route.params.subCategory;
   },
 };
 </script>
@@ -231,13 +288,14 @@ export default {
     "sorting-items-container sorting-items-container sorting-items-container sorting-items-container sorting-items-container"
     "filter-block-container product-list-container product-list-container product-list-container product-list-container";
 
-  // grid-template-columns: 1fr 4fr;
-  // grid-auto-rows: minmax(30 auto);
   font-family: Georgia;
   .sorting-items-container {
     grid-area: sorting-items-container;
     background-color: grey;
     margin: 15px;
+
+    display: flex;
+    justify-content: space-around;
   }
   .product-list-container {
     grid-area: product-list-container;

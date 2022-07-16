@@ -63,22 +63,22 @@ export default {
       this.subMenuData = null;
     },
 
-    async onGoToProductSubCategory(subCategory) {
+    onGoToProductSubCategory(subCategory) {
       console.log(subCategory);
       const category = this.lastOnHoverCategory;
       this.$router.push({
         name: "products",
         params: { category, subCategory: subCategory },
       });
-      await this.loadProducts({ subCategory });
+      this.loadProducts({ subCategory });
     },
 
-    async onGoToProductCategory(category) {
+    onGoToProductCategory(category) {
       this.$router.push({
         name: "products",
         params: { category },
       });
-      await this.loadProducts({ category });
+      this.loadProducts({ category });
     },
   },
 };
