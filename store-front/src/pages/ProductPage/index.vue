@@ -11,19 +11,19 @@
 
       <div class="content-container">
         <div class="sorting-items-container">
-          <div class="sorting-category-title">CОРТУВАННЯ</div>
+          <div class="sorting-category-title"><span> CОРТУВАННЯ: </span></div>
           <div class="select-input-container">
             <select
               v-model="searchParamsObj.sortRule"
               @change="onGoToFilteredProducts"
             >
               <option :value="null" selected>Не вибрано</option>
-              <option value="priseIncrease">По ціні(зменшення)</option>
-              <option value="priseDecrease">По ціні(зібльшення)</option>
-              <option value="dateNew">По даті(спочатку новіші)</option>
-              <option value="dateLast">По даті(спочатку старіші)</option>
-              <option value="nameA">Ім'ям(Я-А)</option>
-              <option value="nameZ">Ім'ям(А-Я)</option>
+              <option value="priseIncrease">По ціні(збільшення)</option>
+              <option value="priseDecrease">По ціні (зменшення)</option>
+              <option value="dateNew">По даті (спочатку новіші)</option>
+              <option value="dateLast">По даті (спочатку старіші)</option>
+              <option value="nameA">Ім'ям (Я-А)</option>
+              <option value="nameZ">Ім'ям (А-Я)</option>
             </select>
           </div>
         </div>
@@ -102,43 +102,45 @@
               </div>
             </div>
 
-            <div>
-              <button @click="onGoToFilteredProducts()">
-                <span> ПОШУК </span>
-              </button>
+            <div class="filtering-btn" @click="onGoToFilteredProducts()">
+              <span> ПОШУК </span>
             </div>
-            <div>
-              <button @click="onClearSearchParamsObj(searchParamsObj)">
-                <span> Скинути </span>
-              </button>
+            <div
+              class="filtering-btn"
+              @click="onClearSearchParamsObj(searchParamsObj)"
+            >
+              <span> СКИНУТИ </span>
             </div>
           </div>
         </div>
         <div class="product-list-container">
           <product-list />
         </div>
-        <div class="pagination-block">
-          <div class="pagination-button">
-            <button @click="onGoChangePageOfProducts('onStart')">
-              на початок
-            </button>
-          </div>
-          <div class="pagination-button">
-            <button @click="onGoChangePageOfProducts('prev')">
-              на початок
-            </button>
-          </div>
 
-          <div class="pagination-button">{{ pageNumber + 1 }}</div>
-          <div
-            class="pagination-button"
-            @click="onGoChangePageOfProducts('next')"
-          >
-            наступна
-          </div>
+        <div class="pagination-wrapper">
+          <div class="pagination-block">
+            <div class="pagination-button">
+              <button @click="onGoChangePageOfProducts('onStart')">
+                на початок
+              </button>
+            </div>
+            <div class="pagination-button">
+              <button @click="onGoChangePageOfProducts('prev')">
+                на початок
+              </button>
+            </div>
 
-          <div class="pagination-button" @click="changePage('end')">
-            в кінець
+            <div class="pagination-button">{{ pageNumber + 1 }}</div>
+            <div
+              class="pagination-button"
+              @click="onGoChangePageOfProducts('next')"
+            >
+              наступна
+            </div>
+
+            <div class="pagination-button" @click="changePage('end')">
+              в кінець
+            </div>
           </div>
         </div>
       </div>
@@ -251,7 +253,7 @@ export default {
   mounted() {
     this.searchParamsObj.category = this.$route.params.category;
 
-    // this.searchParamsObj.subCategory = this.$route.params.subCategory;
+    this.searchParamsObj.subCategory = this.$route.params.subCategory;
   },
 };
 </script>
@@ -262,9 +264,9 @@ export default {
   margin: 30px 15px 15px 20px;
   display: grid;
   grid-template-areas:
-    "filter-block-container  sorting-items-container sorting-items-container sorting-items-container sorting-items-container"
-    "filter-block-container product-list-container product-list-container product-list-container product-list-container"
-    " pagination-block pagination-block pagination-block pagination-block pagination-block";
+    "filter-block-container  sorting-items-container sorting-items-container sorting-items-container sorting-items-container sorting-items-container sorting-items-container"
+    "filter-block-container product-list-container product-list-container product-list-container product-list-container product-list-container product-list-container"
+    " pagination-block pagination-block pagination-block pagination-block pagination-block pagination-block  pagination-block  ";
 
   .sorting-items-container {
     grid-area: sorting-items-container;
@@ -276,9 +278,6 @@ export default {
       font-size: 20px;
       font-weight: 800;
     }
-    select {
-      border: 2px solid black;
-    }
 
     display: flex;
   }
@@ -287,22 +286,38 @@ export default {
   }
 
   .filter-block-container {
+    border: 3px solid rgb(246, 246, 246);
+    padding: 10px;
     grid-area: filter-block-container;
     max-height: 600px;
     max-width: 400px;
     margin: 0 20px 0 25px;
     width: 250px;
-
+    display: flex;
+    flex-direction: column;
     display: inline-block;
+    .filter-options-container {
+      display: flex;
+      flex-direction: column;
+
+      margin: auto;
+    }
 
     div {
       padding-bottom: 10px;
     }
-    button {
-      padding: 7px;
-      background-color: grey;
+    .filtering-btn {
+      display: flex;
+      padding: 5px;
+      margin: 10px 0 10px 0px;
+      background-color: rgb(209, 202, 202);
       &:hover {
         cursor: pointer;
+        transform: scale(1.02);
+      }
+
+      span {
+        margin: auto;
       }
     }
     .filter-blok-title {
@@ -346,50 +361,57 @@ export default {
 //---------------
 
 select {
-  margin-left: 35px;
-  border: 1px solid #d7d7d7;
-  padding: 5px;
-  border-radius: 2px;
-}
-select:hover {
-  background: #cde4f7;
-  border: 1px solid #41c9ff;
-}
+  //   margin-left: 35px;
+  border: 1px solid #b1aeae;
+  background-color: rgb(232, 228, 228);
 
-select:focus {
-  -webkit-box-shadow: 0 0 3px 1px #7cdaff;
-  -moz-box-shadow: 0 0 3px 1px #7cdaff;
-  box-shadow: 0 0 3px 1px #7cdaff;
+  //   padding: 5px;
+  //   border-radius: 2px;
+  // }
+  select:hover {
+    background: #cde4f7;
+    border: 1px solid #41c9ff;
+  }
 }
-select:before {
-  content: "▼";
-}
-option {
-  background: #fff;
-  border-color: #41c9ff;
-  border-radius: 2px;
-  line-height: 18px;
-  outline: none;
-  -webkit-box-shadow: 0 0 3px 1px #c00;
-  -moz-box-shadow: 0 0 3px 1px #c00;
-  box-shadow: 0 0 3px 1px #c00;
-}
-option:focus {
-  -webkit-box-shadow: 0 0 3px 1px #7cdaff;
-  -moz-box-shadow: 0 0 3px 1px #7cdaff;
-  box-shadow: 0 0 3px 1px #7cdaff;
-}
+// select:focus {
+//   -webkit-box-shadow: 0 0 3px 1px #7cdaff;
+//   -moz-box-shadow: 0 0 3px 1px #7cdaff;
+//   box-shadow: 0 0 3px 1px #7cdaff;
+// }
+// select:before {
+//   content: "▼";
+// }
+// option {
+//   background: #fff;
+//   border-color: #41c9ff;
+//   border-radius: 2px;
+//   line-height: 18px;
+//   outline: none;
+//   -webkit-box-shadow: 0 0 3px 1px #c00;
+//   -moz-box-shadow: 0 0 3px 1px #c00;
+//   box-shadow: 0 0 3px 1px #c00;
+// }
+// option:focus {
+//   -webkit-box-shadow: 0 0 3px 1px #7cdaff;
+//   -moz-box-shadow: 0 0 3px 1px #7cdaff;
+//   box-shadow: 0 0 3px 1px #7cdaff;
+// }
 
-.pagination-block {
+.pagination-wrapper {
   display: flex;
   grid-area: pagination-block;
 
-  .pagination-button {
-    background-color: rgb(142, 129, 129);
-    margin: 20px;
-    padding: 5px;
-    &:hover {
-      cursor: pointer;
+  .pagination-block {
+    display: flex;
+    margin: auto;
+
+    .pagination-button {
+      background-color: rgb(142, 129, 129);
+      margin: 20px;
+      padding: 5px;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

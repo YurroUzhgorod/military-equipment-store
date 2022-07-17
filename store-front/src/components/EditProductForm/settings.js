@@ -53,10 +53,10 @@ export const allCategoryAndSubcategory = {
       ua: "Демісезонні черевики",
     },
     winter_boots: {
-      ua: "Демісезонні черевики",
+      ua: "Зимові черевики",
     },
     semi_boots: {
-      ua: "Демісезонні черевики",
+      ua: "Напів-черевики",
     },
     sneakers: {
       ua: "кросівки",

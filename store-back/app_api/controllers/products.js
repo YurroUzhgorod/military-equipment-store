@@ -16,7 +16,7 @@ module.exports.getList = function (req, res) {
   }
 
   let page = searchObj.pageNumber;
-  let skip = page * 3;
+  let skip = page * 4;
 
   let sortRule;
   if (searchObj.sortRule === "priseIncrease") sortRule = { price: 1 };
@@ -29,7 +29,7 @@ module.exports.getList = function (req, res) {
   ProductModel.find(searchObj)
     .sort(sortRule)
     .skip(skip)
-    .limit(3)
+    .limit(4)
     .exec(function (err, products) {
       if (err)
         return sendJSONResponse(res, 500, {

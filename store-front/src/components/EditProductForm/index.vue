@@ -43,13 +43,13 @@
       Виберіть суб-категорію
       <select v-model="product.sub_category">
         <option
-          v-for="(subcategory, index) in allCategoryAndSubcategory[
+          v-for="(subcategory, key, index) in allCategoryAndSubcategory[
             this.product.category
           ]"
           :key="index"
-          :value="subcategory"
+          :value="key"
         >
-          {{ subcategory }}
+          {{ key }}
         </option>
       </select>
     </div>
