@@ -8,15 +8,15 @@
       </div>
 
       <addition-info />
-      <div class="category-info-wrapper">
-        <component :is="activeComponent"></component>
-      </div>
 
       <div class="content-container">
         <div class="sorting-items-container">
-          <div class="category-title"><span> CОРТУВАННЯ </span></div>
+          <div class="category-title">CОРТУВАННЯ</div>
           <div class="select-input-container">
-            <select v-model="searchParamsObj.sortRule">
+            <select
+              v-model="searchParamsObj.sortRule"
+              @change="onGoToFilteredProducts"
+            >
               <option :value="null" selected>Не вибрано</option>
               <option value="priseIncrease">По ціні(зменшення)</option>
               <option value="priseDecrease">По ціні(зібльшення)</option>
@@ -31,29 +31,9 @@
         <div class="filter-block-container">
           <div class="filter-blok-title">ФІЛЬТР ПІДБОРУ</div>
           <div class="filter-options-container">
-            <div class="category-filter-container">
-              <div class="category-filter-title">
-                <hr />
-
-                <p>Виберіть категорію</p>
-              </div>
-              <div class="category-select-container">
-                <select v-model="searchParamsObj.category">
-                  <option :value="null" selected>не вибрано</option>
-                  <option
-                    v-for="(value, key, index) in allCategoryAndSubcategory"
-                    :key="index"
-                    :value="key"
-                  >
-                    {{ key }}
-                  </option>
-                </select>
-              </div>
-            </div>
-
             <div
               class="sub-category-filter-container"
-              v-if="this.searchParamsObj.category"
+              v-if="!this.$route.params.subCategory"
             >
               <hr />
               <div class="sub-category-filter-title">
@@ -83,6 +63,7 @@
               </div>
               <div class="manufacturer-select-container">
                 <select v-model="searchParamsObj.manufacturer">
+                  <option :value="null" selected>не вибрано</option>
                   <option
                     v-for="(manufacturer, index) in manufacturerList"
                     :key="index"
@@ -136,18 +117,36 @@
         <div class="product-list-container">
           <product-list />
         </div>
+        <div class="pagination-block">
+          <div class="pagination-button">
+            <button @click="onGoChangePageOfProducts('onStart')">
+              на початок
+            </button>
+          </div>
+          <div class="pagination-button">
+            <button @click="onGoChangePageOfProducts('prev')">
+              на початок
+            </button>
+          </div>
+
+          <div class="pagination-button">{{ pageNumber + 1 }}</div>
+          <div
+            class="pagination-button"
+            @click="onGoChangePageOfProducts('next')"
+          >
+            наступна
+          </div>
+
+          <div class="pagination-button" @click="changePage('end')">
+            в кінець
+          </div>
+        </div>
       </div>
     </template>
   </main-master-page>
 </template>
 
 <script>
-import BagsDescrip from "@/components/CategoryDescription/BagsDescrip.vue";
-import BootsDescrip from "@/components/CategoryDescription/BootsDescrip.vue";
-import ClothesDescrip from "@/components/CategoryDescription/ClothesDescrip.vue";
-import EquipmentDescrip from "@/components/CategoryDescription/EquipmentDescrip.vue";
-import GlassesDescrip from "@/components/CategoryDescription/GlassesDescrip.vue";
-
 import DeliveryInfoBlock from "@/components/DeliveryInfoBlock";
 import ProductList from "@/components/ProductList";
 import MainMasterPage from "@/masterPages/MainMasterPage.vue";
@@ -166,17 +165,13 @@ export default {
     ProductList,
     DeliveryInfoBlock,
     AdditionInfo,
-    BagsDescrip,
-    BootsDescrip,
-    ClothesDescrip,
-    EquipmentDescrip,
-    GlassesDescrip,
   },
   data() {
     return {
       manufacturerList,
       allCategoryAndSubcategory,
       searchParamsObj: {},
+      pageNumber: 0,
 
       items: [
         {
@@ -196,23 +191,6 @@ export default {
   },
 
   computed: {
-    activeComponent() {
-      switch (this.checkRouteCategory) {
-        case "bags_and_backpacks":
-          return BagsDescrip;
-        case "boots":
-          return BootsDescrip;
-        case "clothes":
-          return ClothesDescrip;
-        case "glasses":
-          return GlassesDescrip;
-        case "equipment":
-          return EquipmentDescrip;
-        default:
-          return null;
-      }
-    },
-
     checkRouteCategory() {
       return this.$route.params.category;
     },
@@ -226,33 +204,22 @@ export default {
 
     onClearSearchParamsObj() {
       this.searchParamsObj = {};
+      this.searchParamsObj.category = this.$route.params.category;
+    },
+
+    onGoChangePageOfProducts(pageAction) {
+      if (pageAction === "onStart") this.pageNumber = 0;
+      if (pageAction === "prev" && this.pageNumber !== 0) this.pageNumber -= 1;
+      if (pageAction === "next") this.pageNumber += 1;
+      this.searchParamsObj.pageNumber = this.pageNumber;
+
+      this.loadProducts(this.searchParamsObj);
     },
 
     onGoToFilteredProducts() {
-      let search = {};
-      if (this.searchParamsObj.category && this.searchParamsObj.category.length)
-        search.category = this.searchParamsObj.category;
-      if (
-        this.searchParamsObj.subCategory &&
-        this.searchParamsObj.subCategory.length
-      )
-        search.subCategory = this.searchParamsObj.subCategory;
-      if (
-        this.searchParamsObj.manufacturer &&
-        this.searchParamsObj.manufacturer.length
-      )
-        search.manufacturer = this.searchParamsObj.manufacturer;
-      if (this.searchParamsObj.title && this.searchParamsObj.title.length)
-        search.title = this.searchParamsObj.title;
+      this.pageNumber = 0;
 
-      if (
-        this.searchParamsObj.sortRule &&
-        this.searchParamsObj.sortRule.length
-      ) {
-        search.sortRule = this.searchParamsObj.sortRule;
-      }
-
-      this.loadProducts(search);
+      this.loadProducts(this.searchParamsObj);
     },
 
     onAddNewProduct() {
@@ -269,33 +236,48 @@ export default {
   watch: {
     checkRouteCategory(newValue) {
       this.items[1].text = newValue;
+      this.searchParamsObj.category = this.$route.params.category;
+      this.onClearSearchParamsObj();
+
+      this.pageNumber = 0;
     },
     checkRouteSubCategory(newValue) {
       this.items[2].text = newValue;
+      this.searchParamsObj.subCategory = this.$route.params.subcategory;
+      this.onClearSearchParamsObj();
+      this.pageNumber = 0;
     },
   },
   mounted() {
     this.searchParamsObj.category = this.$route.params.category;
-    this.searchParamsObj.subCategory = this.$route.params.subCategory;
+
+    // this.searchParamsObj.subCategory = this.$route.params.subCategory;
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .content-container {
+  margin: 30px 15px 15px 20px;
   display: grid;
   grid-template-areas:
-    "sorting-items-container sorting-items-container sorting-items-container sorting-items-container sorting-items-container"
-    "filter-block-container product-list-container product-list-container product-list-container product-list-container";
+    "filter-block-container  sorting-items-container sorting-items-container sorting-items-container sorting-items-container"
+    "filter-block-container product-list-container product-list-container product-list-container product-list-container"
+    " pagination-block pagination-block pagination-block pagination-block pagination-block";
 
   font-family: Georgia;
   .sorting-items-container {
     grid-area: sorting-items-container;
     background-color: grey;
-    margin: 15px;
+    height: 50px;
+    // margin: 15px;
+    div {
+      // margin: auto;
+      font-size: 20px;
+      font-weight: 800;
+    }
 
     display: flex;
-    justify-content: space-around;
   }
   .product-list-container {
     grid-area: product-list-container;
@@ -304,6 +286,7 @@ export default {
   .filter-block-container {
     grid-area: filter-block-container;
     max-height: 600px;
+    max-width: 400px;
     margin: 0 20px 0 25px;
     width: 250px;
 
@@ -392,5 +375,19 @@ option:focus {
   -webkit-box-shadow: 0 0 3px 1px #7cdaff;
   -moz-box-shadow: 0 0 3px 1px #7cdaff;
   box-shadow: 0 0 3px 1px #7cdaff;
+}
+
+.pagination-block {
+  display: flex;
+  grid-area: pagination-block;
+
+  .pagination-button {
+    background-color: rgb(142, 129, 129);
+    margin: 20px;
+    padding: 5px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 </style>

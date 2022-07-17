@@ -6,13 +6,18 @@ const sendJSONResponse = (res, status, content) => {
 };
 
 module.exports.getList = function (req, res) {
-  const searchObj = req.query || {};
+  let searchObj = req.query || {};
+
   if (searchObj.minPrice || searchObj.maxPrice) {
     searchObj.price = {
       $gte: searchObj.minPrice || 0,
       $lte: searchObj.maxPrice || Infinity,
     };
   }
+
+  let page = searchObj.pageNumber;
+  console.log(page);
+  let skip = page * 3;
 
   let sortRule;
   if (searchObj.sortRule === "priseIncrease") sortRule = { price: 1 };
@@ -24,6 +29,8 @@ module.exports.getList = function (req, res) {
 
   ProductModel.find(searchObj)
     .sort(sortRule)
+    .skip(skip)
+    .limit(3)
     .exec(function (err, products) {
       if (err)
         return sendJSONResponse(res, 500, {

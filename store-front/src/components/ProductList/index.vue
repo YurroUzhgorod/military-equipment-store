@@ -17,16 +17,6 @@
         />
       </div>
     </div>
-
-    <div class="text-center" v-if="!isEmpty">
-      <div class="pagination-container">
-        <v-pagination
-          v-model="page"
-          :length="15"
-          :total-visible="7"
-        ></v-pagination>
-      </div>
-    </div>
   </div>
 </template>
 

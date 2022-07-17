@@ -53,7 +53,10 @@ export default {
             manufacturer: searchProductParams.manufacturer,
             minPrice: searchProductParams.minPrice,
             maxPrice: searchProductParams.maxPrice,
+
             sortRule: searchProductParams.sortRule,
+
+            pageNumber: searchProductParams.pageNumber,
           },
         })
         .then((res) => res.data)
