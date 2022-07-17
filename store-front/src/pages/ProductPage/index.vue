@@ -11,7 +11,7 @@
 
       <div class="content-container">
         <div class="sorting-items-container">
-          <div class="category-title">CОРТУВАННЯ</div>
+          <div class="sorting-category-title">CОРТУВАННЯ</div>
           <div class="select-input-container">
             <select
               v-model="searchParamsObj.sortRule"
@@ -43,13 +43,13 @@
                 <select v-model="searchParamsObj.subCategory">
                   <option :value="null">не вибрано</option>
                   <option
-                    v-for="(subcategory, index) in allCategoryAndSubcategory[
+                    v-for="(value, key, index) in allCategoryAndSubcategory[
                       this.searchParamsObj.category
                     ]"
                     :key="index"
-                    :value="subcategory"
+                    :value="key"
                   >
-                    {{ subcategory }}
+                    {{ value.ua }}
                   </option>
                 </select>
               </div>
@@ -258,6 +258,7 @@ export default {
 
 <style lang="scss" scoped>
 .content-container {
+  font-family: Georgia;
   margin: 30px 15px 15px 20px;
   display: grid;
   grid-template-areas:
@@ -265,16 +266,18 @@ export default {
     "filter-block-container product-list-container product-list-container product-list-container product-list-container"
     " pagination-block pagination-block pagination-block pagination-block pagination-block";
 
-  font-family: Georgia;
   .sorting-items-container {
     grid-area: sorting-items-container;
-    background-color: grey;
+
     height: 50px;
     // margin: 15px;
-    div {
+    .sorting-category-title {
       // margin: auto;
       font-size: 20px;
       font-weight: 800;
+    }
+    select {
+      border: 2px solid black;
     }
 
     display: flex;

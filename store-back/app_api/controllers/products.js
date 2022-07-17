@@ -16,7 +16,6 @@ module.exports.getList = function (req, res) {
   }
 
   let page = searchObj.pageNumber;
-  console.log(page);
   let skip = page * 3;
 
   let sortRule;

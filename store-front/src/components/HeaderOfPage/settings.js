@@ -26,7 +26,7 @@ export const menuItems = {
             },
             {
               title: "Футболки & Жилети",
-              routeSubCategory: "t-shirts&West",
+              routeSubCategory: "t_shirts_West",
             },
             {
               title: "Уніформа",
@@ -56,7 +56,7 @@ export const menuItems = {
             },
             {
               title: "Ватерпруф",
-              routeSubCategory: "water-proof",
+              routeSubCategory: "water_proof",
             },
             {
               title: "Комбенезони",
@@ -91,19 +91,19 @@ export const menuItems = {
           listItems: [
             {
               title: "Літні черевики",
-              routeSubCategory: "summer-boots",
+              routeSubCategory: "summer_boots",
             },
             {
               title: "Демісезонні черевики",
-              routeSubCategory: "demi-season-boots",
+              routeSubCategory: "demi_season_boots",
             },
             {
               title: "Зимові черевики",
-              routeSubCategory: "winter-boots",
+              routeSubCategory: "winter_boots",
             },
             {
               title: "Напів-черевики",
-              routeSubCategory: "semi-boots",
+              routeSubCategory: "semi_boots",
             },
             {
               title: "Кеди",
@@ -117,7 +117,7 @@ export const menuItems = {
           listItems: [
             {
               title: "Бахіли",
-              routeSubCategory: "shoe-covers",
+              routeSubCategory: "shoe_covers",
             },
             {
               title: "Гамаші",
@@ -133,7 +133,7 @@ export const menuItems = {
             },
             {
               title: "Аксесуари",
-              routeSubCategory: "boots-accessories",
+              routeSubCategory: "boots_accessories",
             },
           ],
         },
@@ -157,23 +157,23 @@ export const menuItems = {
           listItems: [
             {
               title: "Магазинні підсумки",
-              routeSubCategory: "magazine-pouches",
+              routeSubCategory: "magazine_pouches",
             },
             {
               title: "Утилітарні підсумки",
-              routeSubCategory: "utility-pouches",
+              routeSubCategory: "utility_pouches",
             },
             {
               title: "Підсумки під аптечку",
-              routeSubCategory: "medical-pouches",
+              routeSubCategory: "medical_pouches",
             },
             {
               title: "Гранатні підсумки",
-              routeSubCategory: "grenade-pouches",
+              routeSubCategory: "grenade_pouches",
             },
             {
               title: "Підсумки під рацію",
-              routeSubCategory: "radio-pouches",
+              routeSubCategory: "radio_pouches",
             },
           ],
         },
@@ -183,15 +183,15 @@ export const menuItems = {
           listItems: [
             {
               title: "Бронежилети",
-              routeSubCategory: "body-armors",
+              routeSubCategory: "body_armors",
             },
             {
               title: "Чест-ріги ",
-              routeSubCategory: "chest-rigs",
+              routeSubCategory: "chest_rigs",
             },
             {
               title: "Ремінно-плечеві системи",
-              routeSubCategory: "Belt-and-shoulder-systems",
+              routeSubCategory: "Belt_and_shoulder_systems",
             },
             {
               title: "Жилети",
@@ -223,7 +223,7 @@ export const menuItems = {
           listItems: [
             {
               title: "Рейдові та патрульні рюкзаки",
-              routeSubCategory: "raid-back-pacs",
+              routeSubCategory: "raid_back_pacs",
             },
             {
               title: "Сумки через плече",
@@ -231,15 +231,15 @@ export const menuItems = {
             },
             {
               title: "Баули, транспортні сумки",
-              routeSubCategory: "transports-bag",
+              routeSubCategory: "transports_bag",
             },
             {
               title: " Чохли водонепроникні",
-              routeSubCategory: "waterproof-covers",
+              routeSubCategory: "waterproof_covers",
             },
             {
               title: "Чохли для рюкзаків",
-              routeSubCategory: "bag-pack-covers",
+              routeSubCategory: "bag-pack_covers",
             },
           ],
         },
@@ -263,23 +263,23 @@ export const menuItems = {
           listItems: [
             {
               title: "Захисні окуляри",
-              routeSubCategory: "protect-eye-glasses",
+              routeSubCategory: "protect_eye_glasses",
             },
             {
               title: "Оруляри маски",
-              routeSubCategory: "eye-masks",
+              routeSubCategory: "eye_masks",
             },
             {
               title: "Аксесуари",
-              routeSubCategory: "glasses-accessories",
+              routeSubCategory: "glasses_accessories",
             },
             {
               title: "Діоптричні вставки",
-              routeSubCategory: "dioptric-insert",
+              routeSubCategory: "dioptric_insert",
             },
             {
               title: "Чохли для окулярів",
-              routeSubCategory: "glasses-cover",
+              routeSubCategory: "glasses_cover",
             },
           ],
         },
