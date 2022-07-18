@@ -75,7 +75,7 @@ export default {
         padding: 10px;
         width: 400px;
         height: 80px;
-        margin: 10px;
+        margin: 0 10px 10px 0;
         display: flex;
         border: 1px solid rgb(164, 155, 155);
         background-color: rgb(214, 212, 212);
