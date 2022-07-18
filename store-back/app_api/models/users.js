@@ -22,9 +22,10 @@ const UsersSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  // favoriteProduct: { type: Array, default: [] },
   isAdmin: { type: Boolean, default: false },
-  hash: String,
-  salt: String,
+  hash: { type: String },
+  salt: { type: String },
 });
 
 //--------------------------------

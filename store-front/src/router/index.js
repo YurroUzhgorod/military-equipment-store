@@ -8,6 +8,7 @@ import EditPage from "@/pages/EditPage";
 import InfoPage from "@/pages/InfoPage";
 import ProductsSizePage from "@/pages/ProductsSizePage";
 import FavoriteListPage from "@/pages/FavoriteListPage";
+import OrderPage from "@/pages/OrderPage";
 
 import LoginPage from "@/pages/LoginPage";
 import SignupPage from "@/pages/SignupPage";
@@ -50,6 +51,7 @@ const routes = [
     component: ProductsSizePage,
     name: "productsSize",
   },
+  { path: "/order-form", component: OrderPage, name: "orderForm" },
 ];
 
 const router = createRouter({

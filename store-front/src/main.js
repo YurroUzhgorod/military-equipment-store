@@ -29,20 +29,20 @@ axios.interceptors.response.use(
   }
 );
 // // ---------------------------
-// router.beforeEach((to, from, next) => {
-//   let check =
-//     !store.getters["auth/isAuthenticated"]() &&
-//     !["/", "/login", "/signup"].includes(to.path);
+router.beforeEach((to, from, next) => {
+  let check =
+    !store.getters["auth/isAuthenticated"]() &&
+    ["/order-form"].includes(to.path);
 
-//   if (check) {
-//     // Недопускаємо до захищених роутів, якщо немає токена
+  if (check) {
+    // Недопускаємо до захищених роутів, якщо немає токена
 
-//     next({ path: "/login" });
-//     return;
-//   } else {
-//     next();
-//   }
-// });
+    next({ path: "/login" });
+    return;
+  } else {
+    next();
+  }
+});
 //---------------------------
 
 createApp(App).use(router).use(store).use(vuetify).mount("#app");

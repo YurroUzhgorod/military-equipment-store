@@ -7,7 +7,11 @@
           <v-breadcrumbs :items="items" divider="/"></v-breadcrumbs>
         </div>
         <addition-info />
-        <cart-list />
+        <div class="cart-content-wrapper">
+          <div class="cart-content-container">
+            <cart-list />
+          </div>
+        </div>
       </template>
     </main-master-page>
   </div>
@@ -42,6 +46,7 @@ export default {
       ],
     };
   },
+  methods: {},
 };
 </script>
 

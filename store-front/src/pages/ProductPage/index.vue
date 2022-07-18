@@ -28,7 +28,10 @@
           </div>
         </div>
 
-        <div class="filter-block-container">
+        <div
+          class="filter-block-container"
+          v-if="checkRouteCategory !== 'new-in'"
+        >
           <div class="filter-blok-title">ФІЛЬТР ПІДБОРУ</div>
           <div class="filter-options-container">
             <div
@@ -423,16 +426,16 @@ select {
   grid-area: pagination-block;
 
   .pagination-block {
-    font-size: 30px;
+    font-size: 25px;
 
     display: flex;
     margin: auto;
     img {
-      height: 20px;
+      height: 17px;
     }
 
     .pagination-button {
-      margin: 20px;
+      margin: 12px;
       padding: 5px;
       &:hover {
         cursor: pointer;

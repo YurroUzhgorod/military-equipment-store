@@ -1,18 +1,26 @@
 <template>
-  <div class="product-row-container">
-    <div>
-      <img :src="cartItem.prodPhoto" alt="" />
+  <div class="product-item-container">
+    <div class="cart-item-photo-container">
+      <img :src="cartItem.prodPhoto" alt="product-photo" />
     </div>
     <div class="product-info">
-      {{ cartItem.prodTitle }}
-    </div>
-    <div class="product-info">{{ cartItem.prodPrice }} грн</div>
-    <div>
-      <button @click="onDecrement">-</button>
-
-      <span>{{ cartItem.count }} шт</span>
-      <button @click="onIncrement">+</button>
-      <button @click="onDelete">delete</button>
+      <div class="prod-info-top">
+        <div class="cart-item-title">
+          {{ cartItem.prodTitle }}
+        </div>
+        <div class="delete-item-container">
+          <v-icon @click="onDelete">mdi-close-circle-outline</v-icon>
+        </div>
+      </div>
+      <div class="prod-info-bottom">
+        <div class="prod-item-another"></div>
+        <div class="count-items-container">
+          <button @click="onDecrement">-</button>
+          <div class="count-value">{{ cartItem.count }}</div>
+          <button @click="onIncrement">+</button>
+        </div>
+        <div class="cart-item-price">{{ itemTotalPrice }} грн</div>
+      </div>
     </div>
   </div>
 </template>
@@ -26,6 +34,11 @@ export default {
     cartItem: {
       type: Object,
       default: () => ({}),
+    },
+  },
+  computed: {
+    itemTotalPrice() {
+      return this.cartItem.prodPrice * this.cartItem.count;
     },
   },
 
@@ -55,30 +68,68 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.product-row-container {
+.product-item-container {
+  font-family: georgia;
+  border-bottom: 2px rgb(213, 207, 207) solid;
+  text-align: center;
+  margin: 30px;
+  display: inline-block;
+  width: 800px;
+  height: 135px;
   display: flex;
-  width: 600px;
-  margin: 5px auto;
-  border: 2px black solid;
-  button {
-    width: 60px;
-    background-color: antiquewhite;
-    margin: 10px;
-    border: 2px black solid;
-  }
-  .product-info {
-    width: 80px;
-    background-color: rgb(211, 206, 199);
-    margin: 10px;
-    border: 2px rgb(211, 206, 199) solid;
-  }
-  .product-info {
-    text-decoration-color: aqua;
-  }
-}
 
-img {
-  width: 80px;
-  height: 80px;
+  .cart-item-photo-container {
+    margin: auto;
+    width: 30%;
+    display: flex;
+
+    img {
+      margin: 5px auto;
+      width: 120px;
+    }
+  }
+  .product-info {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    .prod-info-top {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      // justify-content: space-between;
+      height: 50%;
+
+      .cart-item-title {
+      }
+      .delete-item-container {
+      }
+    }
+    .prod-info-bottom {
+      display: flex;
+      justify-content: space-between;
+      height: 50%;
+      .prod-item-another {
+      }
+      .count-items-container {
+        display: flex;
+        .count-value {
+          width: 50px;
+          height: 40px;
+          margin: auto;
+          padding: 2px;
+          border: 1px solid rgb(0, 0, 0);
+          border-radius: 4px;
+        }
+        button {
+          margin: 10px;
+          font-size: 30px;
+        }
+      }
+      .cart-item-price {
+        font-size: 26px;
+      }
+    }
+  }
 }
 </style>

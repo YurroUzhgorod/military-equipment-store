@@ -33,12 +33,8 @@
               <span> {{ product.price }} грн </span>
             </div>
             <div class="buy-block-wrapper">
-              <div class="buy-container">
-                <div
-                  class="add-item-to-cart"
-                  v-if="product.is_available"
-                  @click="onAddToCart(product)"
-                >
+              <div class="buy-container" @click="onAddToCart(product)">
+                <div class="add-item-to-cart" v-if="product.is_available">
                   В КОРЗИНУ
                 </div>
                 <div class="add-item-to-cart" v-else>Товар очікується</div>
