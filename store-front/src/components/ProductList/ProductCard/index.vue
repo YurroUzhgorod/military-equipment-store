@@ -97,10 +97,10 @@ export default {
     ...mapActions("products", ["deleteProduct"]),
 
     ToAndFromFavorite() {
-      this.isItemInFavorite = true;
       console.log(this.isItemInFavorite);
       if (!this.getFavoriteList.find((item) => item._id === this.product._id)) {
         this.addProdToFavoriteList(this.product);
+        this.isItemInFavorite = true;
       } else {
         this.deleteProdFromList(this.product._id);
         this.isItemInFavorite = false;
@@ -121,11 +121,13 @@ export default {
       this.$router.push({ name: "prodItemInfo", params: { id: itemId } });
     },
   },
-  // watch: {
-  //   ToAndFromFavorite(newValue) {
-  //     console.log(newValue);
-  //   },
-  // },
+  mounted() {
+    if (!this.getFavoriteList.find((item) => item._id === this.product._id)) {
+      this.isItemInFavorite = false;
+    } else {
+      this.isItemInFavorite = true;
+    }
+  },
 };
 </script>
 
