@@ -40,6 +40,7 @@
 
         <div class="favorite-items-container" @click="onGoToFavoriteProducts">
           <img
+            :class="{ 'favorite-list-length': getFavoriteList.length }"
             :src="require('@/assets/images/general-icons/bookmark.svg')"
             alt="no photo"
           />
@@ -107,6 +108,7 @@ export default {
   computed: {
     ...mapGetters("cartList", ["getTotalPrice"]),
     ...mapGetters("auth", ["isAuthenticated", "getUserStatus"]),
+    ...mapGetters("favoriteList", ["getFavoriteList"]),
   },
   methods: {
     ...mapActions("auth", ["logout"]),

@@ -14,11 +14,13 @@ export default {
       state.favoriteList = state.favoriteList.filter(
         (item) => item._id !== prodId
       );
+      // localStorage.setItem("favoriteList", JSON.stringify(state.favoriteList));
     },
     addItem(state, productItem) {
       state.favoriteList.push({
         ...productItem,
       });
+      // localStorage.setItem("favoriteList", JSON.stringify(state.favoriteList));
     },
   },
 

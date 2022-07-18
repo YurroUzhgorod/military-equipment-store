@@ -32,6 +32,7 @@
 
       <div class="add-item-to-favorite" @click="ToAndFromFavorite">
         <img
+          :class="{ 'item-is-in-fav-list': checkFavoriteStatus }"
           :src="require('@/assets/images/general-icons/bookmark.svg')"
           alt="no photo"
         />
@@ -68,10 +69,23 @@ export default {
       default: () => ({}),
     },
   },
-
+  data() {
+    return {
+      isItemInFavorite: false,
+    };
+  },
   computed: {
     ...mapGetters("auth", ["getUserStatus"]),
     ...mapGetters("favoriteList", ["getFavoriteList"]),
+
+    // isItemInFavoriteList() {
+    //   if (this.findProductById(this.product._id)) return true;
+    //   return false;
+    // },
+
+    checkFavoriteStatus() {
+      return this.isItemInFavorite;
+    },
   },
 
   methods: {
@@ -83,9 +97,14 @@ export default {
     ...mapActions("products", ["deleteProduct"]),
 
     ToAndFromFavorite() {
-      if (this.getFavoriteList.includes(this.product_id));
-      this.deleteProdFromList(this.product._id);
-      this.addProdToFavoriteList(this.product);
+      this.isItemInFavorite = true;
+      console.log(this.isItemInFavorite);
+      if (!this.getFavoriteList.find((item) => item._id === this.product._id)) {
+        this.addProdToFavoriteList(this.product);
+      } else {
+        this.deleteProdFromList(this.product._id);
+        this.isItemInFavorite = false;
+      }
     },
 
     onAddToCart(product) {
@@ -102,6 +121,11 @@ export default {
       this.$router.push({ name: "prodItemInfo", params: { id: itemId } });
     },
   },
+  // watch: {
+  //   ToAndFromFavorite(newValue) {
+  //     console.log(newValue);
+  //   },
+  // },
 };
 </script>
 
@@ -166,5 +190,8 @@ button {
       cursor: pointer;
     }
   }
+}
+.item-is-in-fav-list {
+  background-color: red;
 }
 </style>
