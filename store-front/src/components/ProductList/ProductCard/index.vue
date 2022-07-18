@@ -9,12 +9,12 @@
     <div class="product-price">
       <span class="product-item-price"> {{ product.price }} грн</span>
     </div>
-    <hr />
-    <div>
-      <div v-if="this.product.is_available">
+    <!-- <hr /> -->
+    <div class="product-status-container">
+      <div class="product-status" v-if="this.product.is_available">
         <span class="product-item-status"> В наявності </span>
       </div>
-      <div v-else>
+      <div class="product-status" v-else>
         <span class="product-item-status"> Товар очікується </span>
       </div>
     </div>
@@ -138,9 +138,16 @@ export default {
   padding-top: 10px;
   margin: 0 10px 15px 15px;
 
-  .product-item-status {
-    background-color: rgb(208, 208, 189);
-    padding: 0 1px 0 1px;
+  .product-status-container {
+    .product-status {
+      display: flex;
+      .product-item-status {
+        margin: auto;
+        background-color: rgb(208, 208, 189);
+        // background-color: rgb(246, 246, 246);
+        padding: 3px 7px 3px 7px;
+      }
+    }
   }
 }
 .product-price {
