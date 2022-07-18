@@ -126,7 +126,7 @@
             </div>
             <div class="pagination-button">
               <button @click="onGoChangePageOfProducts('prev')">
-                на початок
+                попередня
               </button>
             </div>
 
@@ -138,9 +138,7 @@
               наступна
             </div>
 
-            <div class="pagination-button" @click="changePage('end')">
-              в кінець
-            </div>
+            <div class="pagination-button">в кінець</div>
           </div>
         </div>
       </div>

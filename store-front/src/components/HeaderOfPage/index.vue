@@ -33,9 +33,16 @@
           />
         </button>
       </div>
-      <div class="test">
+      <div class="icons-block-container">
         <div class="contact-us-container">
           <call-back-pop-up />
+        </div>
+
+        <div class="favorite-items-container" @click="onGoToFavoriteProducts">
+          <img
+            :src="require('@/assets/images/general-icons/bookmark.svg')"
+            alt="no photo"
+          />
         </div>
 
         <div class="cart-container">
@@ -57,6 +64,7 @@
             <div v-if="getTotalPrice">{{ getTotalPrice }} грн</div>
           </div>
         </div>
+
         <div
           class="add-new-product"
           v-if="getUserStatus()"
@@ -103,6 +111,10 @@ export default {
   methods: {
     ...mapActions("auth", ["logout"]),
     ...mapActions("products", ["loadProducts", "loadProductsIncludes"]),
+
+    onGoToFavoriteProducts() {
+      this.$router.push({ name: "favorite" });
+    },
 
     onLogout() {
       this.logout();

@@ -30,6 +30,12 @@
         />
       </div>
 
+      <div class="add-item-to-favorite" @click="ToAndFromFavorite">
+        <img
+          :src="require('@/assets/images/general-icons/bookmark.svg')"
+          alt="no photo"
+        />
+      </div>
       <div class="edit-item" v-if="getUserStatus()">
         <img
           @click="onEdit(product._id)"
@@ -46,6 +52,7 @@
         />
       </div>
     </div>
+    <hr />
   </div>
 </template>
 
@@ -64,16 +71,26 @@ export default {
 
   computed: {
     ...mapGetters("auth", ["getUserStatus"]),
+    ...mapGetters("favoriteList", ["getFavoriteList"]),
   },
 
   methods: {
     ...mapActions("cartList", ["addProductItem"]),
+    ...mapActions("favoriteList", [
+      "addProdToFavoriteList",
+      "deleteProdFromList",
+    ]),
+    ...mapActions("products", ["deleteProduct"]),
+
+    ToAndFromFavorite() {
+      if (this.getFavoriteList.includes(this.product_id));
+      this.deleteProdFromList(this.product._id);
+      this.addProdToFavoriteList(this.product);
+    },
 
     onAddToCart(product) {
       this.addProductItem(product);
     },
-
-    ...mapActions("products", ["deleteProduct"]),
 
     onDelete(id) {
       this.deleteProduct(id);
@@ -134,6 +151,16 @@ button {
   margin: auto;
   img {
     width: 30px;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+  }
+}
+.add-item-to-favorite {
+  img {
+    margin-top: 3px;
+    height: 25px;
     &:hover {
       transform: scale(1.1);
       cursor: pointer;

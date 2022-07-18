@@ -7,6 +7,7 @@ import CartPage from "@/pages/CartPage";
 import EditPage from "@/pages/EditPage";
 import InfoPage from "@/pages/InfoPage";
 import ProductsSizePage from "@/pages/ProductsSizePage";
+import FavoriteListPage from "@/pages/FavoriteListPage";
 
 import LoginPage from "@/pages/LoginPage";
 import SignupPage from "@/pages/SignupPage";
@@ -33,6 +34,12 @@ const routes = [
     path: "/cart",
     component: CartPage,
     name: "cart",
+  },
+
+  {
+    path: "/favorite-bookmarks",
+    component: FavoriteListPage,
+    name: "favorite",
   },
 
   { path: "/edit/:id?", component: EditPage, name: "edit" },

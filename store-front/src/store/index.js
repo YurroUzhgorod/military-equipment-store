@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 import products from "./products";
 import cartList from "./cartList";
+import favoriteList from "./favoriteList";
 import auth from "./auth";
 
 export default createStore({
@@ -12,5 +13,6 @@ export default createStore({
     products,
     cartList,
     auth,
+    favoriteList,
   },
 });

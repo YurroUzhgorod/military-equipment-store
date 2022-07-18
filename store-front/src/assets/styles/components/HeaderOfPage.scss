@@ -17,9 +17,27 @@
 
     padding: 20px 20px 0 20px;
 
-    .test {
+    .icons-block-container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      .favorite-items-container {
+        text-align: center;
+        img {
+          height: 30px;
+          &:hover {
+            transform: scale(1.2);
+
+            cursor: pointer;
+          }
+        }
+      }
+
+      // .active-favorite-list {
+      //   img {
+      //     background-color: red;
+      //   }
+      // }
 
       .cart-container {
         text-align: right;
@@ -42,7 +60,7 @@
         button {
           font-size: 14px;
           background-color: rgb(190, 106, 66);
-          padding: 3px;
+          padding: 0px;
           border: 1px solid rgb(118, 119, 43);
           &:hover {
             cursor: pointer;
