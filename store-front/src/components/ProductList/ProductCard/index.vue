@@ -194,6 +194,7 @@ button {
   }
 }
 .item-is-in-fav-list {
-  background-color: red;
+  padding: 2px;
+  background-color: rgb(136, 23, 23);
 }
 </style>

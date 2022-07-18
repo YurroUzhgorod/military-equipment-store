@@ -7,6 +7,7 @@
           <v-breadcrumbs :items="items" divider="/"></v-breadcrumbs>
         </div>
         <addition-info />
+        <div class="fav-list-container"></div>
         <favorite-list />
       </template>
     </main-master-page>

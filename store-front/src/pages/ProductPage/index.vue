@@ -119,15 +119,25 @@
 
         <div class="pagination-wrapper">
           <div class="pagination-block">
-            <div class="pagination-button">
-              <button @click="onGoChangePageOfProducts('onStart')">
-                на початок
-              </button>
+            <div
+              class="pagination-button"
+              @click="onGoChangePageOfProducts('onStart')"
+            >
+              <img
+                :src="
+                  require('@/assets/images/general-icons/angle-double-left.png')
+                "
+                alt="no photo"
+              />
             </div>
-            <div class="pagination-button">
-              <button @click="onGoChangePageOfProducts('prev')">
-                попередня
-              </button>
+            <div
+              class="pagination-button"
+              @click="onGoChangePageOfProducts('prev')"
+            >
+              <img
+                :src="require('@/assets/images/general-icons/angle-left.png')"
+                alt="no photo"
+              />
             </div>
 
             <div class="pagination-button">{{ pageNumber + 1 }}</div>
@@ -135,10 +145,23 @@
               class="pagination-button"
               @click="onGoChangePageOfProducts('next')"
             >
-              наступна
+              <img
+                :src="require('@/assets/images/general-icons/angle-right.png')"
+                alt="no photo"
+              />
             </div>
 
-            <div class="pagination-button">в кінець</div>
+            <div
+              class="pagination-button"
+              @click="onGoChangePageOfProducts('end')"
+            >
+              <img
+                :src="
+                  require('@/assets/images/general-icons/angle-double-right.png')
+                "
+                alt="no photo"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -400,11 +423,15 @@ select {
   grid-area: pagination-block;
 
   .pagination-block {
+    font-size: 30px;
+
     display: flex;
     margin: auto;
+    img {
+      height: 20px;
+    }
 
     .pagination-button {
-      background-color: rgb(142, 129, 129);
       margin: 20px;
       padding: 5px;
       &:hover {
