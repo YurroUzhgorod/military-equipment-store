@@ -1,6 +1,9 @@
 <template>
   <main-master-page>
     <template #content>
+      <div class="breadcrumbs-container">
+        <v-breadcrumbs :items="items" divider="/"></v-breadcrumbs>
+      </div>
       <div class="checkout-wrapper">
         <div class="checkout-title"><p>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</p></div>
         <div class="checkout-container">
@@ -83,12 +86,20 @@
                 <div>
                   <span> РАЗОМ </span>
                 </div>
-                <div>
+                <div class="total-price-value">
                   <span> {{ getTotalPrice }} грн </span>
                 </div>
               </div>
-              <div class="confirm-btn"></div>
-              <div class="oferta-checkbox"></div>
+              <div class="confirm-btn">
+                <span> ПІДТВЕРДИТИ ЗАМОВЛЕННЯ </span>
+              </div>
+              <div class="oferta-checkbox">
+                <input type="checkbox" />
+                <span>
+                  Мною прочитано, і я даю згоду з документом
+                  <span id="oferta-document">Публічна оферта</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -170,11 +181,11 @@ export default {
   font-family: georgia;
 }
 .checkout-wrapper {
-  margin: 50px;
+  margin: 0 50px 40px 50px;
   font-family: georgia;
 
   .checkout-title {
-    margin: 30px 0 30px 0;
+    margin: 10px 0 10px 0;
     font-size: 27px;
     font-weight: 800;
   }
@@ -345,12 +356,14 @@ export default {
       margin-left: 40px;
 
       .confirm-container {
-        padding: 20px;
-        // margin-left: 20px;
+        padding: 10px 10px 10px 10px;
+
         margin: auto;
         display: inline-block;
+        display: flex;
+        flex-direction: column;
         width: 400px;
-        height: 200px;
+        height: 230px;
         border: 1px solid rgb(191, 191, 207);
 
         position: fixed;
@@ -359,15 +372,55 @@ export default {
           border-bottom: 1px solid rgb(191, 191, 207);
           font-size: 25px;
           font-weight: 800;
-          .total-sum-container {
+        }
+        .total-sum-container {
+          padding: 10px 0 10px 0;
+          display: flex;
+          justify-content: space-between;
+          div {
             display: flex;
-            justify-content: space-between;
-            div {
+            span {
+              margin: auto;
+              font-size: 15px;
+              font-weight: 800;
             }
           }
-          .confirm-btn {
+          .total-price-value {
+            span {
+              font-size: 20px;
+              font-weight: 600;
+            }
           }
-          .oferta-checkbox {
+        }
+        .confirm-btn {
+          display: flex;
+          padding: 10px;
+          height: 50px;
+          background-color: rgb(72, 101, 47);
+          color: white;
+
+          &:hover {
+            cursor: pointer;
+
+            background-color: rgb(99, 145, 62);
+          }
+          span {
+            margin: auto;
+          }
+        }
+        .oferta-checkbox {
+          margin: 15px 0px 10px 0px;
+          input {
+            transform: scale(1.3);
+            // opacity: 0.9;
+            cursor: pointer;
+          }
+          #oferta-document {
+            // text-indent: 20px;
+            font-weight: 600;
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
       }
