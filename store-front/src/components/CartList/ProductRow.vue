@@ -100,17 +100,17 @@ export default {
       // justify-content: space-between;
       height: 50%;
 
-      .cart-item-title {
-      }
-      .delete-item-container {
-      }
+      // .cart-item-title {
+      // }
+      // .delete-item-container {
+      // }
     }
     .prod-info-bottom {
       display: flex;
       justify-content: space-between;
       height: 50%;
-      .prod-item-another {
-      }
+      // .prod-item-another {
+      // }
       .count-items-container {
         display: flex;
         .count-value {
@@ -122,8 +122,9 @@ export default {
           border-radius: 4px;
         }
         button {
-          margin: 10px;
-          font-size: 30px;
+          margin: 0 15px 15px 15px;
+
+          font-size: 40px;
         }
       }
       .cart-item-price {

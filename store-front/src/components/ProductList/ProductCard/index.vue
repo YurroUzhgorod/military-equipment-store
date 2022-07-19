@@ -9,7 +9,7 @@
     <div class="product-price">
       <span class="product-item-price"> {{ product.price }} грн</span>
     </div>
-    <!-- <hr /> -->
+
     <div class="product-status-container">
       <div class="product-status" v-if="this.product.is_available">
         <span class="product-item-status"> В наявності </span>
@@ -134,9 +134,9 @@ export default {
 <style lang="scss" scoped>
 .product-container {
   display: inline-block;
-
-  padding-top: 10px;
-  margin: 0 10px 15px 15px;
+  border: 1px solid rgb(220, 218, 218);
+  padding: 10px;
+  margin: 0 10px 10px 10px;
 
   .product-status-container {
     .product-status {

@@ -12,7 +12,7 @@
         <div></div>
         <div class="order-form-container">
           <div class="cart-total-price">{{ getTotalPrice }} грн</div>
-          <div class="order-form" @click="onGoToOrderForm">
+          <div class="order-form" @click="onGoToCheckout">
             Оформити замовлення
           </div>
         </div>
@@ -37,9 +37,9 @@ export default {
     ...mapGetters("cartList", ["getCartList", "getTotalPrice"]),
   },
   methods: {
-    onGoToOrderForm() {
+    onGoToCheckout() {
       this.$router.push({
-        name: "orderForm",
+        name: "checkout",
       });
     },
   },
