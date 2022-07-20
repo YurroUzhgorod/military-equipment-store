@@ -41,20 +41,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-// app.use((req, res, next) => {
-//   const openPathes = ["/users/login", "/users/signup"];
-//   if (!openPathes.includes(req.path)) {
-//     try {
-//       req.user = parseBearer(req.headers.authorization, req.headers);
-//     } catch (err) {
-//       return res.status(401).json({ result: "Access Denied" });
-//     }
-//   }
-//   next();
-// });
-
 app.use((req, res, next) => {
-  const closePathes = ["#/order-form"];
+  const closePathes = ["/checkout"];
   if (closePathes.includes(req.path)) {
     try {
       req.user = parseBearer(req.headers.authorization, req.headers);

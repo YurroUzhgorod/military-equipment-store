@@ -265,6 +265,7 @@ export default {
               margin: 10px 10px 10px 0;
               width: 100%;
               input {
+                padding-left: 10px;
                 width: 100%;
                 height: 40px;
                 background-color: rgb(231, 228, 228);
@@ -276,6 +277,8 @@ export default {
               width: 100%;
 
               input {
+                padding-left: 10px;
+
                 width: 100%;
                 height: 40px;
                 background-color: rgb(231, 228, 228);
@@ -342,6 +345,7 @@ export default {
         }
         .text-area-wrapper {
           textarea {
+            padding: 10px;
             background-color: rgb(231, 228, 228);
 
             border: 1px solid rgb(191, 191, 207);
@@ -369,7 +373,7 @@ export default {
         position: fixed;
 
         .confirm-container-title {
-          border-bottom: 1px solid rgb(191, 191, 207);
+          border-bottom: 2px solid rgb(191, 191, 207);
           font-size: 25px;
           font-weight: 800;
         }
@@ -395,7 +399,7 @@ export default {
         .confirm-btn {
           display: flex;
           padding: 10px;
-          height: 50px;
+          height: 60px;
           background-color: rgb(72, 101, 47);
           color: white;
 

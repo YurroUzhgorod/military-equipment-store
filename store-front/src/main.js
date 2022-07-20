@@ -31,12 +31,9 @@ axios.interceptors.response.use(
 // // ---------------------------
 router.beforeEach((to, from, next) => {
   let check =
-    !store.getters["auth/isAuthenticated"]() &&
-    ["/order-form"].includes(to.path);
+    !store.getters["auth/isAuthenticated"]() && ["/checkout"].includes(to.path);
 
   if (check) {
-    // Недопускаємо до захищених роутів, якщо немає токена
-
     next({ path: "/login" });
     return;
   } else {
