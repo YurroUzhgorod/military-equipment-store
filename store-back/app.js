@@ -4,10 +4,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
+// var bodyParser = require("body-parser");
 
 var indexRouter = require("./routes/index");
 var productsRouter = require("./app_api/routes/products");
 var usersRouter = require("./app_api/routes/users");
+var emailsRouter = require("./app_api/routes/emails");
 
 var app = express();
 
@@ -23,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 //-----------------
@@ -56,6 +59,7 @@ app.use((req, res, next) => {
 app.use("/", indexRouter);
 app.use("/products", productsRouter);
 app.use("/users", usersRouter);
+app.use("/checkout", emailsRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));

@@ -12,4 +12,7 @@ export default {
     signup: `${process.env.VUE_APP_API_URL}/users/signup`,
     login: `${process.env.VUE_APP_API_URL}/users/login`,
   },
+  email: {
+    sendOrderForm: `${process.env.VUE_APP_API_URL}/checkout`,
+  },
 };

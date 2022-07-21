@@ -4,6 +4,9 @@
       <div class="breadcrumbs-container">
         <v-breadcrumbs :items="items" divider="/"></v-breadcrumbs>
       </div>
+      <div class="pop-up-wrapper">
+        <order-pop-up v-if="orderSuccess === true" @closePopUp="closePopUp" />
+      </div>
       <div class="checkout-wrapper">
         <div class="checkout-title"><p>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</p></div>
         <div class="checkout-container">
@@ -19,16 +22,32 @@
               <div class="personal-info-container-title">ОСОБИСТІ ДАНІ</div>
               <div class="input-person-data-container">
                 <div class="first-name-container">
-                  <input type="text" placeholder="iм'я" />
+                  <input
+                    type="text"
+                    placeholder="iм'я"
+                    v-model="checkoutForm.name"
+                  />
                 </div>
                 <div class="second-name-container">
-                  <input type="text" placeholder="прізвище" />
+                  <input
+                    type="text"
+                    placeholder="прізвище"
+                    v-model="checkoutForm.secondName"
+                  />
                 </div>
                 <div class="phone-container">
-                  <input type="tel" placeholder="номер телеону" />
+                  <input
+                    type="tel"
+                    placeholder="номер телеону"
+                    v-model="checkoutForm.phone"
+                  />
                 </div>
                 <div class="email-container">
-                  <input type="email" placeholder="eмейл" />
+                  <input
+                    type="email"
+                    placeholder="eмейл"
+                    v-model="checkoutForm.email"
+                  />
                 </div>
               </div>
             </div>
@@ -36,17 +55,30 @@
               <div class="delivery-info-container-title">ДОСТАВКА</div>
               <div class="delivery-way-container">
                 <div class="nova-poshta-container">
-                  <div class="nova-poshta-btn">
+                  <div
+                    class="nova-poshta-btn"
+                    :class="{ 'nova-poshta-is-active': novaPoshta === true }"
+                    @click="deliveryWay('novaPoshta')"
+                  >
                     <span> НОВА ПОШТА </span>
                   </div>
-                  <div class="nova-poshta-city" v-if="1 + 1 === 2">
-                    <input type="text" placeholder=" місто" />
+                  <div class="nova-poshta-city" v-if="novaPoshta">
+                    <input type="text" placeholder=" місто" v-model="city" />
                   </div>
-                  <div class="nova-poshta-department" v-if="1 + 1 === 2">
-                    <input type="number" placeholder=" номер відділення" />
+                  <div class="nova-poshta-department" v-if="novaPoshta">
+                    <input
+                      type="number"
+                      placeholder=" номер відділення"
+                      v-model="departmentNumber"
+                    />
                   </div>
                 </div>
-                <div class="self-pick-up">
+
+                <div
+                  class="self-pick-up"
+                  :class="{ 'self-pickup-is-active': selfPickUp === true }"
+                  @click="deliveryWay('')"
+                >
                   <span>САМОВИВІЗ</span>
                 </div>
               </div>
@@ -55,12 +87,22 @@
             <div class="payments-container">
               <div class="payments-info-container-title">OПЛАТА</div>
               <div class="payments-option-container">
-                <div class="cash-delivery-container">
+                <div
+                  class="cash-delivery-container"
+                  :class="{
+                    'btn-after-received-is-active': cash === true,
+                  }"
+                  @click="paymentWay('afterReceive')"
+                >
                   <div class="btn-after-received">
                     <span> ПРИ ОТРИМАННІ </span>
                   </div>
                 </div>
-                <div class="payment-by-card">
+                <div
+                  class="payment-by-card"
+                  :class="{ 'btn-by-card-is-active': cartPay === true }"
+                  @click="paymentWay('byCard')"
+                >
                   <div class="btn-by-card">
                     <span> БАНКІВСЬКИЙ ПЕРЕКАЗ </span>
                   </div>
@@ -75,7 +117,10 @@
                 </div>
               </div>
               <div class="text-area-wrapper">
-                <textarea placeholder="  Ваш коментар" />
+                <textarea
+                  placeholder="  Ваш коментар"
+                  v-model="checkoutForm.orderComment"
+                />
               </div>
             </div>
           </div>
@@ -90,7 +135,7 @@
                   <span> {{ getTotalPrice }} грн </span>
                 </div>
               </div>
-              <div class="confirm-btn">
+              <div class="confirm-btn" @click="submitOrder(this.checkoutForm)">
                 <span> ПІДТВЕРДИТИ ЗАМОВЛЕННЯ </span>
               </div>
               <div class="oferta-checkbox">
@@ -111,23 +156,27 @@
 <script>
 import MainMasterPage from "@/masterPages/MainMasterPage.vue";
 import OrderItemRow from "./OrderItemRow.vue";
-
-import { mapActions, mapGetters } from "vuex";
+import OrderPopUp from "./OrderPopUp.vue";
+import { mapGetters } from "vuex";
+// import axios from "axios";
+// import apiEndpoints from "@/constants/apiEndpoints";
 export default {
   name: "CheckoutPage",
   components: {
     MainMasterPage,
     OrderItemRow,
+    OrderPopUp,
   },
   data() {
     return {
-      userName: "",
-      email: "",
-      password: "",
-      secretKey: null,
-      message: "",
-      userStatus: false,
-
+      checkoutForm: {},
+      novaPoshta: false,
+      selfPickUp: false,
+      city: null,
+      departmentNumber: null,
+      cartPay: null,
+      cash: null,
+      orderSuccess: false,
       items: [
         {
           text: "home",
@@ -143,34 +192,51 @@ export default {
   computed: {
     ...mapGetters("cartList", ["getCartList", "getTotalPrice"]),
   },
-
   methods: {
-    ...mapActions("auth", ["signup", "logout"]),
+    submitOrder(orderDetails) {
+      if (this.novaPoshta) orderDetails.deliveryWay = "Нова ПJшта";
+      if (this.selfPickUp) orderDetails.deliveryWay = "Самовивіз";
+      if (this.novaPoshta && this.city) orderDetails.city = this.city;
+      if (this.novaPoshta && this.departmentNumber)
+        orderDetails.departmentNumber = this.departmentNumber;
+      if (this.cartPay) orderDetails.paymentWay = "Оплата на карту";
+      if (this.cash) orderDetails.paymentWay = "Оплата при отриманні";
 
-    hideErrorMessage() {
-      this.message = "";
+      this.orderSuccess = true;
+      // axios
+      //   .post(apiEndpoints.email.sendOrderForm, { orderDetails })
+      //   .then((res) => console.log(res.data))
+      //   .catch((err) => {
+      //     console.log(err);
+      //     this.message = err;
+      //   })
+      //   .finally();
     },
 
-    async submit() {
-      try {
-        const user = {
-          name: this.userName,
-          email: this.email,
-          secretKey: this.secretKey,
-          password: this.password,
-        };
-        const result = await this.signup(user);
-        if (result === true) {
-          this.message = "";
-          this.$router.push({
-            path: "/login",
-          });
-        } else {
-          this.message = result;
-        }
-      } catch (err) {
-        this.message = err.response.data.error;
+    //-----------------------------------------------------------------------------
+    deliveryWay(by) {
+      if (by === "novaPoshta") {
+        this.novaPoshta = true;
+        this.selfPickUp = false;
+      } else {
+        this.selfPickUp = true;
+        this.novaPoshta = false;
       }
+    },
+    paymentWay(value) {
+      if (value === "afterReceive") {
+        this.cash = true;
+        this.cartPay = false;
+      } else {
+        this.cash = false;
+        this.cartPay = true;
+      }
+    },
+    closePopUp() {
+      this.orderSuccess = false;
+      this.$router.push({
+        name: "homePage",
+      });
     },
   },
 };
@@ -197,8 +263,8 @@ export default {
       width: 60%;
       display: flex;
       flex-direction: column;
-      .checkout-items-container {
-      }
+      // .checkout-items-container {
+      // }
       .personal-info-container {
         .personal-info-container-title {
           font-size: 21px;
@@ -219,14 +285,14 @@ export default {
             padding: 10px;
             margin: 10px 0 10px 0;
           }
-          .first-name-container {
-          }
-          .second-name-container {
-          }
-          .phone-container {
-          }
-          .email-container {
-          }
+          // .first-name-container {
+          // }
+          // .second-name-container {
+          // }
+          // .phone-container {
+          // }
+          // .email-container {
+          // }
         }
       }
       .delivery-info-container {
@@ -248,14 +314,29 @@ export default {
             display: flex;
             flex-direction: column;
 
+            .nova-poshta-is-active {
+              margin: auto;
+              display: flex;
+              width: 100%;
+              height: 40px;
+              background-color: rgb(126, 142, 99);
+
+              border: 1px solid rgb(191, 191, 207);
+              &:hover span {
+                margin: auto;
+              }
+            }
             .nova-poshta-btn {
               margin: auto;
               display: flex;
               width: 100%;
               height: 40px;
-              background-color: rgb(231, 228, 228);
+              // background-color: rgb(231, 228, 228);
 
               border: 1px solid rgb(191, 191, 207);
+              &:hover {
+                cursor: pointer;
+              }
 
               span {
                 margin: auto;
@@ -286,17 +367,36 @@ export default {
               }
             }
           }
-          .self-pick-up {
-            // margin: auto;
+
+          .self-pickup-is-active {
             display: flex;
             width: 47%;
             height: 40px;
-            background-color: rgb(231, 228, 228);
+            background-color: rgb(126, 142, 99);
 
             border: 1px solid rgb(191, 191, 207);
 
             span {
               margin: auto;
+            }
+            &:hover {
+              cursor: pointer;
+            }
+          }
+          .self-pick-up {
+            // margin: auto;
+            display: flex;
+            width: 47%;
+            height: 40px;
+            // background-color: rgb(231, 228, 228);
+
+            border: 1px solid rgb(191, 191, 207);
+
+            span {
+              margin: auto;
+            }
+            &:hover {
+              cursor: pointer;
             }
           }
         }
@@ -316,7 +416,6 @@ export default {
             margin-right: 22px;
             width: 48%;
             height: 40px;
-            background-color: rgb(231, 228, 228);
 
             border: 1px solid rgb(191, 191, 207);
             display: flex;
@@ -327,13 +426,19 @@ export default {
           .payment-by-card {
             width: 47%;
             height: 40px;
-            background-color: rgb(231, 228, 228);
+
             border: 1px solid rgb(191, 191, 207);
             display: flex;
 
             .btn-by-card {
               margin: auto;
             }
+          }
+          .btn-after-received-is-active {
+            background-color: rgb(126, 142, 99);
+          }
+          .btn-by-card-is-active {
+            background-color: rgb(126, 142, 99);
           }
         }
       }
