@@ -6,12 +6,15 @@ export default {
   state() {
     return {
       productList: [],
+      productCount: null,
       loading: false,
       error: false,
     };
   },
 
   getters: {
+    getFilteredProductCount: (state) => state.productCount,
+
     getProductList: (state) => state.productList,
     getProductById: (state) => (prodId) =>
       state.productList.find((item) => item._id === prodId),
@@ -37,6 +40,9 @@ export default {
     setError(state, data) {
       state.error = data;
     },
+    setProductCount(state, num) {
+      state.productCount = num;
+    },
   },
 
   actions: {
@@ -61,8 +67,10 @@ export default {
         })
         .then((res) => res.data)
         .then((resData) => {
-          if (resData.success) commit("setProductList", resData.data);
-          else throw new Error("Fatch failed!");
+          if (resData.success) {
+            commit("setProductCount", resData.filteredProductCount);
+            commit("setProductList", resData.data);
+          } else throw new Error("Fatch failed!");
         })
         .catch((err) => {
           commit("setError", err);

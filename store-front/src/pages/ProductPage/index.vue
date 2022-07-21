@@ -143,7 +143,7 @@
               />
             </div>
 
-            <div class="pagination-button">{{ pageNumber + 1 }}</div>
+            <div class="pagination-button">{{ CurrentPageNumber + 1 }}</div>
             <div
               class="pagination-button"
               @click="onGoChangePageOfProducts('next')"
@@ -178,7 +178,7 @@ import ProductList from "@/components/ProductList";
 import MainMasterPage from "@/masterPages/MainMasterPage.vue";
 import AdditionInfo from "@/components/AdditionInfo";
 
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 import {
   manufacturerList,
@@ -197,7 +197,8 @@ export default {
       manufacturerList,
       allCategoryAndSubcategory,
       searchParamsObj: {},
-      pageNumber: 0,
+      CurrentPageNumber: 0,
+      filteredProdCount: 0,
 
       items: [
         {
@@ -217,12 +218,18 @@ export default {
   },
 
   computed: {
+    ...mapGetters("products", ["getFilteredProductCount"]),
+
     checkRouteCategory() {
       return this.$route.params.category;
     },
 
     checkRouteSubCategory() {
       return this.$route.params.subCategory;
+    },
+
+    productCount() {
+      return this.getFilteredProductCount;
     },
   },
   methods: {
@@ -234,18 +241,25 @@ export default {
     },
 
     onGoChangePageOfProducts(pageAction) {
-      if (pageAction === "onStart") this.pageNumber = 0;
-      if (pageAction === "prev" && this.pageNumber !== 0) this.pageNumber -= 1;
-      if (pageAction === "next") this.pageNumber += 1;
-      this.searchParamsObj.pageNumber = this.pageNumber;
+      let countOfPages = Math.ceil(this.productCount / 4 - 1);
+      ///
+      console.log("countOfPages");
+      console.log(countOfPages);
+
+      if (pageAction === "onStart") this.CurrentPageNumber = 0;
+      if (pageAction === "prev" && this.CurrentPageNumber !== 0)
+        this.CurrentPageNumber -= 1;
+      if (pageAction === "next" && this.CurrentPageNumber !== countOfPages)
+        this.CurrentPageNumber += 1;
+      if (pageAction === "end") this.CurrentPageNumber = countOfPages;
+      this.searchParamsObj.pageNumber = this.CurrentPageNumber;
 
       this.loadProducts(this.searchParamsObj);
     },
 
     onGoToFilteredProducts() {
-      this.pageNumber = 0;
-
       this.loadProducts(this.searchParamsObj);
+      this.CurrentPageNumber = 0;
     },
 
     onAddNewProduct() {
@@ -255,7 +269,6 @@ export default {
     },
 
     checkSortParams() {
-      console.log(this.searchParamsObj);
       this.loadProducts(this.searchParamsObj);
     },
   },
@@ -265,18 +278,17 @@ export default {
       this.searchParamsObj.category = this.$route.params.category;
       this.onClearSearchParamsObj();
 
-      this.pageNumber = 0;
+      this.CurrentPageNumber = 0;
     },
     checkRouteSubCategory(newValue) {
       this.items[2].text = newValue;
       this.searchParamsObj.subCategory = this.$route.params.subcategory;
       this.onClearSearchParamsObj();
-      this.pageNumber = 0;
+      this.CurrentPageNumber = 0;
     },
   },
   mounted() {
     this.searchParamsObj.category = this.$route.params.category;
-
     this.searchParamsObj.subCategory = this.$route.params.subCategory;
   },
 };

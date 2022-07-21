@@ -17,6 +17,14 @@ module.exports.getList = function (req, res) {
 
   let page = searchObj.pageNumber;
   let skip = page * 4;
+  let filteredProductCount;
+
+  ProductModel.count(searchObj, function (err, count) {
+    console.log("Number of products:", count);
+    filteredProductCount = count;
+    console.log("filteredProductCount");
+    console.log(filteredProductCount);
+  });
 
   let sortRule;
   if (searchObj.sortRule === "priseIncrease") sortRule = { price: 1 };
@@ -36,7 +44,11 @@ module.exports.getList = function (req, res) {
           success: false,
           err: { msg: "Fetch faild!" },
         });
-      sendJSONResponse(res, 200, { success: true, data: products });
+      sendJSONResponse(res, 200, {
+        success: true,
+        data: products,
+        filteredProductCount,
+      });
     });
 };
 
