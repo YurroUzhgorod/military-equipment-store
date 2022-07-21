@@ -43,6 +43,9 @@ export default {
           count: 1,
         });
     },
+    clearCart(state) {
+      state.cartList = [];
+    },
   },
 
   actions: {
@@ -61,6 +64,9 @@ export default {
     },
     addProductItem({ commit }, productId) {
       commit("addProduct", productId);
+    },
+    clearCartList({ commit }) {
+      commit("clearCart");
     },
   },
 };

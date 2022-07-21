@@ -157,7 +157,7 @@
 import MainMasterPage from "@/masterPages/MainMasterPage.vue";
 import OrderItemRow from "./OrderItemRow.vue";
 import OrderPopUp from "./OrderPopUp.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 // import axios from "axios";
 // import apiEndpoints from "@/constants/apiEndpoints";
 export default {
@@ -193,6 +193,8 @@ export default {
     ...mapGetters("cartList", ["getCartList", "getTotalPrice"]),
   },
   methods: {
+    ...mapActions("cartList", ["clearCartList"]),
+
     submitOrder(orderDetails) {
       if (this.novaPoshta) orderDetails.deliveryWay = "Нова ПJшта";
       if (this.selfPickUp) orderDetails.deliveryWay = "Самовивіз";
@@ -237,6 +239,8 @@ export default {
       this.$router.push({
         name: "homePage",
       });
+
+      this.clearCartList();
     },
   },
 };
