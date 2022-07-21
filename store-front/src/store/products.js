@@ -99,24 +99,17 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .post(apiEndpoints.products.add, product)
-          .then(
-            //Якщо добре
-            (res) => res.data
-          )
+          .then((res) => res.data)
           .then((resData) => {
             if (resData.success) resolve(true);
             else throw new Error("Fatch failed!");
             console.log(resData.data);
           })
           .catch((err) => {
-            //Якщо погано
             commit("setError", err);
             reject(err);
           })
-          .finally(
-            //Завжди
-            () => commit("setLoading", false)
-          );
+          .finally(() => commit("setLoading", false));
       });
     },
 
@@ -127,24 +120,17 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .put(apiEndpoints.products.update, product)
-          .then(
-            //Якщо добре
-            (res) => res.data
-          )
+          .then((res) => res.data)
           .then((resData) => {
             if (resData.success) resolve(true);
             else throw new Error("Fatch failed!");
           })
           .catch((err) => {
-            //Якщо погано
             console.log("бек відправив помилку");
             commit("setError", err);
             reject(err);
           })
-          .finally(
-            //Завжди
-            () => commit("setLoading", false)
-          );
+          .finally(() => commit("setLoading", false));
       });
     },
 
