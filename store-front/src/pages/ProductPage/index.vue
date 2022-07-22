@@ -198,7 +198,7 @@ export default {
       allCategoryAndSubcategory,
       searchParamsObj: {},
       CurrentPageNumber: 0,
-      filteredProdCount: 0,
+      // filteredProdCount: 0,
 
       items: [
         {
@@ -227,7 +227,6 @@ export default {
     checkRouteSubCategory() {
       return this.$route.params.subCategory;
     },
-
     productCount() {
       return this.getFilteredProductCount;
     },
@@ -242,9 +241,6 @@ export default {
 
     onGoChangePageOfProducts(pageAction) {
       let countOfPages = Math.ceil(this.productCount / 4 - 1);
-      ///
-      console.log("countOfPages");
-      console.log(countOfPages);
 
       if (pageAction === "onStart") this.CurrentPageNumber = 0;
       if (pageAction === "prev" && this.CurrentPageNumber !== 0)
@@ -277,7 +273,6 @@ export default {
       this.items[1].text = newValue;
       this.searchParamsObj.category = this.$route.params.category;
       this.onClearSearchParamsObj();
-
       this.CurrentPageNumber = 0;
     },
     checkRouteSubCategory(newValue) {
@@ -286,6 +281,13 @@ export default {
       this.onClearSearchParamsObj();
       this.CurrentPageNumber = 0;
     },
+
+    // checkProductLength(newValue) {
+    //   console.log("newValue");
+    //   console.log(newValue);
+
+    //   if (newValue) this.filteredProdCount = newValue;
+    // },
   },
   mounted() {
     this.searchParamsObj.category = this.$route.params.category;

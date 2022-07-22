@@ -68,8 +68,8 @@ export default {
         .then((res) => res.data)
         .then((resData) => {
           if (resData.success) {
-            commit("setProductCount", resData.filteredProductCount);
             commit("setProductList", resData.data);
+            commit("setProductCount", resData.filteredProductCount);
           } else throw new Error("Fatch failed!");
         })
         .catch((err) => {
@@ -134,7 +134,7 @@ export default {
             else throw new Error("Fatch failed!");
           })
           .catch((err) => {
-            console.log("бек відправив помилку");
+            console.log("помилка");
             commit("setError", err);
             reject(err);
           })

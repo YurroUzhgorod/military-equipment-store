@@ -1,83 +1,104 @@
 <template>
-  <div class="wrapper">
-    <div>
-      <label>
-        Назва товару
-        <input type="text" v-model="product.title" />
-      </label>
+  <div class="edit-component-wrapper">
+    <div class="page-title">
+      <span>{{ pageTitle }} </span>
     </div>
 
-    <div>
-      <label>
-        Опис товару
-        <input type="textarea" v-model="product.description" />
-      </label>
-    </div>
-    <div>
-      Виробник
-      <select v-model="product.manufacturer">
-        <option
-          v-for="(manufacturer, index) in manufacturerList"
-          :key="index"
-          :value="manufacturer"
-        >
-          {{ manufacturer }}
-        </option>
-      </select>
-    </div>
+    <div class="edit-wrapper">
+      <div class="photo-container">
+        <img id="img" :src="photoSrc" alt="" />
+      </div>
 
-    <div>
-      Виберіть категорію
-      <select v-model="product.category">
-        <option
-          v-for="(value, key, index) in allCategoryAndSubcategory"
-          :key="index"
-          :value="key"
-        >
-          {{ key }}
-        </option>
-      </select>
-    </div>
+      <div class="edit-container">
+        <div class="edit-form-container">
+          <div class="product-name">Назва товару</div>
+          <input type="text" v-model="product.title" />
+        </div>
+        <hr />
 
-    <div>
-      Виберіть суб-категорію
-      <select v-model="product.sub_category">
-        <option
-          v-for="(subcategory, key, index) in allCategoryAndSubcategory[
-            this.product.category
-          ]"
-          :key="index"
-          :value="key"
-        >
-          {{ key }}
-        </option>
-      </select>
-    </div>
+        <div class="product-name">
+          <div class="input-description">Опис товару</div>
+          <textarea v-model="product.description" />
+        </div>
+        <hr />
 
-    <div>
-      <label>
-        Ціна
-        <input type="number" v-model="product.price" />
-      </label>
-    </div>
+        <div class="manufacturer-filter-container">
+          <div class="manufacturer-filter-title">
+            <p>Виберіть виробника</p>
+          </div>
+          <div class="manufacturer-select-container">
+            <select v-model="product.manufacturer">
+              <option
+                v-for="(manufacturer, index) in manufacturerList"
+                :key="index"
+                :value="manufacturer"
+              >
+                {{ manufacturer }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <hr />
 
-    <div>
-      Статус товару
-      <select v-model="product.is_available">
-        <option :value="true">В продажі</option>
-        <option :value="false">Не в продажі</option>
-      </select>
-    </div>
+        <div class="sub-category-filter-container">
+          <div class="sub-category-filter-title">
+            <p>Виберіть категорію</p>
+          </div>
+          <div class="sub-category-select-container">
+            <select v-model="product.category">
+              <option
+                v-for="(value, key, index) in allCategoryAndSubcategory"
+                :key="index"
+                :value="key"
+              >
+                {{ key }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <hr />
 
-    <div>
-      <label>
-        Фото-картка
-        <input type="file" @input="createLogoImage" />
-      </label>
-      <img id="img" :src="photoSrc" alt="" />
-    </div>
+        <div v-if="this.product.category">
+          <dir>Виберіть суб-категорію</dir>
+          <select v-model="product.sub_category">
+            <option
+              v-for="(subcategory, key, index) in allCategoryAndSubcategory[
+                this.product.category
+              ]"
+              :key="index"
+              :value="key"
+            >
+              {{ key }}
+            </option>
+          </select>
+          <hr />
+        </div>
 
-    <button @click="onSave">{{ btnLabel }}</button>
+        <div>
+          <div>Ціна</div>
+          <input type="number" v-model="product.price" />
+        </div>
+        <hr />
+
+        <div>
+          <div>Статус товару</div>
+
+          <select v-model="product.is_available">
+            <option :value="true">В продажі</option>
+            <option :value="false">Не в продажі</option>
+          </select>
+        </div>
+        <hr />
+
+        <div>
+          <div>Фото-картка</div>
+          <input type="file" id="load-photo-input" @input="createLogoImage" />
+        </div>
+        <hr />
+
+        <button @click="onSave">{{ btnLabel }}</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -105,6 +126,9 @@ export default {
     },
     btnLabel() {
       return this.receivedProductId ? "Оновити" : "Додати";
+    },
+    pageTitle() {
+      return this.receivedProductId ? "Редагуваня товару" : "Додати товар";
     },
   },
 
@@ -156,34 +180,65 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  .edit-form-container {
-    width: 500px;
-    border: 2px black colid;
-  }
-  text-align: center;
-  img {
-    width: 250px;
-  }
-}
-input {
-  border: 1px solid rgb(143, 105, 55);
-  font-size: 16px;
-  height: 50px;
-  width: 480px;
-  background-color: antiquewhite;
-  margin: 10px;
-}
-button {
-  border: 1px green solid;
-  width: 50px;
-  margin: 5px;
-  &:hover {
-    color: red;
-  }
-}
+.edit-component-wrapper {
+  margin: 30px;
+  font-family: georgia;
 
-select {
-  background-color: rgb(140, 136, 136);
+  .page-title {
+    font-size: 25px;
+    display: flex;
+    span {
+      margin: 15px auto;
+    }
+  }
+
+  .edit-wrapper {
+    display: flex;
+    .photo-container {
+      width: 30%;
+    }
+
+    .edit-container {
+      width: 400px;
+
+      .edit-form-container {
+      }
+    }
+  }
+  select {
+    width: 300px;
+
+    margin: 10px 0 10px 0px;
+    border: 1px solid #b1aeae;
+    background-color: rgb(232, 228, 228);
+
+    select:hover {
+      background: #cde4f7;
+      border: 1px solid #41c9ff;
+    }
+  }
+  input {
+    width: 300px;
+    margin: 10px 0 10px 0px;
+
+    border: 1px #958787 solid;
+  }
+  textarea {
+    width: 400px;
+    height: 150px;
+    margin: 10px 0 10px 0px;
+    border: 1px #958787 solid;
+  }
+  #load-photo-inputz {
+  }
+  img {
+    width: 300px;
+  }
+  button {
+    margin: 15px 0 0 0;
+    width: 200px;
+    height: 70px;
+    background-color: #b1aeae;
+  }
 }
 </style>

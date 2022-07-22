@@ -20,10 +20,7 @@ module.exports.getList = function (req, res) {
   let filteredProductCount;
 
   ProductModel.count(searchObj, function (err, count) {
-    console.log("Number of products:", count);
     filteredProductCount = count;
-    console.log("filteredProductCount");
-    console.log(filteredProductCount);
   });
 
   let sortRule;
