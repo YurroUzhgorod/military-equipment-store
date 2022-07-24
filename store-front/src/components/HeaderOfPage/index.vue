@@ -9,7 +9,7 @@
       <router-link v-if="!isAuthenticated()" to="/signup">
         зареєструйтесь
       </router-link>
-      <button v-if="isAuthenticated()" @click="onLogout">Вийти...</button>
+      <button v-if="isAuthenticated()" @click="onLogout">{{}}Вийти...</button>
     </div>
     <div class="header-content-container">
       <div class="logo-images-container" @click="goToRoute('homePage')">

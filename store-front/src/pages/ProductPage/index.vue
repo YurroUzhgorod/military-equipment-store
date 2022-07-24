@@ -254,8 +254,9 @@ export default {
     },
 
     onGoToFilteredProducts() {
-      this.loadProducts(this.searchParamsObj);
+      this.searchParamsObj.pageNumber = 0;
       this.CurrentPageNumber = 0;
+      this.loadProducts(this.searchParamsObj);
     },
 
     onAddNewProduct() {
@@ -274,12 +275,14 @@ export default {
       this.searchParamsObj.category = this.$route.params.category;
       this.onClearSearchParamsObj();
       this.CurrentPageNumber = 0;
+      this.searchParamsObj.pageNumber = 0;
     },
     checkRouteSubCategory(newValue) {
       this.items[2].text = newValue;
       this.searchParamsObj.subCategory = this.$route.params.subcategory;
       this.onClearSearchParamsObj();
       this.CurrentPageNumber = 0;
+      this.searchParamsObj.pageNumber = 0;
     },
 
     // checkProductLength(newValue) {

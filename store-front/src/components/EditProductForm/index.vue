@@ -200,9 +200,6 @@ export default {
 
     .edit-container {
       width: 400px;
-
-      .edit-form-container {
-      }
     }
   }
   select {
@@ -229,8 +226,7 @@ export default {
     margin: 10px 0 10px 0px;
     border: 1px #958787 solid;
   }
-  #load-photo-inputz {
-  }
+
   img {
     width: 300px;
   }

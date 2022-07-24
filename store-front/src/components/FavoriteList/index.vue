@@ -1,5 +1,5 @@
 <template>
-  <div v-if="getFavoriteList.length">
+  <div class="favorite-list-container" v-if="getFavoriteList.length">
     <product-card
       v-for="product in getFavoriteList"
       :key="product._id"
@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.favorite-list-container {
+  margin: 50px 10px 30px 50px;
+}
 .empty-cart-container {
   text-align: center;
   h1 {

@@ -22,6 +22,11 @@ export default {
       });
       localStorage.setItem("favoriteList", JSON.stringify(state.favoriteList));
     },
+
+    clearFavList(state) {
+      state.favoriteList = [];
+      localStorage.removeItem("favoriteList");
+    },
   },
 
   actions: {
@@ -31,6 +36,9 @@ export default {
 
     deleteProdFromList({ commit }, productId) {
       commit("deleteItem", productId);
+    },
+    clearFavoriteList({ commit }) {
+      commit("clearFavList");
     },
   },
 };

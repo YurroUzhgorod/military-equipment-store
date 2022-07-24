@@ -28,7 +28,7 @@ module.exports.signup = function (req, res) {
     user.isAdmin = true;
   else user.isAdmin = false;
 
-  if (!req.body.name || req.body.name.length < 2 || req.body.name.length > 10)
+  if (!req.body.name || req.body.name.length < 2 || req.body.name.length > 20)
     return res.status(500).json({
       error:
         "Помилка вводу імені .Довжина імені повинна бути від 2 до 10 символів",
@@ -36,11 +36,16 @@ module.exports.signup = function (req, res) {
   if (
     !req.body.email ||
     req.body.email.length < 2 ||
-    req.body.email.length > 10
+    req.body.email.length > 20
   )
     return res.status(500).json({
       error:
         "Помилка вводу адреси електронної пошти. Довжина адреси повинна бути від 2 до 10 символів",
+    });
+
+  if (!req.body.email.includes("@"))
+    return res.status(500).json({
+      error: "Помилка вводу.В назві адреси потрібно вказати символ -  @",
     });
 
   if (req.body.password) user.setPassword(req.body.password);

@@ -83,8 +83,10 @@ const store = {
       });
     },
 
-    logout({ commit }) {
+    logout({ commit, dispatch }) {
       commit("clearAuthData");
+      dispatch("cartList/clearCartList", null, { root: true });
+      dispatch("favoriteList/clearFavoriteList", null, { root: true });
     },
   },
 };

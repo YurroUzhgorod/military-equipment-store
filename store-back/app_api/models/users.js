@@ -8,14 +8,14 @@ const UsersSchema = new Schema({
     type: String,
     required: true,
     minlength: 2,
-    maxLength: 10,
+    maxLength: 20,
     trim: true,
   },
   name: {
     type: String,
     required: true,
     minlength: 2,
-    maxLength: 10,
+    maxLength: 20,
     trim: true,
   },
   created: {
