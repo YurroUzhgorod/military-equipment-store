@@ -129,4 +129,12 @@
       // margin: 0px 0px 100px 0px auto;
     }
   }
+  .user-name {
+    font-weight: 600;
+  }
+  .log-out-btn {
+    &:hover {
+      color: rgb(160, 26, 26);
+    }
+  }
 }

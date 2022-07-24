@@ -1,24 +1,11 @@
 const UsersModel = require("../models/users");
 const { prepareToken } = require("../utils/token");
 
-const sendJSONResponse = (res, status, content) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.status(status).json(content);
-};
+// const sendJSONResponse = (res, status, content) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.status(status).json(content);
+// };
 
-module.exports.getList = function (req, res) {
-  UsersModel.find({})
-    .select("_id name")
-    .exec(function (err, users) {
-      if (err)
-        return sendJSONResponse(res, 500, {
-          success: false,
-          err: { msg: "Fetch faild!" },
-        });
-
-      sendJSONResponse(res, 200, { success: true, data: users });
-    });
-};
 module.exports.signup = function (req, res) {
   var user = new UsersModel({
     email: req.body.email,

@@ -9,7 +9,13 @@
       <router-link v-if="!isAuthenticated()" to="/signup">
         зареєструйтесь
       </router-link>
-      <button v-if="isAuthenticated()" @click="onLogout">{{}}Вийти...</button>
+      <div v-if="isAuthenticated()">
+        <span>
+          <span class="user-name">{{ getUserName }}</span
+          >, вітаємо на нашому сайті ||
+        </span>
+        <button class="log-out-btn" @click="onLogout">Хочете вийти?</button>
+      </div>
     </div>
     <div class="header-content-container">
       <div class="logo-images-container" @click="goToRoute('homePage')">
@@ -107,7 +113,7 @@ export default {
 
   computed: {
     ...mapGetters("cartList", ["getTotalPrice"]),
-    ...mapGetters("auth", ["isAuthenticated", "getUserStatus"]),
+    ...mapGetters("auth", ["isAuthenticated", "getUserStatus", "getUserName"]),
     ...mapGetters("favoriteList", ["getFavoriteList"]),
   },
   methods: {
@@ -120,7 +126,7 @@ export default {
 
     onLogout() {
       this.logout();
-      this.$router.push({ name: "HomePage" });
+      this.$router.push({ name: "homePage" });
     },
 
     showEmptyCartPopUp() {

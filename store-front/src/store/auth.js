@@ -9,6 +9,7 @@ const store = {
     expiresAt: localStorage.getItem("expiresAt") || null,
     userStatusIsAdmin:
       JSON.parse(localStorage.getItem("userStatusIsAdmin")) || null,
+    userName: "",
   },
   getters: {
     getUserStatus: (state) => () => {
@@ -23,6 +24,8 @@ const store = {
     },
     authorized: (state) =>
       state.authData && new Date().getTime() < state.expiresAt,
+
+    getUserName: (state) => state.userName,
   },
   mutations: {
     setAuthData(state, { authData, expiresAt, isUserAdmin }) {
@@ -38,10 +41,16 @@ const store = {
         JSON.stringify(state.userStatusIsAdmin)
       );
     },
+
+    setUserName(state, UserName) {
+      state.userName = UserName;
+    },
+
     clearAuthData(state) {
       state.authData = null;
       state.expiresAt = null;
       state.userStatusIsAdmin = null;
+      state.UserName = null;
 
       localStorage.removeItem("authData");
       localStorage.removeItem("expiresAt");
@@ -73,6 +82,8 @@ const store = {
           .post(apiEndpoints.user.login, { email, password })
           .then((res) => res.data)
           .then((data) => {
+            console.log("data axios login");
+            commit("setUserName", data.user.authData.name);
             commit("setAuthData", { ...data.user });
             resolve(true);
           })
