@@ -18,7 +18,11 @@
               <label>
                 Ваше ім'я
                 <br />
-                <input type="text" name="user-name" />
+                <input
+                  type="text"
+                  name="user-name"
+                  v-model="callbackInfo.name"
+                />
               </label>
             </div>
 
@@ -30,7 +34,7 @@
                 <input
                   type="number"
                   name="user-number"
-                  value="380"
+                  v-model="callbackInfo.phone"
                   min="0"
                   placeholder="Ваш номер телефону"
                 />
@@ -51,7 +55,10 @@
     <div class="success-pop-up-wrapper" v-if="isSuccessPopUpActive">
       <div class="success-pop-up">
         <div>
-          <p>Дані прийняті! Ми зв'яжемось з Вами за першої можливості!</p>
+          <p>
+            Дані прийняті! {{ callbackInfo.name }}, ми зв'яжемось з Вами за
+            першої можливості!
+          </p>
         </div>
         <div><button @click="closeSuccessPopUp()">Закрити</button></div>
       </div>
@@ -60,12 +67,16 @@
 </template>
 
 <script>
+import axios from "axios";
+import apiEndpoints from "@/constants/apiEndpoints";
+
 export default {
   name: "CallBackPopUp",
   data() {
     return {
       isFormPopUpActive: false,
       isSuccessPopUpActive: false,
+      callbackInfo: {},
     };
   },
   methods: {
@@ -74,13 +85,17 @@ export default {
     },
     closeCallBackForm() {
       this.isFormPopUpActive = false;
+      this.callbackInfo = {};
     },
     sendForm() {
+      axios.post(apiEndpoints.email.sendCallBack, this.callbackInfo);
+
       this.isFormPopUpActive = false;
       this.isSuccessPopUpActive = true;
     },
     closeSuccessPopUp() {
       this.isSuccessPopUpActive = false;
+      this.callbackInfo = {};
     },
   },
 };

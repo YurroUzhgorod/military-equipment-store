@@ -59,7 +59,7 @@ app.use((req, res, next) => {
 app.use("/", indexRouter);
 app.use("/products", productsRouter);
 app.use("/users", usersRouter);
-app.use("/checkout", emailsRouter);
+app.use("/emails", emailsRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));

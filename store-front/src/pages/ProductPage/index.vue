@@ -8,7 +8,7 @@
       </div>
 
       <addition-info />
-      <div v-if="isLoading">ЗАГРУЗКА СТОРІНКИ!</div>
+      <div v-if="isLoading">ЗАГРУЗКА...ПОЧЕКАЙТЕ!</div>
       <div v-if="isError">ПОМИЛКА !</div>
 
       <div v-if="!isLoading && !isError" class="content-container">
@@ -145,7 +145,7 @@
               />
             </div>
 
-            <div class="pagination-button">{{ CurrentPageNumber }}</div>
+            <div class="pagination-button">{{ currentPageNumber }}</div>
             <div
               class="pagination-button"
               @click="onGoChangePageOfProducts('next')"
@@ -199,7 +199,7 @@ export default {
       manufacturerList,
       allCategoryAndSubcategory,
       searchParamsObj: {},
-      CurrentPageNumber: 1,
+      currentPageNumber: 1,
       // filteredProdCount: 0,
 
       items: [
@@ -248,13 +248,13 @@ export default {
     onGoChangePageOfProducts(pageAction) {
       let countOfPages = Math.ceil(this.productCount / 8);
 
-      if (pageAction === "onStart") this.CurrentPageNumber = 1;
-      if (pageAction === "prev" && this.CurrentPageNumber !== 1)
-        this.CurrentPageNumber -= 1;
-      if (pageAction === "next" && this.CurrentPageNumber !== countOfPages)
-        this.CurrentPageNumber += 1;
-      if (pageAction === "end") this.CurrentPageNumber = countOfPages;
-      this.searchParamsObj.pageNumber = this.CurrentPageNumber;
+      if (pageAction === "onStart") this.currentPageNumber = 1;
+      if (pageAction === "prev" && this.currentPageNumber !== 1)
+        this.currentPageNumber -= 1;
+      if (pageAction === "next" && this.currentPageNumber !== countOfPages)
+        this.currentPageNumber += 1;
+      if (pageAction === "end") this.currentPageNumber = countOfPages;
+      this.searchParamsObj.pageNumber = this.currentPageNumber;
 
       this.loadProducts(this.searchParamsObj);
     },
@@ -280,14 +280,14 @@ export default {
       this.items[1].text = newValue;
       this.searchParamsObj.category = this.$route.params.category;
       this.onClearSearchParamsObj();
-      this.CurrentPageNumber = 1;
+      this.currentPageNumber = 1;
       this.searchParamsObj.pageNumber = 1;
     },
     checkRouteSubCategory(newValue) {
       this.items[2].text = newValue;
       this.searchParamsObj.subCategory = this.$route.params.subcategory;
       this.onClearSearchParamsObj();
-      this.CurrentPageNumber = 1;
+      this.currentPageNumber = 1;
       this.searchParamsObj.pageNumber = 1;
     },
 

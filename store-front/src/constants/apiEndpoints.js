@@ -13,6 +13,7 @@ export default {
     login: `${process.env.VUE_APP_API_URL}/users/login`,
   },
   email: {
-    sendOrderForm: `${process.env.VUE_APP_API_URL}/checkout`,
+    sendOrderForm: `${process.env.VUE_APP_API_URL}/emails/checkout`,
+    sendCallBack: `${process.env.VUE_APP_API_URL}/emails/callback`,
   },
 };

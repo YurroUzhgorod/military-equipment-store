@@ -8,7 +8,7 @@
             відпралені на Вашу електронну пошту. Очікуйте дзвінка менеджера.
           </p>
         </div>
-        <div><button @click="$emit('closePopUp')">>Закрити</button></div>
+        <div><button @click="$emit('closePopUp')">Закрити</button></div>
       </div>
     </div>
   </div>
@@ -17,10 +17,10 @@
 <script>
 export default {
   name: "CallBackPopUp",
-  data() {
-    return {
-      orderNumber: new Date().getTime(),
-    };
+  props: {
+    orderNumber: {
+      type: String,
+    },
   },
   methods: {},
 };

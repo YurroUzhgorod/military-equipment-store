@@ -5,7 +5,11 @@
         <v-breadcrumbs :items="items" divider="/"></v-breadcrumbs>
       </div>
       <div class="pop-up-wrapper">
-        <order-pop-up v-if="orderSuccess === true" @closePopUp="closePopUp" />
+        <order-pop-up
+          v-if="orderSuccess === true"
+          @closePopUp="closePopUp"
+          :orderNumber="checkoutForm.orderId"
+        />
       </div>
       <div class="checkout-wrapper">
         <div class="checkout-title"><p>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</p></div>
@@ -158,8 +162,8 @@ import MainMasterPage from "@/masterPages/MainMasterPage.vue";
 import OrderItemRow from "./OrderItemRow.vue";
 import OrderPopUp from "./OrderPopUp.vue";
 import { mapActions, mapGetters } from "vuex";
-// import axios from "axios";
-// import apiEndpoints from "@/constants/apiEndpoints";
+import axios from "axios";
+import apiEndpoints from "@/constants/apiEndpoints";
 export default {
   name: "CheckoutPage",
   components: {
@@ -195,24 +199,26 @@ export default {
   methods: {
     ...mapActions("cartList", ["clearCartList"]),
 
-    submitOrder(orderDetails) {
-      if (this.novaPoshta) orderDetails.deliveryWay = "Нова ПJшта";
-      if (this.selfPickUp) orderDetails.deliveryWay = "Самовивіз";
-      if (this.novaPoshta && this.city) orderDetails.city = this.city;
+    submitOrder() {
+      if (this.novaPoshta) this.checkoutForm.deliveryWay = "Нова Пошта";
+      if (this.selfPickUp) this.checkoutForm.deliveryWay = "Самовивіз";
+      if (this.novaPoshta && this.city) this.checkoutForm.city = this.city;
       if (this.novaPoshta && this.departmentNumber)
-        orderDetails.departmentNumber = this.departmentNumber;
-      if (this.cartPay) orderDetails.paymentWay = "Оплата на карту";
-      if (this.cash) orderDetails.paymentWay = "Оплата при отриманні";
+        this.checkoutForm.departmentNumber = this.departmentNumber;
+      if (this.cartPay) this.checkoutForm.paymentWay = "Оплата на карту";
+      if (this.cash) this.checkoutForm.paymentWay = "Оплата при отриманні";
+      this.checkoutForm.orderId = new Date().getTime();
+      this.checkoutForm.totalPrice = this.getTotalPrice;
 
       this.orderSuccess = true;
-      // axios
-      //   .post(apiEndpoints.email.sendOrderForm, { orderDetails })
-      //   .then((res) => console.log(res.data))
-      //   .catch((err) => {
-      //     console.log(err);
-      //     this.message = err;
-      //   })
-      //   .finally();
+
+      axios.post(apiEndpoints.email.sendOrderForm, this.checkoutForm);
+      // .then((res) => console.log(res.data))
+      // .catch((err) => {
+      //   console.log(err);
+      //   this.message = err;
+      // })
+      // .finally();
     },
 
     //-----------------------------------------------------------------------------
