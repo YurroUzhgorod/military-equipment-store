@@ -14,9 +14,9 @@ module.exports.getList = function (req, res) {
       $lte: searchObj.maxPrice || Infinity,
     };
   }
-
+  let perPage = 8;
   let page = searchObj.pageNumber;
-  let skip = page * 4;
+  let skip = (page - 1) * 4;
   let filteredProductCount;
 
   ProductModel.count(searchObj, function (err, count) {
@@ -34,7 +34,7 @@ module.exports.getList = function (req, res) {
   ProductModel.find(searchObj)
     .sort(sortRule)
     .skip(skip)
-    .limit(4)
+    .limit(perPage)
     .exec(function (err, products) {
       if (err)
         return sendJSONResponse(res, 500, {

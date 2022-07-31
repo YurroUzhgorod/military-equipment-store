@@ -8,8 +8,10 @@
       </div>
 
       <addition-info />
+      <div v-if="isLoading">ЗАГРУЗКА СТОРІНКИ!</div>
+      <div v-if="isError">ПОМИЛКА !</div>
 
-      <div class="content-container">
+      <div v-if="!isLoading && !isError" class="content-container">
         <div class="sorting-items-container">
           <div class="sorting-category-title"><span> CОРТУВАННЯ: </span></div>
           <div class="select-input-container">
@@ -143,7 +145,7 @@
               />
             </div>
 
-            <div class="pagination-button">{{ CurrentPageNumber + 1 }}</div>
+            <div class="pagination-button">{{ CurrentPageNumber }}</div>
             <div
               class="pagination-button"
               @click="onGoChangePageOfProducts('next')"
@@ -197,7 +199,7 @@ export default {
       manufacturerList,
       allCategoryAndSubcategory,
       searchParamsObj: {},
-      CurrentPageNumber: 0,
+      CurrentPageNumber: 1,
       // filteredProdCount: 0,
 
       items: [
@@ -218,7 +220,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters("products", ["getFilteredProductCount"]),
+    ...mapGetters("products", [
+      "getFilteredProductCount",
+      "isLoading",
+      "isError",
+    ]),
 
     checkRouteCategory() {
       return this.$route.params.category;
@@ -242,8 +248,8 @@ export default {
     onGoChangePageOfProducts(pageAction) {
       let countOfPages = Math.ceil(this.productCount / 4 - 1);
 
-      if (pageAction === "onStart") this.CurrentPageNumber = 0;
-      if (pageAction === "prev" && this.CurrentPageNumber !== 0)
+      if (pageAction === "onStart") this.CurrentPageNumber = 1;
+      if (pageAction === "prev" && this.CurrentPageNumber !== 1)
         this.CurrentPageNumber -= 1;
       if (pageAction === "next" && this.CurrentPageNumber !== countOfPages)
         this.CurrentPageNumber += 1;
@@ -254,8 +260,8 @@ export default {
     },
 
     onGoToFilteredProducts() {
-      this.searchParamsObj.pageNumber = 0;
-      this.CurrentPageNumber = 0;
+      this.searchParamsObj.pageNumber = 1;
+      this.CurrentPageNumber = 1;
       this.loadProducts(this.searchParamsObj);
     },
 
@@ -274,15 +280,15 @@ export default {
       this.items[1].text = newValue;
       this.searchParamsObj.category = this.$route.params.category;
       this.onClearSearchParamsObj();
-      this.CurrentPageNumber = 0;
-      this.searchParamsObj.pageNumber = 0;
+      this.CurrentPageNumber = 1;
+      this.searchParamsObj.pageNumber = 1;
     },
     checkRouteSubCategory(newValue) {
       this.items[2].text = newValue;
       this.searchParamsObj.subCategory = this.$route.params.subcategory;
       this.onClearSearchParamsObj();
-      this.CurrentPageNumber = 0;
-      this.searchParamsObj.pageNumber = 0;
+      this.CurrentPageNumber = 1;
+      this.searchParamsObj.pageNumber = 1;
     },
 
     // checkProductLength(newValue) {
