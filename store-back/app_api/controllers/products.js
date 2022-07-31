@@ -16,7 +16,7 @@ module.exports.getList = function (req, res) {
   }
   let perPage = 8;
   let page = searchObj.pageNumber;
-  let skip = (page - 1) * 4;
+  let skip = (page - 1) * perPage;
   let filteredProductCount;
 
   ProductModel.count(searchObj, function (err, count) {

@@ -78,11 +78,6 @@ export default {
     ...mapGetters("auth", ["getUserStatus"]),
     ...mapGetters("favoriteList", ["getFavoriteList"]),
 
-    // isItemInFavoriteList() {
-    //   if (this.findProductById(this.product._id)) return true;
-    //   return false;
-    // },
-
     checkFavoriteStatus() {
       return this.isItemInFavorite;
     },
@@ -97,7 +92,6 @@ export default {
     ...mapActions("products", ["deleteProduct"]),
 
     ToAndFromFavorite() {
-      console.log(this.isItemInFavorite);
       if (!this.getFavoriteList.find((item) => item._id === this.product._id)) {
         this.addProdToFavoriteList(this.product);
         this.isItemInFavorite = true;

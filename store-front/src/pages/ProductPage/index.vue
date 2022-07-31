@@ -246,7 +246,7 @@ export default {
     },
 
     onGoChangePageOfProducts(pageAction) {
-      let countOfPages = Math.ceil(this.productCount / 4 - 1);
+      let countOfPages = Math.ceil(this.productCount / 8);
 
       if (pageAction === "onStart") this.CurrentPageNumber = 1;
       if (pageAction === "prev" && this.CurrentPageNumber !== 1)

@@ -11,10 +11,9 @@
       </router-link>
       <div v-if="isAuthenticated()">
         <span>
-          <span class="user-name">{{ getUserName }}</span
-          >, вітаємо на нашому сайті ||
-        </span>
-        <button class="log-out-btn" @click="onLogout">Хочете вийти?</button>
+          <span class="user-name">{{ getUserName }}</span> </span
+        >,
+        <button class="log-out-btn" @click="onLogout">хочете вийти?</button>
       </div>
     </div>
     <div class="header-content-container">
