@@ -138,7 +138,6 @@ export default {
       .product-item-status {
         margin: auto;
         background-color: rgb(208, 208, 189);
-        // background-color: rgb(246, 246, 246);
         padding: 3px 7px 3px 7px;
       }
     }
