@@ -115,7 +115,7 @@ export default {
       this.$router.push({ name: "prodItemInfo", params: { id: itemId } });
     },
   },
-  mounted() {
+  async mounted() {
     if (!this.getFavoriteList.find((item) => item._id === this.product._id)) {
       this.isItemInFavorite = false;
     } else {

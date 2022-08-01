@@ -290,13 +290,6 @@ export default {
       this.currentPageNumber = 1;
       this.searchParamsObj.pageNumber = 1;
     },
-
-    // checkProductLength(newValue) {
-    //   console.log("newValue");
-    //   console.log(newValue);
-
-    //   if (newValue) this.filteredProdCount = newValue;
-    // },
   },
   mounted() {
     this.searchParamsObj.category = this.$route.params.category;
@@ -408,42 +401,14 @@ export default {
 //---------------
 
 select {
-  //   margin-left: 35px;
   border: 1px solid #b1aeae;
   background-color: rgb(232, 228, 228);
 
-  //   padding: 5px;
-  //   border-radius: 2px;
-  // }
   select:hover {
     background: #cde4f7;
     border: 1px solid #41c9ff;
   }
 }
-// select:focus {
-//   -webkit-box-shadow: 0 0 3px 1px #7cdaff;
-//   -moz-box-shadow: 0 0 3px 1px #7cdaff;
-//   box-shadow: 0 0 3px 1px #7cdaff;
-// }
-// select:before {
-//   content: "▼";
-// }
-// option {
-//   background: #fff;
-//   border-color: #41c9ff;
-//   border-radius: 2px;
-//   line-height: 18px;
-//   outline: none;
-//   -webkit-box-shadow: 0 0 3px 1px #c00;
-//   -moz-box-shadow: 0 0 3px 1px #c00;
-//   box-shadow: 0 0 3px 1px #c00;
-// }
-// option:focus {
-//   -webkit-box-shadow: 0 0 3px 1px #7cdaff;
-//   -moz-box-shadow: 0 0 3px 1px #7cdaff;
-//   box-shadow: 0 0 3px 1px #7cdaff;
-// }
-
 .pagination-wrapper {
   display: flex;
   grid-area: pagination-block;
