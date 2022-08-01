@@ -1,5 +1,6 @@
 const UsersModel = require("../models/users");
 const { prepareToken } = require("../utils/token");
+var mailer = require("./nodemailer");
 
 // const sendJSONResponse = (res, status, content) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -55,6 +56,21 @@ module.exports.signup = function (req, res) {
         result: "Успіх.Користувач зареєструвався",
         token,
       });
+    })
+    .then(() => {
+      var message = {
+        from: "perecoty-pole online store",
+        to: req.body.email,
+        subject: "perecoty-pole store",
+        text: `Вітаємо, Ви зареєстувались на нашому сайті.
+  
+      Ваші реєстраційні дані:
+        
+        Імя: ${req.body.name}
+        Емейл: ${req.body.email}
+        Пароль: ${req.body.password}`,
+      };
+      mailer(message);
     })
     .catch((err) => {
       return res.status(500).json({ error: "Помилка реєстрації" });
